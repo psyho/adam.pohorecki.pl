@@ -3,8 +3,8 @@
 // If you need a handy color picker try http://hslpicker.com
 
 $light-background: #FDFCFB;
-$red-foreground: #B22414;
-$ocean: #52A9B2;
+$red-foreground: #C02942;
+$ocean: #542437;
 $hoffas-grave: #AF9677;
 
 $light-gray: #fafafa;
@@ -29,7 +29,8 @@ $page-bg: $light-background;
 $main-bg: $light-background;
 
 $title-color: $red-foreground;
-$subtitle-color: darken($ocean, 15);
+//$subtitle-color: darken($ocean, 15);
+$subtitle-color: $ocean;
 
 
 /* To use the light Solarized highlighting theme uncomment the following line */
