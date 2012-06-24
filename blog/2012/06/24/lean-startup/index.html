@@ -1,0 +1,404 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Lean Startup - Adam Pohorecki</title>
+  <meta name="author" content="Adam Pohorecki">
+
+  
+  <meta name="description" content="I recently read the &#8220;Lean Startup&#8221; book by Eric Ries which I can recommend to anyone involved in software development, not just people &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adam.pohorecki.pl/blog/2012/06/24/lean-startup">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Pohorecki" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-28409670-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Pohorecki</a></h1>
+  
+    <h2>Test first, ask questions later</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adam.pohorecki.pl" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Lean Startup</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-24T02:25:00+02:00" pubdate data-updated="true">Jun 24<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><img class="left" src="/images/blog/lean-startup.png" title="Lean Startup cover" ></p>
+
+<p>I recently read the <a href="http://theleanstartup.com/book">&#8220;Lean Startup&#8221; book by Eric Ries</a> which I can recommend to anyone involved in software development, not just people working with technology startups, like the title suggests.</p>
+
+<p>The book describes a process, which can be used to make innovation more manageable and directed using the Lean Manufacturing principles combined with metrics-driven-development.
+It is written with entrepreneurs in mind, but it also touches on topics such as Continuous Deployment and automated testing, which are important to me.</p>
+
+<!--more-->
+
+
+<h2>The problem solved by Lean Startup movement</h2>
+
+<p>In my career, I have seen a certain mistake repeated too many times.
+I call this mistake &#8220;feature overload&#8221;.
+It happens when a product, based on someone&#8217;s arbitrary decision, is gradually extended with features that don&#8217;t necessarily add value, until it&#8217;s so slow and bloated that it has to be rewritten or fails altogether.</p>
+
+<p>If you are a programmer, you might recognize this smell from code.
+The principle of avoiding this kind of mistakes is called <a href="http://en.wikipedia.org/wiki/You_ain't_gonna_need_it">YAGNI</a> (You Ain&#8217;t Gonna Need It).</p>
+
+<p>BDD advises that we write our User Stories in form &#8221;<strong>In order to&#8230;</strong>, As a &#8230;, I want to&#8230;&#8221;.
+This first clause ensures, that the features we implement, are actually ones that are needed to improve the product.</p>
+
+<p>Lean Startup takes this idea much further by applying scientific principles.
+It obligates us to measure how the users react, and based on that, validate whether the feature actually brings value or not.
+If a feature does not bring us closer to the goal, then it should be removed.</p>
+
+<h2>Extending the Definition of Done (DoD)</h2>
+
+<p>Typically, a Definition of Done in Scrum looks something like this:</p>
+
+<ul>
+<li>implemented</li>
+<li>passed the code review</li>
+<li>tested</li>
+<li>accepted by the client</li>
+<li>deployed</li>
+</ul>
+
+
+<p>Lean startup appends another item to that definition: &#8220;validated&#8221;.
+This means that for every feature deployed you would run a <a href="http://en.wikipedia.org/wiki/A/B_testing">split test</a> with the feature enabled and disabled and based on the metrics gathered during the experiment, you would consider whether this feature is worth keeping or not.</p>
+
+<p>It is worth noting that unvalidated features count toward the Work in Progress limit in Kanban, so this limits your development speed to how fast you can deploy and validate features, since only a limited number of split tests can usually be run at once.</p>
+
+<h2>Continuous Deployment</h2>
+
+<p>As you can probably see already, projects that take advantage of the Lean Startup methodology are ideal candidates for Continuous Delivery (or Deployment):</p>
+
+<ul>
+<li>If you need to a/b test everything, then you must have feature switches implemented.</li>
+<li>If the process requires you to deploy often, you can&#8217;t probably just do that at the end of iteration.</li>
+</ul>
+
+
+<h2>TDD and Lean Startup</h2>
+
+<p>Ron Jeffries wrote a blog post a couple of years ago about <a href="http://xprogramming.com/blog/what-is-really-essential/">why you can&#8217;t do iterative development without writing automated tests</a>.
+It essentially states that if you want to release often, you need to test everything just as often, and that&#8217;s impossible to do that by hand.</p>
+
+<p>Obviously, if you want to deploy each time a feature is implemented, this becomes even harder, so you need automated tests even more.</p>
+
+<p>Ries in his book does agree with the fact that you need an extensive automated test suite, however he considers automated <em>unit</em> tests a from of waste and advocates writing end to end tests instead.</p>
+
+<p>The opinion that isolated unit tests are of limited use is often heard amongst people who don&#8217;t practice TDD.
+I believe in the opposite: isolated unit tests are the most valuable tests you can write, while the end-to-end tests are the ones that provide the least value.</p>
+
+<h3>Tests are about feedback</h3>
+
+<p>Imagine you have a test suite that takes an hour to run.
+How often would you run it during your regular development?
+Would you even run it locally?
+I know I would not.</p>
+
+<p>Now imagine your test suite takes 15 seconds to run (1-2s for unit tests and the rest for integration tests).
+Would you run it locally?
+Maybe even each time you save a file?</p>
+
+<p>If you tests are slow, nobody runs them except for your CI server.
+End to end tests tend to depend on the structure of your markup and often are brittle and unstable.</p>
+
+<p>Fast tests give you confidence to change and refactor your code, and if you follow one simple rule of mocking (<strong>don&#8217;t mock what you don&#8217;t own</strong>), you will rarely fall into the trap of mocking too much.
+When unit tests fail, they point you almost exactly to where the failure occurred, which reduces the time spent debugging.</p>
+
+<p>I strongly believe that TDD is a technique that eliminates waste and makes rapid change possible. I think it should be a core practice for every lean startup.</p>
+
+<h2>Cohort Analysis</h2>
+
+<p>Cohort Analysis is a technique that I first read about in the Lean Startup book.
+It is optimized to give you feedback on how the changes you introduce modify your user&#8217;s behavior.</p>
+
+<p>For example, let&#8217;s say you implemented a feature that awards users certain amount of points when they visit the site each day.
+Your hypothesis is that this will increase the user retention.</p>
+
+<p>To validate your hypothesis you run a split test with the new feature enabled for some portion of the new users arriving at your website.
+You measure how many users visit your site, register and how many of the registered has returned to the site at least 3 times.</p>
+
+<p>At the end of the experiment, you present your metrics as a percentage of the overall number of visitors in the given segment.
+In theory, the percentage of users who register should not vary significantly, but the percentage of users returning to the site should increase.</p>
+
+<p>I really like how lean startup forces you to define your acceptance criteria in terms of things that can actually be measured.</p>
+
+<h2>The 5 Whys</h2>
+
+<p>Another interesting technique, which I first encountered in Eric Ries&#8217;s book is <a href="http://en.wikipedia.org/wiki/5_Whys">&#8220;The 5 Whys Technique&#8221;</a>.</p>
+
+<p>It is a technique for determining the root cause of a problem by asking the question &#8220;Why&#8230;?&#8221; (kind of like children do) five times in a row.
+You do this every time something goes wrong (like when you deploy not working software to production, or when you go over the WIP limit on a Kanban board).
+Once you get answers to the 5 questions, you can apply an amount of effort proportional to the scale of the problem, to each of the problems that came up as answers to the questions.
+This way you get to improve and make your process more resistant to failure, but you also make sure that you don&#8217;t spend too much time on things that don&#8217;t happen often or are not too important.</p>
+
+<h2>Final remarks</h2>
+
+<p>Agile development methodologies tell us to embrace change, which is a great step forward comparing to the old waterfall/change-request days.
+However they do not give us a way to judge which features are more important, and which are not.
+This is a problem, because it involves a lot of guesswork and politics.</p>
+
+<p>Lean startup gives us a way of making feature decisions based on hard data and facilitates building the right product, not just a product the right way.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Adam Pohorecki</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-24T02:25:00+02:00" pubdate data-updated="true">Jun 24<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/lean-startup/'>lean-startup</a>, <a class='category' href='/blog/categories/tdd/'>tdd</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://adam.pohorecki.pl/blog/2012/06/24/lean-startup/" data-via="apohorecki" data-counturl="http://adam.pohorecki.pl/blog/2012/06/24/lean-startup/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/01/17/octopress-the-good-the-bad-and-the-ugly/" title="Previous Post: Octopress - the Good, the Bad and the Ugly">&laquo; Octopress - the Good, the Bad and the Ugly</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About</h1>
+  <div id="about">
+    A software development blog by Adam Pohorecki.
+    <a href="/about">Read more...</a>
+
+    <div class="avatar">
+      <img src="/images/avatar.jpg" alt="Adam Pohorecki" />
+    </div>
+  </div>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/06/24/lean-startup/">Lean Startup</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/01/17/octopress-the-good-the-bad-and-the-ugly/">Octopress - the Good, the Bad and the Ugly</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("apohorecki", 3, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/apohorecki" class="twitter-follow-button" data-show-count="false">Follow @apohorecki</a>
+  
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Adam Pohorecki -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'adampohoreckipl';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://adam.pohorecki.pl/blog/2012/06/24/lean-startup/';
+        var disqus_url = 'http://adam.pohorecki.pl/blog/2012/06/24/lean-startup/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: gem, | Adam Pohorecki]]></title>
+  <link href="http://adam.pohorecki.pl/blog/categories/gem-/atom.xml" rel="self"/>
+  <link href="http://adam.pohorecki.pl/"/>
+  <updated>2012-06-24T13:21:13+02:00</updated>
+  <id>http://adam.pohorecki.pl/</id>
+  <author>
+    <name><![CDATA[Adam Pohorecki]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress - the Good, the Bad and the Ugly]]></title>
+    <link href="http://adam.pohorecki.pl/blog/2012/01/17/octopress-the-good-the-bad-and-the-ugly/"/>
+    <updated>2012-01-17T17:11:00+01:00</updated>
+    <id>http://adam.pohorecki.pl/blog/2012/01/17/octopress-the-good-the-bad-and-the-ugly</id>
+    <content type="html"><![CDATA[<p><img class="left" src="/images/blog/octopress.png" title="Octopress logo" ></p>
+
+<p>To inaugurate my blog, I decided that I am going to review the tool, which I use to manage it - <a href="http://octopress.org">Octopress</a>, the self-proclaimed "blogging framework for hackers".</p>
+
+<p>I have been using Octopress to manage the <a href="http://sckrk.com">Software Craftsmanship in Kraków</a> blog for a couple of months now, and now I decided to use it for my personal blog.
+This post will explain why I chose it, and what I don't like about it.</p>
+
+<!--more-->
+
+
+<h2>TL;DR</h2>
+
+<p>Octopress is great for programmers who want to take advantage of GitHub or Heroku for hosting their blog, it requires very little setup and comes "with batteries included".</p>
+
+<p>However, it should be made into a gem, because forking the project on GitHub and working on the same source tree as the developer feels more than a bit "hackish".</p>
+
+<h2>Using Octopress</h2>
+
+<p>Octopress is a static site generator, that specializes in blogging, as oposed to some other solutions like <a href="http://nanoc.stoneship.org/">Nanoc</a>, which are more generic in nature.</p>
+
+<p>If you want to use Octopress, you should either fork the repo on GitHub or add it as a remote to your existing repository.
+After that all you need to do is invoke <code>rake install</code>, modify a few config values and you are ready to start adding content.</p>
+
+<p>Deploying to various destinations can be done with <code>rake deploy</code> after some setup.
+The setup modifies the Rakefile that comes with Octopress, which in turn generates conflicts when you update later.
+Out of the box, Octopress supports GitHub Pages, Heroku and Rsync as deployment options.</p>
+
+<h2>The good</h2>
+
+<p>The very best feature of Octopress is the "batteries included" approach, which I mentioned earlier.</p>
+
+<p>It comes with a bunch of plugins, like Twitter and GitHub integration, Disqus comments, deployment tasks and others.
+The default template is mobile friendly, and will adjust according to the screen size.</p>
+
+<p>Having so much from the get go saves you quite a lot of setup compared to some other solutions, so you can have a blog live in minutes after you install the tool.</p>
+
+<p>Compared to Wordpress, Octopress is also much easier to customize, and the templates are much cleaner - it uses Mustache for templates and SASS for styles.
+Also using Markdown for composing posts and VIM (does not come with Octopress;) for editing them is much more convenient than Wordpress's WYSIWYG editor.</p>
+
+<p>As a static page generator, Octopress also has the advantage of easily backing up the blog content and versioning it, especially compared to the database backed tools like Wordpress.
+Now I have an (almost) full copy of the blog data everywhere I check it out and on GitHub.
+This is a huge win, because you don't want to worry about loosing your data.</p>
+
+<p>Another great thing about Octopress is Solarized theme for syntax highlighting.
+Check it out:</p>
+
+<p><code>ruby Sample of syntax highliting
+def hello_world
+  puts "Octopress is awesome!"
+end
+</code></p>
+
+<h2>The bad</h2>
+
+<p>The biggest downside of Octopress for me is that <a href="http://sciruby.com/">almost</a> <a href="http://www.telenet.com.au/">every</a> <a href="http://jcsims.me/">blog</a> <a href="http://www.mariovisic.com/">which</a> <a href="http://hairysun.com/">uses</a> <a href="http://yagnesh.org/">it</a> <a href="http://nomedojogo.com/">looks</a> <a href="http://trucsdedev.com/">almost</a> <a href="http://duffomelia.com/">exactly</a> <a href="http://depth-first.com/">the</a> <a href="http://www.uru.ch/">same</a>.
+You can customize colors very easily and even modify the templates that come with the default theme, but modifying colors is usually the biggest change most people (including me) make.</p>
+
+<p>Octopress comes with only one theme, and different ones are not easy to find.
+Thankfully the default one looks nice and is very well done.</p>
+
+<p>Compare this with Wordpress, which has thousands of templates readily available, and your biggest problem is finding the right one.</p>
+
+<h2>The ugly</h2>
+
+<p>Right now, Octopress encourages you to fork the project to use it.
+Whenever you want to update the "library", you have to merge or rebase the remote changes and since there are no release tags, you most likely will do it against master.
+You will also probably run into some conflicts, because some core files, like Rakefile, need to be modified to store configuration.</p>
+
+<p>In my opinion Octopress should move to the same model that Nanoc uses.
+It should be a gem, which is easily installable and upgradeable, and only the customizable files should go into the user's project directory.
+Instead of using Rake, it should provide its own commandline tool to accomplish common tasks like deployment or compiling the content.</p>
+
+<h2>Conclusion</h2>
+
+<p>Octopress is a great tool for programmers that want to start blogging without having to worry about customizing some static page generator or Wordpress.
+It comes with beautiful syntax highlighting, responsive layout and useful plugins for integrating with applications like Disqus and Twitter.</p>
+
+<p>The downside is that you should spend some time to customize the layout and styles, because most of the blogs that use it look very similar.</p>
+]]></content>
+  </entry>
+  
+</feed>

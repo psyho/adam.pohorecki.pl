@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: tdd | Adam Pohorecki]]></title>
+  <link href="http://adam.pohorecki.pl/blog/categories/tdd/atom.xml" rel="self"/>
+  <link href="http://adam.pohorecki.pl/"/>
+  <updated>2012-06-24T13:21:13+02:00</updated>
+  <id>http://adam.pohorecki.pl/</id>
+  <author>
+    <name><![CDATA[Adam Pohorecki]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Lean Startup]]></title>
+    <link href="http://adam.pohorecki.pl/blog/2012/06/24/lean-startup/"/>
+    <updated>2012-06-24T02:25:00+02:00</updated>
+    <id>http://adam.pohorecki.pl/blog/2012/06/24/lean-startup</id>
+    <content type="html"><![CDATA[<p><img class="left" src="/images/blog/lean-startup.png" title="Lean Startup cover" ></p>
+
+<p>I recently read the <a href="http://theleanstartup.com/book">"Lean Startup" book by Eric Ries</a> which I can recommend to anyone involved in software development, not just people working with technology startups, like the title suggests.</p>
+
+<p>The book describes a process, which can be used to make innovation more manageable and directed using the Lean Manufacturing principles combined with metrics-driven-development.
+It is written with entrepreneurs in mind, but it also touches on topics such as Continuous Deployment and automated testing, which are important to me.</p>
+
+<!--more-->
+
+
+<h2>The problem solved by Lean Startup movement</h2>
+
+<p>In my career, I have seen a certain mistake repeated too many times.
+I call this mistake "feature overload".
+It happens when a product, based on someone's arbitrary decision, is gradually extended with features that don't necessarily add value, until it's so slow and bloated that it has to be rewritten or fails altogether.</p>
+
+<p>If you are a programmer, you might recognize this smell from code.
+The principle of avoiding this kind of mistakes is called <a href="http://en.wikipedia.org/wiki/You_ain't_gonna_need_it">YAGNI</a> (You Ain't Gonna Need It).</p>
+
+<p>BDD advises that we write our User Stories in form "<strong>In order to...</strong>, As a ..., I want to...".
+This first clause ensures, that the features we implement, are actually ones that are needed to improve the product.</p>
+
+<p>Lean Startup takes this idea much further by applying scientific principles.
+It obligates us to measure how the users react, and based on that, validate whether the feature actually brings value or not.
+If a feature does not bring us closer to the goal, then it should be removed.</p>
+
+<h2>Extending the Definition of Done (DoD)</h2>
+
+<p>Typically, a Definition of Done in Scrum looks something like this:</p>
+
+<ul>
+<li>implemented</li>
+<li>passed the code review</li>
+<li>tested</li>
+<li>accepted by the client</li>
+<li>deployed</li>
+</ul>
+
+
+<p>Lean startup appends another item to that definition: "validated".
+This means that for every feature deployed you would run a <a href="http://en.wikipedia.org/wiki/A/B_testing">split test</a> with the feature enabled and disabled and based on the metrics gathered during the experiment, you would consider whether this feature is worth keeping or not.</p>
+
+<p>It is worth noting that unvalidated features count toward the Work in Progress limit in Kanban, so this limits your development speed to how fast you can deploy and validate features, since only a limited number of split tests can usually be run at once.</p>
+
+<h2>Continuous Deployment</h2>
+
+<p>As you can probably see already, projects that take advantage of the Lean Startup methodology are ideal candidates for Continuous Delivery (or Deployment):</p>
+
+<ul>
+<li>If you need to a/b test everything, then you must have feature switches implemented.</li>
+<li>If the process requires you to deploy often, you can't probably just do that at the end of iteration.</li>
+</ul>
+
+
+<h2>TDD and Lean Startup</h2>
+
+<p>Ron Jeffries wrote a blog post a couple of years ago about <a href="http://xprogramming.com/blog/what-is-really-essential/">why you can't do iterative development without writing automated tests</a>.
+It essentially states that if you want to release often, you need to test everything just as often, and that's impossible to do that by hand.</p>
+
+<p>Obviously, if you want to deploy each time a feature is implemented, this becomes even harder, so you need automated tests even more.</p>
+
+<p>Ries in his book does agree with the fact that you need an extensive automated test suite, however he considers automated <em>unit</em> tests a from of waste and advocates writing end to end tests instead.</p>
+
+<p>The opinion that isolated unit tests are of limited use is often heard amongst people who don't practice TDD.
+I believe in the opposite: isolated unit tests are the most valuable tests you can write, while the end-to-end tests are the ones that provide the least value.</p>
+
+<h3>Tests are about feedback</h3>
+
+<p>Imagine you have a test suite that takes an hour to run.
+How often would you run it during your regular development?
+Would you even run it locally?
+I know I would not.</p>
+
+<p>Now imagine your test suite takes 15 seconds to run (1-2s for unit tests and the rest for integration tests).
+Would you run it locally?
+Maybe even each time you save a file?</p>
+
+<p>If you tests are slow, nobody runs them except for your CI server.
+End to end tests tend to depend on the structure of your markup and often are brittle and unstable.</p>
+
+<p>Fast tests give you confidence to change and refactor your code, and if you follow one simple rule of mocking (<strong>don't mock what you don't own</strong>), you will rarely fall into the trap of mocking too much.
+When unit tests fail, they point you almost exactly to where the failure occurred, which reduces the time spent debugging.</p>
+
+<p>I strongly believe that TDD is a technique that eliminates waste and makes rapid change possible. I think it should be a core practice for every lean startup.</p>
+
+<h2>Cohort Analysis</h2>
+
+<p>Cohort Analysis is a technique that I first read about in the Lean Startup book.
+It is optimized to give you feedback on how the changes you introduce modify your user's behavior.</p>
+
+<p>For example, let's say you implemented a feature that awards users certain amount of points when they visit the site each day.
+Your hypothesis is that this will increase the user retention.</p>
+
+<p>To validate your hypothesis you run a split test with the new feature enabled for some portion of the new users arriving at your website.
+You measure how many users visit your site, register and how many of the registered has returned to the site at least 3 times.</p>
+
+<p>At the end of the experiment, you present your metrics as a percentage of the overall number of visitors in the given segment.
+In theory, the percentage of users who register should not vary significantly, but the percentage of users returning to the site should increase.</p>
+
+<p>I really like how lean startup forces you to define your acceptance criteria in terms of things that can actually be measured.</p>
+
+<h2>The 5 Whys</h2>
+
+<p>Another interesting technique, which I first encountered in Eric Ries's book is <a href="http://en.wikipedia.org/wiki/5_Whys">"The 5 Whys Technique"</a>.</p>
+
+<p>It is a technique for determining the root cause of a problem by asking the question "Why...?" (kind of like children do) five times in a row.
+You do this every time something goes wrong (like when you deploy not working software to production, or when you go over the WIP limit on a Kanban board).
+Once you get answers to the 5 questions, you can apply an amount of effort proportional to the scale of the problem, to each of the problems that came up as answers to the questions.
+This way you get to improve and make your process more resistant to failure, but you also make sure that you don't spend too much time on things that don't happen often or are not too important.</p>
+
+<h2>Final remarks</h2>
+
+<p>Agile development methodologies tell us to embrace change, which is a great step forward comparing to the old waterfall/change-request days.
+However they do not give us a way to judge which features are more important, and which are not.
+This is a problem, because it involves a lot of guesswork and politics.</p>
+
+<p>Lean startup gives us a way of making feature decisions based on hard data and facilitates building the right product, not just a product the right way.</p>
+]]></content>
+  </entry>
+  
+</feed>
