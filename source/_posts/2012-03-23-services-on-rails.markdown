@@ -4,6 +4,7 @@ title: "Services on Rails"
 date: 2012-03-23 17:02
 comments: true
 categories: OOP dependency-injection services rails ruby
+published: false
 ---
 
 In the recent months we have seen the Ruby and Rails community shift from the largely procedural into more object-oriented paradigm of writing applications.
