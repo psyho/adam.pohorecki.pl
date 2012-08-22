@@ -1,0 +1,263 @@
+<title>Clojure</title>
+
+<section>
+<h1>Clojure</h1>
+<footer>Adam Pohorecki</footer>
+</section>
+
+<section>
+<figure>
+<img src="cunning.jpg" />
+</figure>
+</section>
+
+<section>
+<figure>
+<img src="tpp.jpg" />
+</figure>
+</section>
+
+<section>
+<h1>Why learn new programming languages?</h1>
+</section>
+
+<section>
+	<h1>Good tool for some use case</h1>
+</section>
+
+<section>
+	<h1>eg. Objective-C, Erlang, JavaScript</h1>
+</section>
+
+<section>
+	<h1>Changes the way you think</h1>
+</section>
+
+<section>
+	<h1>eg. Haskell, Smalltalk</h1>
+</section>
+
+<section>
+	<h1>Clojure fits both reasons</h1>
+</section>
+
+<section>
+	<h1>What is Clojure?</h1>
+</section>
+
+<section>
+	<h1>LISP on the JVM</h1>
+</section>
+
+<section>
+	<h1>LISP on the JVM</h1>
+</section>
+
+<section>
+<h1>Syntax</h1>
+</section>
+
+<section>
+<code lang="clojure">
+; obligatory hello world
+(println "hello world!")
+
+; function
+(defn foo
+  "documentation goes here"
+  [a b]
+  (+ a (* a b)))
+
+; data structures
+(def list '(1 2))
+(def vector [1 2 3])
+(def map {:a 1})
+(def set #{:a :b})
+
+; anonymous functions
+(map #(* % %) vector)
+</code>
+</section>
+
+<section>
+<h1>Clojure's sweet spot</h1>
+</section>
+
+<section>
+	<figure>
+		<img src="cpu.png" alt="Moore's law" />
+	</figure>
+</section>
+
+<section>
+	<h1>Parallel processing more important every year</h1>
+</section>
+
+<section>
+  <h1>Clojure excels at concurrent programming</h1>
+</section>
+
+<section>
+<h1>Immutable</h1>
+</section>
+
+<section>
+<h2>Guess the output value</h2>
+<code lang="ruby">
+x = {foo: 1, bar: 2}
+do_something(x)
+puts x[:foo]
+</code>
+</section>
+
+<section>
+<h1>Persistent Data Structures</h1>
+</section>
+
+<section>
+<h1>Separation of value/state/identity</h1>
+</section>
+
+<section>
+	<ul>
+		<li>var</li>
+		<li>atom</li>
+		<li>ref</li>
+		<li>agent</li>
+		<li>future</li>
+		<li>promise</li>
+	</ul>
+</section>
+
+<section>
+<h1>STM</h1>
+</section>
+
+<section>
+<code lang="clojure">
+(def psyho
+  (ref {:name "Adam" :lt_count 0}))
+
+(def give-talk [who]
+  (dosync
+    (alter update-in @psyho
+      [:lt_count] inc)))
+
+(give-talk psyho)
+</code>
+</section>
+
+<section>
+<h1>Bonus: ClojureScript</h1>
+</section>
+
+<section>
+<h1>Clojure changes the way you think</h1>
+</section>
+
+<section>
+<h1>Not object-oriented</h1>
+</section>
+
+<section>
+<h1>Function: smaller unit of reuse</h1>
+</section>
+
+<section>
+<h1>Separation of data and logic</h1>
+</section>
+
+<section>
+<h1>No inheritance :)</h1>
+</section>
+
+<section>
+<h1>Logic is separated into pure functions and changing state</h1>
+</section>
+
+<section>
+<h1>Clojure has a lot in common with Ruby</h1>
+</section>
+
+<section>
+<h1>Expressive</h1>
+</section>
+
+<section>
+<h1>Dynamic typing</h1>
+</section>
+
+<section>
+<h1>Shoot yourself in the leg (if you want to)</h1>
+</section>
+
+<section>
+<h1>Build your own language language</h1>
+</section>
+
+<section>
+<h1>but...</h1>
+</section>
+
+<section>
+<h1>LISP macros are way more powerful</h1>
+</section>
+
+<section>
+<h1>Can you implement if/unless/case in Ruby?</h1>
+</section>
+
+<section>
+<h1>Extending built-in types</h1>
+</section>
+
+<section>
+<code lang="ruby">
+# open classes
+"foo".classify
+:foo.classify
+Foo.classify
+</code>
+
+<code lang="clojure">
+; polymorphic, namespaced functions
+(classify "foo")
+(classify :foo)
+(classify Foo)
+(another.lib/classify "foo")
+</code>
+</section>
+
+<section>
+<h1>Extensive data manipulation library</h1>
+</section>
+
+<section>
+<h1>Some learning resources</h1>
+</section>
+
+<section>
+<h1><a href="http://pragprog.com/book/shcloj2/programming-clojure">Programming Clojure</a></h1>
+</section>
+
+<section>
+<h1><a href="http://joyofclojure.com/">Joy of Clojure</a></h1>
+</section>
+
+<section>
+<h1><a href="http://www.clojurebook.com/">Clojure Programming</a></h1>
+</section>
+
+<section>
+<h1><a href="http://4clojure.com">4clojure.com</a></h1>
+</section>
+
+<section>
+<h1>Thank you</h1>
+</section>
+
+<style type="text/css">
+  .highlight {
+    font-size: 0.8em;
+  }
+</style>
