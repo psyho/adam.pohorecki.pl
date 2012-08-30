@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+
+<title>AngularJS</title><script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script><script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script><script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script><link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/themes/base/jquery-ui.css"><script type="text/javascript">
+  angular.module('samples', ['ng']);
+  jQuery(function() {
+    jQuery('.sample.ng').each(function() {
+      angular.bootstrap(this, ['samples']);
+    })
+  });
+</script><section><h1>AngularJS</h1>
+<footer>Adam Pohorecki - 30.08.2012</footer></section><section><h1>Agenda</h1>
+</section><section><h1>HTML and dynamic content</h1>
+</section><section><div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td>
+<td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"name"</span><span class="nt">&gt;</span>Your name<span class="nt">&lt;/label&gt;</span>
+</span><span class="line"><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"name"</span> <span class="na">id=</span><span class="s">"name"</span> <span class="nt">/&gt;</span>
+</span><span class="line">
+</span><span class="line"><span class="nt">&lt;p&gt;</span>
+</span><span class="line">  Hello <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"name"</span><span class="nt">&gt;</span>{{name}}<span class="nt">&lt;/span&gt;</span>!
+</span><span class="line"><span class="nt">&lt;/p&gt;</span></span></code></pre></td>
+</tr></table></div>
+<div class="sample">
+  <div>
+    <label for="name">Your name:</label>
+    <input type="text" name="name" id="name">
+</div>
+
+  <div>Hello <span class="name">{{name}}</span>!</div>
+</div>
+</section><section><h1>jQuery saves the day</h1>
+</section><section><div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class="line">  <span class="nx">$</span><span class="p">(</span><span class="s2">"input[name=name]"</span><span class="p">).</span><span class="nx">keydown</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class="line">    <span class="nx">$</span><span class="p">(</span><span class="s1">'.name'</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">val</span><span class="p">());</span>
+</span><span class="line">  <span class="p">});</span>
+</span><span class="line"><span class="p">});</span></span></code></pre></td>
+</tr></table></div>
+<div class="sample hello-jq">
+  <script type="text/javascript">
+    jQuery(function() {
+      jQuery(".hello-jq input[name=name]").keydown(function() {
+        jQuery('.name').html(jQuery(this).val());
+      });
+    });
+  </script><div>
+    <label for="name">Your name:</label>
+    <input type="text" name="name" id="name">
+</div>
+
+  <div>Hello <span class="name">{{name}}</span>!</div>
+</div>
+</section><section><h1>You could implement a web app this way...</h1>
+</section><section><figure><img src="seems-legit.jpg" alt="seems legit"></figure></section><section><h1>Enter AngularJS</h1>
+</section><section><div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td>
+<td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;div</span> <span class="na">ng-app</span><span class="nt">&gt;</span>
+</span><span class="line">  <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"name"</span><span class="nt">&gt;</span>Your name<span class="nt">&lt;/label&gt;</span>
+</span><span class="line">  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">ng-model=</span><span class="s">"name"</span>
+</span><span class="line">    <span class="na">id=</span><span class="s">"name"</span><span class="nt">/&gt;</span>
+</span><span class="line">
+</span><span class="line">  <span class="nt">&lt;p&gt;</span>Hello {{name}}!<span class="nt">&lt;/p&gt;</span>
+</span><span class="line"><span class="nt">&lt;/div&gt;</span></span></code></pre></td>
+</tr></table></div>
+<div class="sample ng">
+  <div>
+    <label for="name">Your name:</label>
+    <input type="text" ng-model="name" id="name">
+</div>
+
+  <div>Hello {{name}}!</div>
+</div>
+</section><section><h1>HTML Enhanced for web apps</h1>
+</section><section><h1>Another JS MVC framework!?</h1>
+</section><section><figure><img src="yawn.jpg" alt="YAWN"></figure></section><section><h1>AngularJS is much more than just MVC</h1>
+</section><section><h1>Customize HTML</h1>
+</section><section><div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td>
+<td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;tabs&gt;</span>
+</span><span class="line">  <span class="nt">&lt;pane</span> <span class="na">title=</span><span class="s">"First Tab"</span><span class="nt">&gt;</span>
+</span><span class="line">    First tab content
+</span><span class="line">  <span class="nt">&lt;/pane&gt;</span>
+</span><span class="line">  <span class="nt">&lt;pane</span> <span class="na">title=</span><span class="s">"Second Tab"</span><span class="nt">&gt;</span>
+</span><span class="line">    Second tab content
+</span><span class="line">  <span class="nt">&lt;/pane&gt;</span>
+</span><span class="line"><span class="nt">&lt;/tabs&gt;</span></span></code></pre></td>
+</tr></table></div></section><section><h1>2-Way Data Binding</h1>
+</section><section><h1>Dependency Injection</h1>
+</section><section><div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="kd">function</span> <span class="nx">FooController</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">$window</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">  <span class="nx">$scope</span><span class="p">.</span><span class="nx">greet</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class="line">    <span class="nx">$window</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="s2">"Hello "</span> <span class="o">+</span> <span class="nx">$scope</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+</span><span class="line">  <span class="p">};</span>
+</span><span class="line"><span class="p">}</span></span></code></pre></td>
+</tr></table></div>
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td>
+<td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;div</span> <span class="na">ng-controller=</span><span class="s">"FooController"</span><span class="nt">&gt;</span>
+</span><span class="line">  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">ng-model=</span><span class="s">"name"</span> <span class="nt">/&gt;</span>
+</span><span class="line">  <span class="nt">&lt;a</span> <span class="na">ng-click=</span><span class="s">"greet()"</span><span class="nt">&gt;</span>Greet<span class="nt">&lt;/a&gt;</span>
+</span><span class="line"><span class="nt">&lt;/div&gt;</span></span></code></pre></td>
+</tr></table></div>
+<div class="sample ng">
+  <script type="text/javascript">
+    function FooController($scope, $window) {
+      $scope.greet = function() {
+        $window.alert("Hello " + $scope.name);
+      };
+    }
+  </script><div ng-controller="FooController">
+    <div>
+      <label for="name">Your name:</label>
+      <input type="text" ng-model="name" id="name">
+</div>
+
+    <a href ng-click="greet()">Greet me</a>
+  </div>
+</div>
+</section><section><h1>Testability</h1>
+</section><section><div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="nx">describe</span><span class="p">(</span><span class="s2">"FooController"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class="line">  <span class="nx">it</span><span class="p">(</span><span class="s2">"greets the user"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class="line">    <span class="kd">var</span> <span class="nx">scope</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">"Bob"</span> <span class="p">};</span>
+</span><span class="line">    <span class="kd">var</span> <span class="nx">win</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class="line">      <span class="nx">alert</span><span class="o">:</span> <span class="nx">jasmine</span><span class="p">.</span><span class="nx">createSpy</span><span class="p">()</span>
+</span><span class="line">    <span class="p">};</span>
+</span><span class="line">    <span class="kd">var</span> <span class="nx">ctrl</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FooController</span><span class="p">(</span><span class="nx">scope</span><span class="p">,</span> <span class="nx">win</span><span class="p">);</span>
+</span><span class="line">
+</span><span class="line">    <span class="nx">scope</span><span class="p">.</span><span class="nx">greet</span><span class="p">();</span>
+</span><span class="line">
+</span><span class="line">    <span class="nx">expect</span><span class="p">(</span><span class="nx">win</span><span class="p">.</span><span class="nx">alert</span><span class="p">).</span><span class="nx">toHaveBeenCalledWith</span><span class="p">(</span>
+</span><span class="line">      <span class="s2">"Hello Bob"</span><span class="p">);</span>
+</span><span class="line">  <span class="p">});</span>
+</span><span class="line"><span class="p">});</span></span></code></pre></td>
+</tr></table></div></section><section><h1>Plain Old JS Objects</h1>
+</section><section><h1>Framework for your app</h1>
+</section><section><h3>The framework</h3>
+<ul>
+<li>modules</li>
+	<li>controllers</li>
+	<li>services</li>
+	<li>directives</li>
+	<li>filters</li>
+</ul></section><section><h1>Library for common use cases</h1>
+</section><section><h3>The library</h3>
+<ul>
+<li>routing</li>
+	<li>XHR</li>
+	<li>RESTful XHR</li>
+	<li>i18n and l10n</li>
+	<li>promises</li>
+	<li>forms / validation</li>
+	<li>mocks</li>
+	<li>e2e tests</li>
+</ul></section><section><h1>MVC in Angular</h1>
+</section><section><h1>The View</h1>
+</section><section><h1>HTML/DOM based</h1>
+</section><section><h1>Customizable using directives and filters</h1>
+</section><section><h1>The Model</h1>
+</section><section><h1>$scope</h1>
+</section><section><div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="kd">function</span> <span class="nx">TodosController</span><span class="p">(</span><span class="nx">$scope</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">  <span class="nx">$scope</span><span class="p">.</span><span class="nx">todos</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Learn Angular"</span><span class="p">];</span>
+</span><span class="line">
+</span><span class="line">  <span class="nx">$scope</span><span class="p">.</span><span class="nx">add</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class="line">    <span class="k">if</span><span class="p">(</span><span class="nx">$scope</span><span class="p">.</span><span class="nx">newTodo</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">      <span class="nx">$scope</span><span class="p">.</span><span class="nx">todos</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">$scope</span><span class="p">.</span><span class="nx">newTodo</span><span class="p">);</span>
+</span><span class="line">      <span class="nx">$scope</span><span class="p">.</span><span class="nx">newTodo</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">  <span class="p">};</span>
+</span><span class="line"><span class="p">}</span></span></code></pre></td>
+</tr></table></div>
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td>
+<td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;div</span> <span class="na">ng-controller=</span><span class="s">"TodosController"</span><span class="nt">&gt;</span>
+</span><span class="line">  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">ng-model=</span><span class="s">"newTodo"</span> <span class="nt">/&gt;</span>
+</span><span class="line">  <span class="nt">&lt;a</span> <span class="na">href</span> <span class="na">ng-click=</span><span class="s">"add()"</span><span class="nt">&gt;</span>Add<span class="nt">&lt;/a&gt;</span>
+</span><span class="line">  <span class="nt">&lt;ul&gt;</span>
+</span><span class="line">    <span class="nt">&lt;li</span> <span class="na">ng-repeat=</span><span class="s">"todo in todos"</span><span class="nt">&gt;</span>{{todo}}<span class="nt">&lt;/li&gt;</span>
+</span><span class="line">  <span class="nt">&lt;/ul&gt;</span>
+</span><span class="line"><span class="nt">&lt;/div&gt;</span></span></code></pre></td>
+</tr></table></div></section><section><div class="sample ng">
+  <script type="text/javascript">
+function TodosController($scope) {
+  $scope.todos = ["Learn Angular"];
+
+  $scope.add = function() {
+    if($scope.newTodo) {
+      $scope.todos.push($scope.newTodo);
+      $scope.newTodo = '';
+    }
+  };
+}
+  </script><div ng-controller="TodosController">
+  <div>
+    <input type="text" ng-model="newTodo"><a href ng-click="add()">Add</a>
+  </div>
+
+  <div>
+    <div>Todos:</div>
+    <div ng-repeat="todo in todos">* {{todo}}</div>
+  </div>
+</div>
+</div>
+</section><section><h1>Scopes are hierarchical</h1>
+</section><section><div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="kd">function</span> <span class="nx">OuterCtrl</span><span class="p">(</span><span class="nx">$scope</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">  <span class="nx">$scope</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="s2">"outer foo"</span><span class="p">;</span>
+</span><span class="line">  <span class="nx">$scope</span><span class="p">.</span><span class="nx">bar</span> <span class="o">=</span> <span class="s2">"outer bar"</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line">
+</span><span class="line"><span class="kd">function</span> <span class="nx">InnerCtrl</span><span class="p">(</span><span class="nx">$scope</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">  <span class="nx">$scope</span><span class="p">.</span><span class="nx">bar</span> <span class="o">=</span> <span class="s2">"inner bar"</span><span class="p">;</span>
+</span><span class="line">  <span class="nx">$scope</span><span class="p">.</span><span class="nx">baz</span> <span class="o">=</span> <span class="nx">$scope</span><span class="p">.</span><span class="nx">foo</span> <span class="o">+</span> <span class="s2">" o_O"</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span></span></code></pre></td>
+</tr></table></div></section><section><div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td>
+<td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;div</span> <span class="na">ng-controller=</span><span class="s">"OuterCtrl"</span><span class="nt">&gt;</span>
+</span><span class="line">  Outer Controller:<span class="nt">&lt;br&gt;</span>
+</span><span class="line">  foo: {{foo}} | bar: {{bar}} | baz: {{baz}}
+</span><span class="line">  <span class="nt">&lt;div</span> <span class="na">ng-controller=</span><span class="s">"InnerCtrl"</span><span class="nt">&gt;</span>
+</span><span class="line">    Inner Controller:<span class="nt">&lt;br&gt;</span>
+</span><span class="line">    foo: {{foo}} | bar: {{bar}} | baz: {{baz}}
+</span><span class="line">  <span class="nt">&lt;/div&gt;</span>
+</span><span class="line"><span class="nt">&lt;/div&gt;</span></span></code></pre></td>
+</tr></table></div>
+<div class="sample ng">
+  <script type="text/javascript">
+function OuterCtrl($scope) {
+  $scope.foo = "outer foo";
+  $scope.bar = "outer bar";
+}
+
+function InnerCtrl($scope) {
+  $scope.bar = "inner bar";
+  $scope.baz = $scope.foo + " o_O";
+}
+  </script><div ng-controller="OuterCtrl">
+    Outer Controller:<br>
+    foo: {{foo}} | bar: {{bar}} | baz: {{baz}}
+    <div ng-controller="InnerCtrl">
+      Inner Controller:<br>
+      foo: {{foo}} | bar: {{bar}} | baz: {{baz}}
+    </div>
+  </div>
+</div>
+</section><section><h1>The controller</h1>
+</section><section><h1>Multiple controllers per page</h1>
+</section><section><h1>Directives can have controllers as well</h1>
+</section><section><div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="kd">function</span> <span class="nx">PeopleCtrl</span><span class="p">(</span><span class="nx">$scope</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">  <span class="nx">$scope</span><span class="p">.</span><span class="nx">people</span> <span class="o">=</span> <span class="p">[{</span><span class="nx">name</span><span class="o">:</span> <span class="s2">"adam"</span><span class="p">},</span>
+</span><span class="line">                   <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s2">"bob"</span><span class="p">}];</span>
+</span><span class="line">  <span class="c1">// add / remove / reorder</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line">
+</span><span class="line"><span class="kd">function</span> <span class="nx">PersonCtrl</span><span class="p">(</span><span class="nx">$scope</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">  <span class="nx">$scope</span><span class="p">.</span><span class="nx">makeUpper</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class="line">    <span class="nx">$scope</span><span class="p">.</span><span class="nx">person</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span>
+</span><span class="line">      <span class="nx">$scope</span><span class="p">.</span><span class="nx">person</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span>
+</span><span class="line">  <span class="p">}</span>
+</span><span class="line"><span class="p">}</span></span></code></pre></td>
+</tr></table></div></section><section><div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td>
+<td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;div</span> <span class="na">ng-controller=</span><span class="s">"PeopleCtrl"</span><span class="nt">&gt;</span>
+</span><span class="line">  {{people | json}}
+</span><span class="line">
+</span><span class="line">  <span class="nt">&lt;div</span> <span class="na">ng-repeat=</span><span class="s">"person in people"</span>
+</span><span class="line">       <span class="na">ng-controller=</span><span class="s">"PersonCtrl"</span><span class="nt">&gt;</span>
+</span><span class="line">    {{person}}
+</span><span class="line">    <span class="nt">&lt;a</span> <span class="na">href</span> <span class="na">ng-click=</span><span class="s">"makeUpper()"</span><span class="nt">&gt;</span>Upcase!<span class="nt">&lt;/a&gt;</span>
+</span><span class="line">  <span class="nt">&lt;/div&gt;</span>
+</span><span class="line"><span class="nt">&lt;/div&gt;</span></span></code></pre></td>
+</tr></table></div>
+<div class="sample ng">
+  <script type="text/javascript">
+    function PeopleCtrl($scope) {
+      $scope.people = [{name: "adam"}, {name: "bob"}];
+      // add / remove / reorder
+    }
+
+    function PersonCtrl($scope) {
+      $scope.makeUpper = function() {
+        $scope.person.name = $scope.person.name.toUpperCase();
+      }
+    }
+  </script><div ng-controller="PeopleCtrl">
+    {{people | json}}
+
+    <div ng-repeat="person in people" ng-controller="PersonCtrl">
+      {{person}}
+      <a href ng-click="makeUpper()">Upcase!</a>
+    </div>
+  </div>
+</div>
+</section><section><h1>Some examples</h1>
+</section><section><h1>Directive</h1>
+</section><section><div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="kd">var</span> <span class="nx">datepicker</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class="line">  <span class="k">return</span> <span class="p">{</span>
+</span><span class="line">    <span class="nx">require</span><span class="o">:</span> <span class="s1">'ngModel'</span><span class="p">,</span>
+</span><span class="line">    <span class="nx">link</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">scope</span><span class="p">,</span> <span class="nx">el</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">,</span> <span class="nx">ctrl</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">      <span class="nx">jQuery</span><span class="p">(</span><span class="nx">el</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">({</span>
+</span><span class="line">        <span class="nx">onSelect</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">dateText</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">          <span class="nx">scope</span><span class="p">.</span><span class="nx">$apply</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class="line">            <span class="nx">ctrl</span><span class="p">.</span><span class="nx">$setViewValue</span><span class="p">(</span><span class="nx">dateText</span><span class="p">);</span>
+</span><span class="line">          <span class="p">});</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">      <span class="p">});</span>
+</span><span class="line">
+</span><span class="line">      <span class="nx">ctrl</span><span class="p">.</span><span class="nx">render</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class="line">        <span class="nx">jQuery</span><span class="p">(</span><span class="nx">el</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">(</span><span class="s1">'setDate'</span><span class="p">,</span>
+</span><span class="line">          <span class="nx">ctrl</span><span class="p">.</span><span class="nx">$viewValue</span><span class="p">);</span>
+</span><span class="line">      <span class="p">};</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">  <span class="p">};</span>
+</span><span class="line"><span class="p">};</span></span></code></pre></td>
+</tr></table></div></section><section><div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">'samples'</span><span class="p">).</span>
+</span><span class="line">  <span class="nx">directive</span><span class="p">(</span><span class="s1">'datepicker'</span><span class="p">,</span> <span class="nx">datepicker</span><span class="p">);</span></span></code></pre></td>
+</tr></table></div></section><section><div class="sample ng">
+<script type="text/javascript">
+var datepicker = function() {
+  return {
+    require: 'ngModel',
+    link: function(scope, el, attrs, ctrl) {
+      jQuery(el).datepicker({
+        onSelect: function(dateText) {
+          scope.$apply(function() {
+            ctrl.$setViewValue(dateText);
+          });
+        }
+      });
+
+      ctrl.render = function() {
+        jQuery(el).datepicker('setDate', ctrl.$viewValue);
+      };
+    }
+  };
+};
+angular.module('samples').directive('datepicker', datepicker);
+</script><input ng-model="date" datepicker><br>
+Date: {{date}} <br><input ng-model="date">
+</div>
+</section><section><h1>Filter</h1>
+</section><section><div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="kd">var</span> <span class="nx">sum</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class="line">  <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">values</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">    <span class="k">return</span> <span class="nx">values</span><span class="p">.</span><span class="nx">reduce</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">      <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span> <span class="p">});</span>
+</span><span class="line">  <span class="p">};</span>
+</span><span class="line"><span class="p">};</span>
+</span><span class="line"><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">'samples'</span><span class="p">).</span><span class="nx">filter</span><span class="p">(</span><span class="s1">'sum'</span><span class="p">,</span> <span class="nx">sum</span><span class="p">);</span></span></code></pre></td>
+</tr></table></div>
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td>
+<td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;div</span> <span class="na">ng-init=</span><span class="s">"numbers = [1, 2, 3]"</span><span class="nt">&gt;</span>
+</span><span class="line">  numbers: {{numbers | json}}
+</span><span class="line">  sum: {{numbers | sum }}
+</span><span class="line"><span class="nt">&lt;/div&gt;</span></span></code></pre></td>
+</tr></table></div>
+<div class="sample ng">
+  <script type="text/javascript">
+    var sum = function() {
+      return function(values) {
+        return values.reduce(function(a, b) { return a + b; });
+      };
+    };
+    angular.module('samples').filter('sum', sum);
+  </script><div ng-init="numbers = [1, 2, 3]">
+    numbers: {{numbers | json}}
+    sum: {{numbers | sum }}
+  </div>
+</div>
+</section><section><h1>Service</h1>
+</section><section><div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="kd">var</span> <span class="nx">notifyUser</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$window</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">  <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">    <span class="nx">$window</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="nx">msg</span><span class="p">);</span>
+</span><span class="line">  <span class="p">};</span>
+</span><span class="line"><span class="p">};</span>
+</span><span class="line"><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">'samples'</span><span class="p">)</span>
+</span><span class="line">  <span class="p">.</span><span class="nx">factory</span><span class="p">(</span><span class="s1">'notifyUser'</span><span class="p">,</span>
+</span><span class="line">    <span class="p">[</span><span class="s1">'$window'</span><span class="p">,</span> <span class="nx">notifyUser</span><span class="p">]);</span></span></code></pre></td>
+</tr></table></div></section><section><h1>Module</h1>
+</section><section><div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line">  <span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">'myModule'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'myServices'</span><span class="p">,</span>
+</span><span class="line">    <span class="s1">'myDirectives'</span><span class="p">]).</span>
+</span><span class="line">  <span class="nx">directive</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">,</span> <span class="nx">foo</span><span class="p">).</span>
+</span><span class="line">  <span class="nx">value</span><span class="p">(</span><span class="s1">'bar'</span><span class="p">,</span> <span class="s1">'the bar'</span><span class="p">).</span>
+</span><span class="line">  <span class="nx">factory</span><span class="p">(</span><span class="s1">'myAlert'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'baz'</span><span class="p">,</span> <span class="nx">myAlert</span><span class="p">]);</span></span></code></pre></td>
+</tr></table></div></section><section><h1>Forms &amp; validation</h1>
+</section><section><div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td>
+<td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;form</span> <span class="na">name=</span><span class="s">"myForm"</span><span class="nt">&gt;</span>
+</span><span class="line">  Foo*: <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">required</span>
+</span><span class="line">    <span class="na">ng-model=</span><span class="s">"foo"</span> <span class="nt">/&gt;&lt;br&gt;</span>
+</span><span class="line">  Bar*: <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">required</span>
+</span><span class="line">    <span class="na">ng-model=</span><span class="s">"bar"</span> <span class="nt">/&gt;&lt;br&gt;</span>
+</span><span class="line">  <span class="nt">&lt;button</span> <span class="na">ng-disabled=</span><span class="s">"myForm.$pristine</span>
+</span><span class="line"><span class="s">      || myForm.$invalid"</span><span class="nt">&gt;</span>Save<span class="nt">&lt;/button&gt;</span>
+</span><span class="line"><span class="nt">&lt;/form&gt;</span></span></code></pre></td>
+</tr></table></div>
+<div class="sample ng">
+  <form name="myForm">
+    Foo*: <input type="text" required ng-model="foo"><br>
+    Bar*: <input type="text" required ng-model="bar"><br><button ng-disabled="myForm.$pristine || myForm.$invalid">Save</button>
+  </form>
+</div>
+</section><section><h1>Testing</h1>
+</section><section><h1>Unit</h1>
+</section><section><h1>Extremely easy</h1>
+</section><section><h1>Mocks for non-testable stuff like setTimeout/console.log/XHR</h1>
+</section><section><h1>E2E</h1>
+</section><section><h1>Possible to mock HTTP</h1>
+</section><section><h1>More reliable than Selenium</h1>
+</section><section><h1>Much harder to use than Selenium</h1>
+</section><section><h1>What sucks in Angular</h1>
+</section><section><h3>A year ago:</h3>
+  <ul>
+<li>no forms</li>
+  	<li>non-composable validations</li>
+    <li>no i18n</li>
+    <li>complex directives</li>
+    <li>directives/widgets</li>
+    <li>scope and controller were the same thing</li>
+  </ul></section><section><h1>All my complaints were addressed</h1>
+</section><section><h1>Plus stuff I didn't know I needed</h1>
+</section><section><h1>Big improvements =&gt; lots of breaking changes</h1>
+</section><section><h1>1.0 should be stable though</h1>
+</section><section><h3>Problems now:</h3>
+  <ul>
+<li>animations require more work</li>
+  	<li>$resource could be similar to backbone models</li>
+  	<li>very few libraries extending Angular</li>
+    <li>can't reuse templates on the backend</li>
+  </ul></section><section><h1>Highlights</h1>
+</section><section><h1>Easy setup</h1>
+</section><section><h1>Unmatched testability</h1>
+</section><section><h1>Cleaner code with less callbacks an boilerplate</h1>
+</section><section><h1>Build your own HTML</h1>
+</section><section><figure><img src="hypnotoad.gif"><figcaption>you shall ask<br>questions now</figcaption></figure></section><section><h1>Thank you</h1>
+</section><style type="text/css">
+div.highlight, .sample {
+  font-size: 0.7em;
+}
+
+.sample {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px #ccc;
+  box-shadow: 5px 5px 5px #ccc;
+  margin: 73px;
+  padding: 1em;
+}
+</style><style>
+  .highlight {
+    font-size: 0.8em;
+    background-color: #FDF6E3;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #ccc;
+    border-collapse: collapse;
+    border: 1px solid #ebe4ce;
+  }
+  .highlight .line-numbers {
+    width: 30px;
+    text-align: right;
+    background-color: #FDF8E8;
+    color: #93A1A1;
+    border-right: 1px solid #EBE4CE;
+  }
+  .highlight .line-number {
+    padding-right: 7px;
+  }
+  .highlight .code {
+    padding-left: 5px;
+  }
+
+.highlight { margin: 73px; }
+.highlight .hll { background-color: #ffffcc }
+.highlight .c { color: #586E75 } /* Comment */
+.highlight .err { color: #93A1A1 } /* Error */
+.highlight .g { color: #93A1A1 } /* Generic */
+.highlight .k { color: #859900 } /* Keyword */
+.highlight .l { color: #93A1A1 } /* Literal */
+.highlight .n { color: #93A1A1 } /* Name */
+.highlight .o { color: #859900 } /* Operator */
+.highlight .x { color: #CB4B16 } /* Other */
+.highlight .p { color: #93A1A1 } /* Punctuation */
+.highlight .cm { color: #586E75 } /* Comment.Multiline */
+.highlight .cp { color: #859900 } /* Comment.Preproc */
+.highlight .c1 { color: #586E75 } /* Comment.Single */
+.highlight .cs { color: #859900 } /* Comment.Special */
+.highlight .gd { color: #2AA198 } /* Generic.Deleted */
+.highlight .ge { color: #93A1A1; font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #DC322F } /* Generic.Error */
+.highlight .gh { color: #CB4B16 } /* Generic.Heading */
+.highlight .gi { color: #859900 } /* Generic.Inserted */
+.highlight .go { color: #93A1A1 } /* Generic.Output */
+.highlight .gp { color: #93A1A1 } /* Generic.Prompt */
+.highlight .gs { color: #93A1A1; font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #CB4B16 } /* Generic.Subheading */
+.highlight .gt { color: #93A1A1 } /* Generic.Traceback */
+.highlight .kc { color: #CB4B16 } /* Keyword.Constant */
+.highlight .kd { color: #268BD2 } /* Keyword.Declaration */
+.highlight .kn { color: #859900 } /* Keyword.Namespace */
+.highlight .kp { color: #859900 } /* Keyword.Pseudo */
+.highlight .kr { color: #268BD2 } /* Keyword.Reserved */
+.highlight .kt { color: #DC322F } /* Keyword.Type */
+.highlight .ld { color: #93A1A1 } /* Literal.Date */
+.highlight .m { color: #2AA198 } /* Literal.Number */
+.highlight .s { color: #2AA198 } /* Literal.String */
+.highlight .na { color: #93A1A1 } /* Name.Attribute */
+.highlight .nb { color: #B58900 } /* Name.Builtin */
+.highlight .nc { color: #268BD2 } /* Name.Class */
+.highlight .no { color: #CB4B16 } /* Name.Constant */
+.highlight .nd { color: #268BD2 } /* Name.Decorator */
+.highlight .ni { color: #CB4B16 } /* Name.Entity */
+.highlight .ne { color: #CB4B16 } /* Name.Exception */
+.highlight .nf { color: #268BD2 } /* Name.Function */
+.highlight .nl { color: #93A1A1 } /* Name.Label */
+.highlight .nn { color: #93A1A1 } /* Name.Namespace */
+.highlight .nx { color: #93A1A1 } /* Name.Other */
+.highlight .py { color: #93A1A1 } /* Name.Property */
+.highlight .nt { color: #268BD2 } /* Name.Tag */
+.highlight .nv { color: #268BD2 } /* Name.Variable */
+.highlight .ow { color: #859900 } /* Operator.Word */
+.highlight .w { color: #93A1A1 } /* Text.Whitespace */
+.highlight .mf { color: #2AA198 } /* Literal.Number.Float */
+.highlight .mh { color: #2AA198 } /* Literal.Number.Hex */
+.highlight .mi { color: #2AA198 } /* Literal.Number.Integer */
+.highlight .mo { color: #2AA198 } /* Literal.Number.Oct */
+.highlight .sb { color: #586E75 } /* Literal.String.Backtick */
+.highlight .sc { color: #2AA198 } /* Literal.String.Char */
+.highlight .sd { color: #93A1A1 } /* Literal.String.Doc */
+.highlight .s2 { color: #2AA198 } /* Literal.String.Double */
+.highlight .se { color: #CB4B16 } /* Literal.String.Escape */
+.highlight .sh { color: #93A1A1 } /* Literal.String.Heredoc */
+.highlight .si { color: #2AA198 } /* Literal.String.Interpol */
+.highlight .sx { color: #2AA198 } /* Literal.String.Other */
+.highlight .sr { color: #DC322F } /* Literal.String.Regex */
+.highlight .s1 { color: #2AA198 } /* Literal.String.Single */
+.highlight .ss { color: #2AA198 } /* Literal.String.Symbol */
+.highlight .bp { color: #268BD2 } /* Name.Builtin.Pseudo */
+.highlight .vc { color: #268BD2 } /* Name.Variable.Class */
+.highlight .vg { color: #268BD2 } /* Name.Variable.Global */
+.highlight .vi { color: #268BD2 } /* Name.Variable.Instance */
+.highlight .il { color: #2AA198 } /* Literal.Number.Integer.Long */
+</style>
+
+<!-- Maybe a font from http://www.google.com/webfonts ? -->
+<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
+
+<style>
+  html, .view body { background-color: black; counter-reset: slideidx; }
+  body, .view section { background-color: white; border-radius: 12px }
+  /* A section is a slide. It's size is 800x600, and this will never change */
+  section, .view head > title {
+      /* The font from Google */
+      font-family: 'Oswald', arial, serif;
+      font-size: 30px;
+  }
+
+  .view section:after {
+    counter-increment: slideidx;
+    content: counter(slideidx, decimal-leading-zero);
+    position: absolute; bottom: -80px; right: 100px;
+    color: white;
+  }
+
+  .view head > title {
+    color: white;
+    text-align: center;
+    margin: 1em 0 1em 0;
+  }
+
+  h1, h2 {
+    margin-top: 200px;
+    text-align: center;
+    font-size: 80px;
+  }
+  h3 {
+    margin: 100px 0 50px 100px;
+  }
+
+  ul {
+      margin: 50px 200px;
+  }
+
+  p {
+    margin: 75px;
+    font-size: 50px;
+  }
+
+  blockquote {
+    height: 100%;
+    background-color: black;
+    color: white;
+    font-size: 60px;
+    padding: 50px;
+  }
+  blockquote:before {
+    content: open-quote;
+  }
+  blockquote:after {
+    content: close-quote;
+  }
+
+  /* Figures are displayed full-page, with the caption
+     on top of the image/video */
+  figure {
+    background-color: black;
+    width: 100%;
+    height: 100%;
+  }
+  figure > * {
+    position: absolute;
+  }
+  figure > img, figure > video {
+    width: 100%; height: 100%;
+  }
+  figcaption {
+    margin: 70px;
+    font-size: 50px;
+  }
+
+  footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 40px;
+    text-align: right;
+    background-color: #F3F4F8;
+    border-top: 1px solid #CCC;
+  }
+
+  /* Transition effect */
+  /* Feel free to change the transition effect for original
+     animations. See here:
+     https://developer.mozilla.org/en/CSS/CSS_transitions
+     How to use CSS3 Transitions: */
+  section {
+    -moz-transition: left 400ms linear 0s;
+    -webkit-transition: left 400ms linear 0s;
+    -ms-transition: left 400ms linear 0s;
+    transition: left 400ms linear 0s;
+  }
+  .view section {
+    -moz-transition: none;
+    -webkit-transition: none;
+    -ms-transition: none;
+    transition: none;
+  }
+
+  .view section[aria-selected] {
+    border: 5px red solid;
+  }
+
+  /* Before */
+  section { left: -150%; }
+  /* Now */
+  section[aria-selected] { left: 0; }
+  /* After */
+  section[aria-selected] ~ section { left: +150%; }
+
+  /* Incremental elements */
+
+  /* By default, visible */
+  .incremental > * { opacity: 1; }
+
+  /* The current item */
+  .incremental > *[aria-selected] { opacity: 1; }
+
+  /* The items to-be-selected */
+  .incremental > *[aria-selected] ~ * { opacity: 0; }
+
+  /* The progressbar, at the bottom of the slides, show the global
+     progress of the presentation. */
+  #progress-bar {
+    height: 2px;
+    background: #AAA;
+  }
+</style>
+
+<!-- {{{{ dzslides core
+#
+#
+#     __  __  __       .  __   ___  __
+#    |  \  / /__` |    | |  \ |__  /__`
+#    |__/ /_ .__/ |___ | |__/ |___ .__/ core :€
+#
+#
+# The following block of code is not supposed to be edited.
+# But if you want to change the behavior of these slides,
+# feel free to hack it!
+#
+-->
+
+<div id="progress-bar"></div>
+
+<!-- Default Style -->
+<style>
+  * { margin: 0; padding: 0; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+  details { display: none; }
+  body {
+    width: 800px; height: 600px;
+    margin-left: -400px; margin-top: -300px;
+    position: absolute; top: 50%; left: 50%;
+    overflow: hidden;
+    display: none;
+  }
+  .view body {
+    position: static;
+    margin: 0; padding: 0;
+    width: 100%; height: 100%;
+    display: inline-block;
+    overflow: visible; overflow-x: hidden;
+    /* undo Dz.onresize */
+    transform: none !important;
+    -moz-transform: none !important;
+    -webkit-transform: none !important;
+    -o-transform: none !important;
+    -ms-transform: none !important;
+  }
+  .view head, .view head > title { display: block }
+  section {
+    position: absolute;
+    pointer-events: none;
+    width: 100%; height: 100%;
+  }
+  .view section {
+    pointer-events: auto;
+    position: static;
+    width: 800px; height: 600px;
+    margin: -150px -200px;
+    float: left;
+
+    transform: scale(.4);
+    -moz-transform: scale(.4);
+    -webkit-transform: scale(.4);
+    -o-transform: scale(.4);
+    -ms-transform: scale(.4);
+  }
+  .view section > * { pointer-events: none; }
+  section[aria-selected] { pointer-events: auto; }
+  html { overflow: hidden; }
+  html.view { overflow: visible; }
+  body.loaded { display: block; }
+  .incremental {visibility: hidden; }
+  .incremental[active] {visibility: visible; }
+  #progress-bar{
+    bottom: 0;
+    position: absolute;
+    -moz-transition: width 400ms linear 0s;
+    -webkit-transition: width 400ms linear 0s;
+    -ms-transition: width 400ms linear 0s;
+    transition: width 400ms linear 0s;
+  }
+  .view #progress-bar {
+    display: none;
+  }
+</style>
+
+<script>
+  var Dz = {
+    remoteWindows: [],
+    idx: -1,
+    step: 0,
+    html: null,
+    slides: null,
+    progressBar : null,
+    params: {
+      autoplay: "1"
+    }
+  };
+
+  Dz.init = function() {
+    document.body.className = "loaded";
+    this.slides = Array.prototype.slice.call($$("body > section"));
+    this.progressBar = $("#progress-bar");
+    this.html = document.body.parentNode;
+    this.setupParams();
+    this.onhashchange();
+    this.setupTouchEvents();
+    this.onresize();
+    this.setupView();
+  }
+
+  Dz.setupParams = function() {
+    var p = window.location.search.substr(1).split('&');
+    p.forEach(function(e, i, a) {
+      var keyVal = e.split('=');
+      Dz.params[keyVal[0]] = decodeURIComponent(keyVal[1]);
+    });
+  // Specific params handling
+    if (!+this.params.autoplay)
+      $$.forEach($$("video"), function(v){ v.controls = true });
+  }
+
+  Dz.onkeydown = function(aEvent) {
+    // Don't intercept keyboard shortcuts
+    if (aEvent.altKey
+      || aEvent.ctrlKey
+      || aEvent.metaKey
+      || aEvent.shiftKey) {
+      return;
+    }
+    if ( aEvent.keyCode == 37 // left arrow
+      || aEvent.keyCode == 38 // up arrow
+      || aEvent.keyCode == 33 // page up
+    ) {
+      aEvent.preventDefault();
+      this.back();
+    }
+    if ( aEvent.keyCode == 39 // right arrow
+      || aEvent.keyCode == 40 // down arrow
+      || aEvent.keyCode == 34 // page down
+    ) {
+      aEvent.preventDefault();
+      this.forward();
+    }
+    if (aEvent.keyCode == 35) { // end
+      aEvent.preventDefault();
+      this.goEnd();
+    }
+    if (aEvent.keyCode == 36) { // home
+      aEvent.preventDefault();
+      this.goStart();
+    }
+    if (aEvent.keyCode == 32) { // space
+      aEvent.preventDefault();
+      this.toggleContent();
+    }
+    if (aEvent.keyCode == 70) { // f
+      aEvent.preventDefault();
+      this.goFullscreen();
+    }
+    if (aEvent.keyCode == 79) { // o
+      aEvent.preventDefault();
+      this.toggleView();
+    }
+  }
+
+  /* Touch Events */
+
+  Dz.setupTouchEvents = function() {
+    var orgX, newX;
+    var tracking = false;
+
+    var db = document.body;
+    db.addEventListener("touchstart", start.bind(this), false);
+    db.addEventListener("touchmove", move.bind(this), false);
+
+    function start(aEvent) {
+      aEvent.preventDefault();
+      tracking = true;
+      orgX = aEvent.changedTouches[0].pageX;
+    }
+
+    function move(aEvent) {
+      if (!tracking) return;
+      newX = aEvent.changedTouches[0].pageX;
+      if (orgX - newX > 100) {
+        tracking = false;
+        this.forward();
+      } else {
+        if (orgX - newX < -100) {
+          tracking = false;
+          this.back();
+        }
+      }
+    }
+  }
+
+  Dz.setupView = function() {
+    document.body.addEventListener("click", function ( e ) {
+      if (!Dz.html.classList.contains("view")) return;
+      if (!e.target || e.target.nodeName != "SECTION") return;
+
+      Dz.html.classList.remove("view");
+      Dz.setCursor(Dz.slides.indexOf(e.target) + 1);
+    }, false);
+  }
+
+  /* Adapt the size of the slides to the window */
+
+  Dz.onresize = function() {
+    var db = document.body;
+    var sx = db.clientWidth / window.innerWidth;
+    var sy = db.clientHeight / window.innerHeight;
+    var transform = "scale(" + (1/Math.max(sx, sy)) + ")";
+
+    db.style.MozTransform = transform;
+    db.style.WebkitTransform = transform;
+    db.style.OTransform = transform;
+    db.style.msTransform = transform;
+    db.style.transform = transform;
+  }
+
+
+  Dz.getDetails = function(aIdx) {
+    var s = $("section:nth-of-type(" + aIdx + ")");
+    var d = s.$("details");
+    return d ? d.innerHTML : "";
+  }
+
+  Dz.onmessage = function(aEvent) {
+    var argv = aEvent.data.split(" "), argc = argv.length;
+    argv.forEach(function(e, i, a) { a[i] = decodeURIComponent(e) });
+    var win = aEvent.source;
+    if (argv[0] === "REGISTER" && argc === 1) {
+      this.remoteWindows.push(win);
+      this.postMsg(win, "REGISTERED", document.title, this.slides.length);
+      this.postMsg(win, "CURSOR", this.idx + "." + this.step);
+      return;
+    }
+    if (argv[0] === "BACK" && argc === 1)
+      this.back();
+    if (argv[0] === "FORWARD" && argc === 1)
+      this.forward();
+    if (argv[0] === "START" && argc === 1)
+      this.goStart();
+    if (argv[0] === "END" && argc === 1)
+      this.goEnd();
+    if (argv[0] === "TOGGLE_CONTENT" && argc === 1)
+      this.toggleContent();
+    if (argv[0] === "SET_CURSOR" && argc === 2)
+      window.location.hash = "#" + argv[1];
+    if (argv[0] === "GET_CURSOR" && argc === 1)
+      this.postMsg(win, "CURSOR", this.idx + "." + this.step);
+    if (argv[0] === "GET_NOTES" && argc === 1)
+      this.postMsg(win, "NOTES", this.getDetails(this.idx));
+  }
+
+  Dz.toggleContent = function() {
+    // If a Video is present in this new slide, play it.
+    // If a Video is present in the previous slide, stop it.
+    var s = $("section[aria-selected]");
+    if (s) {
+      var video = s.$("video");
+      if (video) {
+        if (video.ended || video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      }
+    }
+  }
+
+  Dz.setCursor = function(aIdx, aStep) {
+    // If the user change the slide number in the URL bar, jump
+    // to this slide.
+    aStep = (aStep != 0 && typeof aStep !== "undefined") ? "." + aStep : ".0";
+    window.location.hash = "#" + aIdx + aStep;
+  }
+
+  Dz.onhashchange = function() {
+    var cursor = window.location.hash.split("#"),
+        newidx = 1,
+        newstep = 0;
+    if (cursor.length == 2) {
+      newidx = ~~cursor[1].split(".")[0];
+      newstep = ~~cursor[1].split(".")[1];
+      if (newstep > Dz.slides[newidx - 1].$$('.incremental > *').length) {
+        newstep = 0;
+        newidx++;
+      }
+    }
+    this.setProgress(newidx, newstep);
+    if (newidx != this.idx) {
+      this.setSlide(newidx);
+    }
+    if (newstep != this.step) {
+      this.setIncremental(newstep);
+    }
+    for (var i = 0; i < this.remoteWindows.length; i++) {
+      this.postMsg(this.remoteWindows[i], "CURSOR", this.idx + "." + this.step);
+    }
+  }
+
+  Dz.back = function() {
+    if (this.idx == 1 && this.step == 0) {
+      return;
+    }
+    if (this.step == 0) {
+      this.setCursor(this.idx - 1,
+                     this.slides[this.idx - 2].$$('.incremental > *').length);
+    } else {
+      this.setCursor(this.idx, this.step - 1);
+    }
+  }
+
+  Dz.forward = function() {
+    if (this.idx >= this.slides.length &&
+        this.step >= this.slides[this.idx - 1].$$('.incremental > *').length) {
+        return;
+    }
+    if (this.step >= this.slides[this.idx - 1].$$('.incremental > *').length) {
+      this.setCursor(this.idx + 1, 0);
+    } else {
+      this.setCursor(this.idx, this.step + 1);
+    }
+  }
+
+  Dz.goStart = function() {
+    this.setCursor(1, 0);
+  }
+
+  Dz.goEnd = function() {
+    var lastIdx = this.slides.length;
+    var lastStep = this.slides[lastIdx - 1].$$('.incremental > *').length;
+    this.setCursor(lastIdx, lastStep);
+  }
+
+  Dz.toggleView = function() {
+    this.html.classList.toggle("view");
+
+    if (this.html.classList.contains("view")) {
+      $("section[aria-selected]").scrollIntoView(true);
+    }
+  }
+
+  Dz.setSlide = function(aIdx) {
+    this.idx = aIdx;
+    var old = $("section[aria-selected]");
+    var next = $("section:nth-of-type("+ this.idx +")");
+    if (old) {
+      old.removeAttribute("aria-selected");
+      var video = old.$("video");
+      if (video) {
+        video.pause();
+      }
+    }
+    if (next) {
+      next.setAttribute("aria-selected", "true");
+      if (this.html.classList.contains("view")) {
+        next.scrollIntoView();
+      }
+      var video = next.$("video");
+      if (video && !!+this.params.autoplay) {
+        video.play();
+      }
+    } else {
+      // That should not happen
+      this.idx = -1;
+      // console.warn("Slide doesn't exist.");
+    }
+  }
+
+  Dz.setIncremental = function(aStep) {
+    this.step = aStep;
+    var old = this.slides[this.idx - 1].$('.incremental > *[aria-selected]');
+    if (old) {
+      old.removeAttribute('aria-selected');
+    }
+    var incrementals = $$('.incremental');
+    if (this.step <= 0) {
+      $$.forEach(incrementals, function(aNode) {
+        aNode.removeAttribute('active');
+      });
+      return;
+    }
+    var next = this.slides[this.idx - 1].$$('.incremental > *')[this.step - 1];
+    if (next) {
+      next.setAttribute('aria-selected', true);
+      next.parentNode.setAttribute('active', true);
+      var found = false;
+      $$.forEach(incrementals, function(aNode) {
+        if (aNode != next.parentNode)
+          if (found)
+            aNode.removeAttribute('active');
+          else
+            aNode.setAttribute('active', true);
+        else
+          found = true;
+      });
+    } else {
+      setCursor(this.idx, 0);
+    }
+    return next;
+  }
+
+  Dz.goFullscreen = function() {
+    var html = $('html'),
+        requestFullscreen = html.requestFullscreen || html.requestFullScreen || html.mozRequestFullScreen || html.webkitRequestFullScreen;
+    if (requestFullscreen) {
+      requestFullscreen.apply(html);
+    }
+  }
+
+  Dz.setProgress = function(aIdx, aStep) {
+    var slide = $("section:nth-of-type("+ aIdx +")");
+    if (!slide)
+      return;
+    var steps = slide.$$('.incremental > *').length + 1,
+        slideSize = 100 / (this.slides.length - 1),
+        stepSize = slideSize / steps;
+    this.progressBar.style.width = ((aIdx - 1) * slideSize + aStep * stepSize) + '%';
+  }
+
+  Dz.postMsg = function(aWin, aMsg) { // [arg0, [arg1...]]
+    aMsg = [aMsg];
+    for (var i = 2; i < arguments.length; i++)
+      aMsg.push(encodeURIComponent(arguments[i]));
+    aWin.postMessage(aMsg.join(" "), "*");
+  }
+
+  function init() {
+    Dz.init();
+    window.onkeydown = Dz.onkeydown.bind(Dz);
+    window.onresize = Dz.onresize.bind(Dz);
+    window.onhashchange = Dz.onhashchange.bind(Dz);
+    window.onmessage = Dz.onmessage.bind(Dz);
+  }
+
+  window.onload = init;
+</script>
+
+
+<script> // Helpers
+  if (!Function.prototype.bind) {
+    Function.prototype.bind = function (oThis) {
+
+      // closest thing possible to the ECMAScript 5 internal IsCallable
+      // function
+      if (typeof this !== "function")
+      throw new TypeError(
+        "Function.prototype.bind - what is trying to be fBound is not callable"
+      );
+
+      var aArgs = Array.prototype.slice.call(arguments, 1),
+          fToBind = this,
+          fNOP = function () {},
+          fBound = function () {
+            return fToBind.apply( this instanceof fNOP ? this : oThis || window,
+                   aArgs.concat(Array.prototype.slice.call(arguments)));
+          };
+
+      fNOP.prototype = this.prototype;
+      fBound.prototype = new fNOP();
+
+      return fBound;
+    };
+  }
+
+  var $ = (HTMLElement.prototype.$ = function(aQuery) {
+    return this.querySelector(aQuery);
+  }).bind(document);
+
+  var $$ = (HTMLElement.prototype.$$ = function(aQuery) {
+    return this.querySelectorAll(aQuery);
+  }).bind(document);
+
+  $$.forEach = function(nodeList, fun) {
+    Array.prototype.forEach.call(nodeList, fun);
+  }
+
+</script>
+<!-- vim: set fdm=marker: }}} -->
