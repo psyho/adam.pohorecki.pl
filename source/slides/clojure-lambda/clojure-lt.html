@@ -1,0 +1,825 @@
+<title>Clojure</title>
+
+<section>
+<h1>Clojure</h1>
+<footer>Lambda Lounge 28.03.2013 - Adam Pohorecki</footer>
+</section>
+
+<section class="multi-headers">
+<h2><emph>Functional</emph> Programming</h2>
+<h2>in <emph>LISP</emph></h2>
+<h2>on the <emph>JVM</emph></h2>
+</section>
+
+<section>
+<figure>
+<img src="elephant.jpg" />
+</figure>
+</section>
+
+<section>
+<h1>LISP?</h1>
+</section>
+
+<section>
+<h1>(((((((((((((<emph>???</emph>)))))))))))))</h1>
+</section>
+
+<section>
+<h1>Yes, Clojure has parentheses</h1>
+</section>
+
+<section class="img">
+<img src="deal-with-it.gif" />
+</section>
+
+<section>
+<h1>Minimal syntax</h1>
+</section>
+
+<section>
+<script lang="clojure">
+(some-function arg-one arg-two)
+
+; data structures
+(def list '(1 2))
+(def vector [1 2 3])
+(def map {:a 1})
+(def set #{:a :b})
+
+; anonymous functions
+(map #(* % %) vector)
+</script>
+</section>
+
+<section>
+<h1>Hello world!</h1>
+</section>
+
+<section>
+<h1>The kingdom of nouns</h1>
+</section>
+
+<section>
+<script lang="ruby">
+Greeter.greet("Lambda Lounge")
+</script>
+
+<script lang="ruby">
+module Greeter
+  def self.greet(name)
+    puts "Hello, #{name}"
+  end
+end
+</script>
+</section>
+
+<section>
+<h1>The kingdom of verbs</h1>
+</section>
+
+<section>
+<script lang="clojure">
+(greet "Lambda Lounge")
+</script>
+
+<script lang="clojure">
+(defn greet [name]
+  (println "Hello," name))
+</script>
+</section>
+
+<section>
+<h1>Polymorphism</h1>
+</section>
+
+<section>
+<script lang="ruby">
+user.render(canvas)
+monster.render(canvas)
+tree.render(canvas)
+</script>
+
+<script lang="clojure">
+(render user canvas)
+(render monster canvas)
+(render tree canvas)
+</script>
+</section>
+
+<section class="smaller">
+<script lang="clojure">
+(defn render [object canvas]
+  (case (:type object)
+    :user (render-user object canvas)
+    :tree (render-tree object canvas)
+    :monster (render-monster object canvas)))
+</script>
+</section>
+
+<section>
+  <figure><img src="seems_legit.jpg" /></figure>
+</section>
+
+<section>
+<h1>Protocols</h1>
+</section>
+
+<section class="smaller">
+<script lang="clojure">
+(defprotocol Renderable
+  (render [object canvas]))
+
+(defrecord User [...]
+  Renderable
+  (render [user canvas] ...)
+
+  ; same name, different protocol
+  ConsoleRenderable
+  (render [user] ...))
+
+(extend-type String
+  Renderable
+  (render [s canvas] ...))
+
+(defn make-renderable [foo]
+  (reify
+    Renderable
+    (render [_ canvas] ...)))
+</script>
+</section>
+
+<section>
+<script lang="ruby">
+spaceship.collide(other_spaceship)
+spaceship.collide(rock)
+rock.collide(rock)
+rock.collide(spaceship)
+</script>
+
+<script lang="clojure">
+(collide spaceship other-spaceship)
+(collide spaceship rock)
+(collide rock rock)
+(collide rock spaceship)
+</script>
+</section>
+
+<section class="smaller">
+<script lang="clojure">
+(defmulti collide (fn [& args] (map :type args)))
+
+(defmethod collide [::spaceship ::spaceship]
+  [spaceship-one spaceship-two]
+  ...)
+
+(defmethod collide [::spaceship ::immobile]
+  [spaceship-one immobile]
+  ...)
+
+(derive ::rock ::immobile)
+</script>
+</section>
+
+<section>
+<h1>Polymorphism is not just for OO</h1>
+</section>
+
+<section>
+<h1>Boilerplate</h1>
+</section>
+
+<section>
+<script lang="ruby">
+begin
+  transaction = Transaction.new
+  do_some_stuff
+  transaction.commit
+rescue => e
+  Logger.error("Transaction failed")
+  transaction.rollback
+  raise
+end
+</script>
+
+<script lang="ruby">
+with_transaction do
+  do_some_stuff
+end
+</script>
+</section>
+
+<section>
+<script lang="clojure">
+(try
+  (let [transaction (open-transaction)]
+    (do
+      (save-user user)
+      (save-order order))
+    (commit transaction)
+    (catch Exception e
+      (log "Transaction failed")
+      (rollback transaction)
+      (throw e))))
+</script>
+
+<script lang="clojure">
+(with-transaction
+  (save-user user)
+  (save-order order))
+</script>
+</section>
+
+<section>
+<script lang="clojure">
+(defn do-with-transaction [block]
+  (try
+    (let [transaction (open-transaction)]
+      (block) ; <-- changed
+      (commit transaction)
+      (catch Exception e
+        (log "Transaction failed")
+        (rollback transaction)
+        (throw e)))))
+</script>
+
+<script lang="clojure">
+(do-with-transaction
+  #(do
+    (save-user user)
+    (save-order order)))
+</script>
+</section>
+
+<section>
+<script lang="clojure">
+(defmacro with-transaction [body]
+  `(do-with-transaction
+    (fn [] (do ~@body))))
+</script>
+
+<script lang="clojure">
+(with-transaction
+  (save-user user)
+  (save-order order))
+</script>
+</section>
+
+<section>
+<script lang="ruby">
+if !condition
+  do_unless_condition
+else
+  do_if_condition
+end
+</script>
+
+<script lang="ruby">
+# ???
+if_not condition
+  do_unless_condition
+else
+  do_if_condition
+end
+</script>
+</section>
+
+<section>
+<script lang="ruby">
+if_not condition do
+  self.then do
+    do_unless_condition
+  end
+
+  self.else do
+    do_if_condition
+  end
+end
+</script>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+class IfNot
+  def then(&block)
+    @then = block
+  end
+
+  def else(&block)
+    @else = block
+  end
+
+  def run(condition)
+    if !condition
+      @then.call if @then
+    else
+      @else.call if @else
+    end
+  end
+end
+
+def if_not(condition, &block)
+  runner = IfNot.new
+  runner.instance_eval(&block)
+  runner.run(condition)
+end
+</script>
+</section>
+
+<section>
+<script lang="clojure">
+(if-not condition
+  (do-unless-condition)
+  (do-if-condition))
+</script>
+
+<script lang="clojure">
+(defmacro if-not [condition do-unless do-if]
+  `(if (not ~condition)
+      ~do-unless
+      ~do-if))
+</script>
+</section>
+
+<section>
+<figure>
+<img src="add-features.jpg" />
+</figure>
+</section>
+
+<section>
+<h1>The small print</h1>
+</section>
+
+<section>
+<script lang="ruby">
+cant_touch_this if clojure?
+</script>
+
+<script lang="clojure">
+; this won't work
+(cant-touch-this if ruby?)
+
+; that's the closest you can get
+(? cant-touch-this if ruby?)
+</script>
+</section>
+
+<section>
+<h1>Add <emph>any feature</emph> as long as it <emph>looks like LISP</emph></h1>
+</section>
+
+<section>
+<h1 style="margin-top: 100px">The<br><emph>understated elegance</emph><br>of LISP</h1>
+</section>
+
+<section>
+<h2>Code is Data</h2>
+<script lang="clojure">
+(defn greet [name]
+  (println "Hello," name))
+</script>
+</section>
+
+<section class="img">
+<img src="lisp_xkcd.png" />
+</section>
+
+<section>
+<h1>Functional Programming</h1>
+</section>
+
+<section>
+	<figure>
+		<img src="cpu.png" alt="Moore's law" />
+	</figure>
+</section>
+
+<section>
+<h1>The ingredients</h1>
+</section>
+
+<section>
+<h1>First order functions</h1>
+</section>
+
+<section>
+<script lang="clojure">
+(def add-5 (partial + 5))
+(def times-3 (partial * 3))
+
+(map (comp add-5 times-3) (range 10))
+;=> (5 8 11 14 17 20 23 26 29 32)
+
+(map (juxt add-5 times-3) (range 10))
+;=> ([5 0] [6 3] [7 6] [8 9] [9 12] ...)
+</script>
+</section>
+
+<section>
+<h1>Compared to OO</h1>
+</section>
+
+<section>
+<h1>smaller units of composition</h1>
+</section>
+
+<section>
+<h1>lower coupling</h1>
+</section>
+
+<section>
+<script lang="ruby">
+def index(policy, user)
+  if policy.is_authorized?(user)
+    do_something
+  end
+end
+</script>
+
+<script lang="clojure">
+(defn index [is-authorized? user]
+  (if (is-authorized? user)
+    (do-something)))
+</script>
+</section>
+
+<section>
+<h1>Laziness</h1>
+</section>
+
+<section>
+<script lang="clojure">
+; infinite sequence of prime numbers
+(def prime-numbers (filter prime? (range)))
+
+(take 10 prime-numbers)
+
+(reduce +
+  (take 10
+    (filter palindrome? prime-numbers)))
+
+; again with the macros...
+(->>
+  prime-numbers
+  (filter palindrome?)
+  (take 10)
+  (reduce +))
+</script>
+</section>
+
+<section>
+<h1>Immutability</h1>
+</section>
+
+<section>
+<script lang="clojure">
+(def foo [1 2 3])
+
+(def bar (conj foo 4))
+
+(prn x)
+;=> [1 2 3]
+
+(prn y)
+;=> [1 2 3 4]
+</script>
+</section>
+
+<section>
+<h1>How about this?</h1>
+</section>
+
+<section>
+<script lang="clojure">
+; a few Gb of RAM
+(def foo (take 1000000000 prime-numbers))
+
+(def bar (conj foo 4))
+(def baz (conj bar 5))
+</script>
+</section>
+
+<section>
+<h1>Persistent data structures</h1>
+</section>
+
+<section class="img" style="margin-top: 100px">
+<img src="clojure-trees.png" />
+</section>
+
+<section>
+<h1>Immutability enables <emph>concurrency</emph></h1>
+</section>
+
+<section>
+<h1>Immutability enables <emph>abstraction</emph></h1>
+</section>
+
+<section>
+<h2 style="margin-top: 100px;">What does this code do?</h2>
+
+<script lang="ruby">
+notification_builder.build(events)
+</script>
+
+<script lang="clojure">
+(build-notifications events)
+</script>
+</section>
+
+<section>
+<h1 style="margin-top: 100px;">FP is about<br><emph>handling state</emph><br>not passing around functions</h1>
+</section>
+
+<section>
+<h1>Functional core,<br>Imperative shell</h1>
+</section>
+
+<section class="smaller">
+<script lang="clojure">
+(let [
+  ; get the necessary data from the database
+  user (find-user user-id)
+  orders (orders-for-user user-id)
+
+  ; figure out how the world should change
+  tax-policy (make-tax-policy (:country user))
+  invoice (build-invoice tax-policy user orders)]
+
+  ; interact with the outside world
+  (send-invoice (:email user) invoice))
+</script>
+</section>
+
+<section>
+<h1>Same approach to concurrency</h1>
+</section>
+
+<section>
+<script lang="clojure">
+(def game (atom (make-game)))
+
+; clients (many threads)
+(loop
+  (do
+    (swap! game process-input (read-input))
+    (->>
+      @game
+      render
+      (send client-socket)))
+
+; server (one thread)
+(loop
+  (do
+    (swap! game handle-collisions)
+    (swap! game respawn-npcs)))
+</script>
+</section>
+
+<section>
+<script lang="clojure">
+; pure functions (all return a new game)
+(defn make-game [] ...)
+(defn process-input [game input] ...)
+(defn handle-collisions [game] ...)
+(defn respawn-npcs [game] ...)
+
+; also pure, returns bytes to send
+(defn render [game] ...)
+</script>
+</section>
+
+<section>
+<h2>Separation of value/state/identity</h3>
+</section>
+
+<section>
+<script lang="clojure">
+; value
+{:name "Clojure" :awesome true}
+
+; state = value at a point in time
+@current-language
+=> {:name "Clojure" :awesome true}
+
+; identity
+(def current-language (atom clojure))
+</script>
+</section>
+
+<section>
+<h1>Moar concurrency!</h1>
+</section>
+
+<section>
+<script lang="clojure">
+(def bob (ref (make-player)))
+(def alice (ref (make-player)))
+
+; do in transaction
+(dosync
+  (if (> (:stars @bob) (:stars @alice))
+    (alter alice give-moar-stars)
+    (alter bob give-moar-stars)))
+</script>
+</section>
+
+<section>
+<figure><img src="moar1.jpg" /></figure>
+</section>
+
+<section>
+<script lang="clojure">
+; fires off immediately
+(def the-answer-to-life
+  (future (Thread/sleep 10000) 42))
+
+; blocks until future result is calculated
+@the-answer-to-life
+</script>
+</section>
+
+<section>
+<script lang="clojure">
+(def promised-land (promise))
+
+; will block until delivered
+@promised-land
+
+; can check if realized
+(realized? promised-land)
+
+(deliver promised-land :far-far-away)
+</script>
+</section>
+
+<section>
+<figure><img src="moar2.jpg" /></figure>
+</section>
+
+<section>
+<script lang="clojure">
+(def counter (agent 0))
+
+; asynchronous
+(send counter inc)
+
+; get current agent value
+@counter
+</script>
+</section>
+
+<section>
+<script lang="clojure">
+(def ^:dynamic x 0)
+(def ^:dynamic y 0)
+
+; the values of x and y are changed
+; but only within the context of the
+; current thread and within the
+; (binding) call
+(binding [x (inc x)
+          y (inc y)]
+  (do-something))
+</script>
+</section>
+
+<section>
+<h1>JVM language</h1>
+</section>
+
+<section>
+<h1>Bonus: ClojureScript</h1>
+</section>
+
+<section>
+<h1>one language everywhere?</h1>
+</section>
+
+<section>
+<h1>Clojure</h1>
+</section>
+
+<section>
+<h1>Changes the way you think</h1>
+</section>
+
+<section>
+<h1>General-purpose</h1>
+</section>
+
+<section>
+<h1>Function: smaller unit of reuse</h1>
+</section>
+
+<section>
+<h1>No inheritance :)</h1>
+</section>
+
+<section>
+<h1>Logic is separated into pure functions and changing state</h1>
+</section>
+
+<section>
+<h1>Expressive</h1>
+</section>
+
+<section>
+<h1>Dynamic typing</h1>
+</section>
+
+<section>
+<h1>Shoot yourself in the leg (if you want to)</h1>
+</section>
+
+<section>
+<h1>Build your own language language</h1>
+</section>
+
+<section>
+<h1>Extensive data manipulation library</h1>
+</section>
+
+<section>
+<h1>Some learning resources</h1>
+</section>
+
+<section>
+<h1><a href="http://pragprog.com/book/shcloj2/programming-clojure">Programming Clojure</a></h1>
+</section>
+
+<section class="img" style="margin-top: 0px">
+<img src="programming-clojure.jpg" />
+</section>
+
+<section>
+<h1><a href="http://joyofclojure.com/">Joy of Clojure</a></h1>
+</section>
+
+<section class="img" style="margin-top: 35px">
+<img src="joy-of-clojure.jpg" />
+</section>
+
+<section>
+<h1><a href="http://www.clojurebook.com/">Clojure Programming</a></h1>
+</section>
+
+<section class="img">
+<img src="clojure-programming.gif" />
+</section>
+
+<section>
+<h1><a href="https://leanpub.com/fp-oo">Functional Programming for Object-Oriented Programmer</a></h1>
+</section>
+
+<section class="img" style="margin-top: 125px">
+<img src="fp-oo.jpg" />
+</section>
+
+<section>
+<h1><a href="http://shop.oreilly.com/product/0636920025139.do">ClojureScript Up and Running</a></h1>
+</section>
+
+<section class="img" style="margin-top: 75px">
+<img src="clojurescript.jpg" />
+</section>
+
+<section>
+<h1><a href="http://4clojure.com">4clojure.com</a></h1>
+</section>
+
+<section>
+<h1>Thank you</h1>
+</section>
+
+<style type="text/css">
+  .smaller div.highlight{
+    font-size: 0.6em;
+  }
+
+  .highlight {
+    font-size: 0.8em;
+  }
+
+  emph {
+    color: #6BBBC8;
+  }
+
+  section.img {
+    text-align: center;
+    margin-top: 200px;
+  }
+
+  .strike {
+    text-decoration: line-through;
+  }
+
+  .multi-headers h2 {
+    margin-top: 10px;
+  }
+
+  .multi-headers {
+    padding-top: 70px;
+  }
+</style>
