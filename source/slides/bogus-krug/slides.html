@@ -1,0 +1,650 @@
+<title>Isolate like a boss with Bogus</title>
+
+<section>
+<h1 class="higher">Isolate like a boss<br>with <emph>Bogus</emph></h1>
+<footer>Adam Pohorecki - 14.05.2013</footer>
+</section>
+
+<section>
+<h1 class="octocat">
+  <a href="https://github.com/psyho/bogus">psyho/bogus</a>
+</h1>
+</section>
+
+<section>
+  <h1>Have you ever seen this?</h1>
+</section>
+
+<section>
+<pre style="margin: 0 60px;">
+
+$ rspec spec
+</pre>
+<pre style="margin: 0 60px; color: green;">
+......................................
+......................................
+......................................
+......................................
+......................................
+......................................
+......................................
+......................................
+......................................
+...................
+</pre>
+<pre style="margin: 0 60px;">
+
+Finished in 15 minutes 32 seconds
+</pre>
+</section>
+
+<section>
+<figure>
+<img src="zombies.jpg" />
+</figure>
+<footer><emph>Slow tests are like zombies</emph> - they don't run fast, but they will eventually get you</footer>
+</section>
+
+<section>
+<h1>
+  Why slow tests?
+</h1>
+</section>
+
+<section>
+<figure>
+<img src="pyramides.jpg" alt="Pyramids" />
+</figure>
+<footer>Because of the <emph>testing pyramid</emph></footer>
+</section>
+
+<section>
+<figure>
+<img src="pyramid/theory.jpg" alt="Testing pyramid" />
+</figure>
+</section>
+
+<section>
+<figure>
+<img src="pyramid/timing.jpg" alt="Testing pyramid timing" />
+</figure>
+</section>
+
+<section>
+<figure>
+<img src="pyramid/rails.jpg" alt="Testing pyramid vs Rails" />
+</figure>
+</section>
+
+<section>
+<figure>
+<img src="pyramid/state-of-the-art.jpg" alt="Testing pyramid state-of-the-art" />
+</figure>
+<footer>Current state-of-the-art approach</footer>
+</section>
+
+<section>
+<h1>End-to-end tests</h1>
+<ul>
+  <li>top-down development</li>
+  <li>integrate many things at once</li>
+  <li>slow as hell</li>
+</ul>
+</section>
+
+<section>
+<script lang="ruby">
+describe "User dashboard" do
+  it "allows creating blog posts" do
+    joe = create(:user)
+    login_as(joe)
+
+    dashboard.add_blog_post(
+      entitled: "Hello")
+
+    home_page.should have_post(
+      entitled: "Hello")
+  end
+end
+</script>
+
+<footer>Sample e2e test</footer>
+</section>
+
+<section>
+<h1>integrated tests</h1>
+<ul>
+  <li>don't mock what you don't own</li>
+  <li>integrate 2-3 things at once</li>
+  <li>relatively slow</li>
+</ul>
+</section>
+
+<section>
+<script lang="ruby">
+describe PostRepository do
+  it "allows adding blog posts" do
+    joe = create(:user)
+    posts = PostRepository.for_user(joe)
+
+    post = posts.add(title: "Hello") # ...
+
+    posts.all.should == [post]
+  end
+end
+</script>
+
+<footer>Sample integrated test</footer>
+</section>
+
+<section>
+<h1>isolated tests</h1>
+<ul>
+  <li>isolated from everything else</li>
+  <li>give design feedback</li>
+  <li>pinpoint errors in logic</li>
+  <li>very fast</li>
+</ul>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+describe PostAdder do
+  let(:admin_notifier) { stub(post_added: nil) }
+  let(:post_repository) { stub(add: post) }
+
+  let(:adder) { PostAdder.new(admin_notifier,
+                              post_repository) }
+
+  it "adds the blog post" do
+    adder.add(title: "Hello")
+
+    post_repository.should(
+      have_received.add(title: "Hello"))
+  end
+
+  it "notifies the admin"
+  #...
+end
+</script>
+
+<footer>Sample isolated test</footer>
+</section>
+
+<section>
+<h1>The problem</h1>
+</section>
+
+<section>
+<script lang="ruby">
+post = stub
+post_repository = stub(add: post)
+admin_notifier = stub(post_added: nil)
+post_adder = PostAdder.new(post_repository,
+                           admin_notifier)
+
+post_adder.add(title: "Hello")
+
+admin_notifier.should(
+  have_received.post_added(post))
+</script>
+
+<footer>AdminNotifier used to take 1 argument...</footer>
+</section>
+
+<section>
+<script lang="ruby">
+class PostAdder
+  def add(details)
+    post = post_repository.add(details)
+    admin_notifier.post_added(post)
+  end
+end
+
+class AdminNotifier
+  # oops!
+  def post_added(author, post)
+  end
+end
+</script>
+
+<footer>... but now it takes two</footer>
+</section>
+
+<section>
+<h1>e2e tests<br>should catch this</h1>
+</section>
+
+<section>
+<h1>Feedback time</h1>
+<ul>
+  <li>isolated tests: <emph>1-10s</emph></li>
+  <li>integrated tests: <emph>30s-5m</emph></li>
+  <li>e2e tests: <emph>10m-1h</emph></li>
+</ul>
+</section>
+
+<section>
+  <h1>Fakes to the rescue</h1>
+</section>
+
+<section class="slightly-smaller">
+<script lang="ruby">
+# many definitions in multiple files
+stub(post_added: nil)
+</script>
+
+<script lang="ruby">
+# single definition
+class FakeAdminNotifier
+  def post_added(author, post)
+    calls << [:post_added, author, post]
+  end
+
+  def calls
+    @calls ||= []
+  end
+end
+</script>
+
+<footer>Define your stubs just once</footer>
+</section>
+
+<section>
+<script lang="ruby">
+stub(post_added: nil)
+</script>
+
+<script lang="ruby">
+fake(:admin_notifier)
+</script>
+
+<footer>Bogus to the rescue!</footer>
+</section>
+
+<section>
+<script lang="ruby">
+describe PostAdder do
+  let(:admin_notifier) {
+    fake(:admin_notifier) }
+end
+</script>
+
+<script lang="ruby">
+describe PostAdder do
+  fake(:admin_notifier)
+end
+</script>
+
+<footer>Syntactic sugar included</footer>
+</section>
+
+<section>
+<script lang="ruby">
+class BackgroundAdminNotifier
+  def self.post_added(author, post)
+    # schedule something
+  end
+end
+</script>
+
+<script lang="ruby">
+fake(:admin_notifier, as: :class) {
+  BackgroundAdminNotifier
+}
+</script>
+
+<footer>Customizable</footer>
+</section>
+
+<section>
+<script lang="ruby">
+# global configuration
+Bogus.fakes do
+  fake :admin_notifier,
+    as: :class,
+    class: proc{ BackgroundAdminNotifier }
+end
+</script>
+
+<script lang="ruby">
+# in specs
+fake(:admin_notifier)
+</script>
+
+<footer>DRY fakes with global configuration</footer>
+</section>
+
+<section>
+<script lang="ruby">
+admin_notifier = fake(:admin_notifier)
+# ...
+
+post_adder.add(title: "hello")
+
+admin_notifier.should(
+  have_received.post_added(post))
+</script>
+
+<footer>Spy on fakes without stubbing</footer>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+class PostAdder
+  def self.add(details)
+    post = PostRepository.add(details)
+    AdminNotifier.post_added(post)
+  end
+end
+</script>
+
+<script lang="ruby">
+fake_class(PostRepository, add: post)
+fake_class(AdminNotifier)
+
+PostRepository.add(title: "Hello")
+
+AdminNotifier.should(
+  have_received.post_added(post))
+</script>
+
+<footer>Fakes without dependency injection</footer>
+</section>
+
+<section class="slightly-smaller">
+<script lang="ruby">
+class AirbrakeNotifier
+  def log(error); end
+  def api_key; end
+end
+
+class FileErrorLogger
+  def log(error); end
+  def ensure_log_dir_exists; end
+end
+</script>
+
+<script lang="ruby">
+# responds only to log(error)
+fake(:error_notifier) { [AirbrakeNotifier,
+                         FileErrorLogger] }
+</script>
+
+
+<footer>Fake roles, not classes</footer>
+</section>
+
+<section>
+  <h1>Safe stubbing</h1>
+</section>
+
+<section class="slightly-smaller">
+<script lang="ruby">
+stub(repository).add(title: "Hello") { post }
+</script>
+
+<script lang="ruby">
+mock(repository).add(title: "Hello") { post }
+</script>
+
+<script lang="ruby">
+repository.should have_received.add(
+  title: "Hello")
+</script>
+
+<footer>Short stubbing/mocking/spying syntax inspired by RR</footer>
+</section>
+
+<section class="slightly-smaller">
+<script lang="ruby">
+class PostRepository
+  def self.add(author, title)
+  end
+end
+
+class PostAdder
+  def self.add(details)
+    PostRepository.add(details)
+  end
+end
+</script>
+
+<script lang="ruby">
+stub(PostRepository).add(any_args) { post }
+
+PostAdder.add(title: "Hello") # ArgumentError
+</script>
+
+<footer>Stubbing does not overwrite arity</footer>
+</section>
+
+<section>
+<script lang="ruby">
+# NameError
+stub(PostRepository).add_post(any_args) {
+  post }
+</script>
+
+<footer>Can't stub methods that do not exist</footer>
+</section>
+
+<section>
+<script lang="ruby">
+class PostRepository
+  def self.add(author, title)
+  end
+end
+</script>
+
+<script lang="ruby">
+# NameError
+stub(PostRepository).add("Hello") { post }
+</script>
+
+<footer>Can't stub method with wrong number of arguments</footer>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+# given
+post_repository = fake(:post_repository)
+
+# then
+mock(post_repository).add("Hello")
+
+# when
+post_adder.add("Hello")
+</script>
+
+<script lang="ruby">
+# given
+post_repository = fake(:post_repository)
+
+# when
+post_adder.add("Hello")
+
+# then
+post_repository.should have_received.add("Hello")
+</script>
+
+<footer>Spying instead of mocking</footer>
+</section>
+
+<section>
+<script lang="ruby">
+class PostRepository
+  def self.add_post(title)
+  end
+end
+
+</script>
+
+<script lang="ruby">
+# NameError
+post_repository.should_not(
+  have_received.add("Hello"))
+</script>
+
+<footer>Safe to make negative expectations</footer>
+</section>
+
+<section>
+<h1>Contract tests</h1>
+</section>
+
+<section class="slightly-smaller">
+<script lang="ruby">
+describe PostsController do
+  fake(:authenticator)
+
+  it "renders 403 if unauthenticated" do
+    stub(authenticator).authenticate {
+      raise Unauthorized }
+
+    controller.authenticator = authenticator
+
+    get :index
+
+    response.status.should == 403
+  end
+end
+</script>
+
+<footer>When we expect certain behavior...</footer>
+</section>
+
+<section class="slightly-smaller">
+<script lang="ruby">
+describe Authenticator do
+  it "raises Unauthorized if anonymous" do
+    authenticator = Authenticator.new(guest)
+
+    expect {
+      authenticator.authenticate
+    }.to raise_error(Unauthorized)
+  end
+end
+</script>
+
+<footer>... we verify that the collaborator really behaves that way</footer>
+</section>
+
+<section>
+<h1>1 year later...</h1>
+</section>
+
+<section class="slightly-smaller">
+<script lang="ruby">
+# changed behavior
+describe Authenticator do
+  it "returns false if anonymous" do
+    authenticator = Authenticator.new(guest)
+
+    authenticator.authenticate.should be_false
+  end
+end
+</script>
+
+<script lang="ruby">
+# but elsewhere...
+authenticator = fake(:authenticator)
+stub(authenticator).authenticate {
+  raise Unauthorized }
+</script>
+<footer>Authenticator was changed, controller wasn't</footer>
+</section>
+
+<section class="slightly-smaller">
+<script lang="ruby">
+describe Authenticator do
+  # ensure that any behavior stubbed on fakes
+  # named :authenticator is also exhibited
+  # in the tests for Authenticator
+  verify_contract(:authenticator)
+
+  # ... (same as before)
+
+  # tests fail, because we stub authenticator
+  # to raise Unauthorized in some test, but
+  # tests for Authenticator never exhibit this
+  # behavior
+end
+</script>
+
+<footer>Single-line to add automatic contract verification</footer>
+</section>
+
+<section>
+<h1>Downsides</h1>
+<ul>
+  <li>Opinionated</li>
+  <li>RSpec-only for now</li>
+  <li>Contract tests need more love</li>
+</ul>
+</section>
+
+<section>
+<h1>Upsides</h1>
+<ul>
+  <li>Less code, more safety</li>
+  <li>Faster feedback for regressions</li>
+  <li>Fearless refactoring</li>
+</ul>
+</section>
+
+<section>
+<h1>Me</h1>
+</section>
+
+<section>
+<h1>@apohorecki<br>github.com/psyho</h1>
+</section>
+
+<section>
+<figure>
+<img src="sckrk-large.png" alt="[sckrk]" />
+</figure>
+</section>
+
+<section>
+<figure>
+<img src="hypnotoad.gif" />
+<figcaption>you shall ask<br>questions now</figcaption>
+</figure>
+</section>
+
+<section>
+<h1>Thanks!</h1>
+</section>
+
+<style type="text/css">
+  div.highlight {
+    margin-bottom: 50px;
+    margin-top: 50px;
+  }
+
+  .higher {
+    margin-top: 120px;
+  }
+
+  h1.octocat {
+    height: 200px;
+    background: url("octocat.jpg") top left no-repeat;
+    padding-left: 100px;
+    padding-top: 25px;
+    margin-left: 40px;
+  }
+
+  emph {
+    color: #08c;
+  }
+
+  .smaller .highlight {
+    font-size: 60%;
+  }
+
+  .slightly-smaller .highlight {
+    font-size: 70%;
+  }
+</style>
