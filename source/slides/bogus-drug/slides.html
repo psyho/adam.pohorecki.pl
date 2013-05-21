@@ -1,0 +1,663 @@
+<title>Isolate like a boss with Bogus</title>
+
+<section>
+<h1 class="higher">Isolate like a boss<br>with <emph>Bogus</emph></h1>
+<footer>Adam Pohorecki - 20.05.2013</footer>
+</section>
+
+<section>
+<h1 class="octocat">
+  <a href="https://github.com/psyho/bogus">psyho/bogus</a>
+</h1>
+</section>
+
+<section>
+<h1>The system</h1>
+</section>
+
+<section>
+<h1>Awesome Blog 2.0 PRO</h1>
+</section>
+
+<section>
+<h1>The devs</h1>
+</section>
+
+<section class="with-footer">
+<figure>
+<img src="hacker.gif" alt="hacker" />
+</figure>
+<footer>
+Johnny the Hacker
+</footer>
+</section>
+
+<section class="with-footer">
+<figure>
+<img src="craftsman.png" alt="craftsman" />
+</figure>
+<footer>
+Bob the Craftsman
+</footer>
+</section>
+
+<section>
+<script lang="ruby">
+describe PostAdder do
+  it "saves the blog posts" # ...
+  it "notifies the administrators" # ...
+end
+</script>
+
+<footer>
+The PostAdder class
+</footer>
+</section>
+
+<section class="slightly-smaller">
+<script lang="ruby">
+describe PostAdder do
+  before do
+    PostAdder.add(title: "Hello")
+  end
+
+  it "saves the blog posts" do
+    Post.exists?(title: "Hello").should be_true
+  end
+
+  it "notifies the administrators" do
+    AdminMailer.deliveries.size.should == 1
+  end
+end
+</script>
+
+<footer>
+Johny creates the PostAdder class
+</footer>
+</section>
+
+<section class="slightly-smaller">
+<script lang="ruby">
+class PostAdder
+  def self.add(details)
+    post = PostRepository.add(details)
+    AdminMailer.post_added(post).deliver
+  end
+end
+</script>
+
+<footer>
+Johny creates the PostAdder class
+</footer>
+</section>
+
+<section>
+<h1>Eventually, the tests become slow...</h1>
+</section>
+
+<section>
+<pre style="margin: 0 60px;">
+
+$ rspec spec
+</pre>
+<pre style="margin: 0 60px; color: green;">
+......................................
+......................................
+......................................
+......................................
+......................................
+......................................
+......................................
+......................................
+......................................
+...................
+</pre>
+<pre style="margin: 0 60px;">
+
+Finished in 15 minutes 32 seconds
+</pre>
+</section>
+
+<section class="with-footer">
+<figure>
+<img src="y-u-no.jpg" />
+<figcaption>Y U No<br>isolate?</figcaption>
+</figure>
+<footer>Bob is disappoint</footer>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+describe PostAdder do
+  let(:post) { build(:post) }
+
+  before do
+    stub_class("PostRepository")
+    stub_class("AdminNotifier")
+
+    stub(PostRepository).add { post }
+    stub(AdminNotifier).post_added(post)
+  end
+
+  it "saves the blog posts" do
+    mock(PostRepository).add(title: "Hello") { post }
+
+    PostAdder.add(title: "Hello")
+  end
+
+  it "notifies the administrators" # ...
+end
+</script>
+
+<footer>
+Bob refactors the PostAdder tests
+</footer>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+describe PostAdder do
+  let(:post) { build(:post) }
+
+  before do
+    stub_class("PostRepository")
+    stub_class("AdminNotifier")
+
+    stub(PostRepository).add { post }
+    stub(AdminNotifier).post_added(post)
+  end
+
+  it "saves the blog posts" # ...
+
+  it "notifies the administrators" do
+    mock(AdminNotifier).post_added(post)
+
+    PostAdder.add(title: "Hello")
+  end
+end
+</script>
+
+<footer>
+Bob refactors the PostAdder tests
+</footer>
+</section>
+
+<section class="slightly-smaller">
+<script lang="ruby">
+class PostAdder
+  def self.add(details)
+    post = PostRepository.add(details)
+    AdminNotifier.post_added(post)
+  end
+end
+
+class AdminNotifier
+  def self.post_added(post)
+    AdminMailer.post_added(post).deliver
+  end
+end
+</script>
+
+<footer>
+Bob refactors the PostAdder tests
+</footer>
+</section>
+
+<section>
+  <h1>Tests run fast again</h1>
+</section>
+
+<section>
+<pre style="margin: 0 60px;">
+
+$ rspec spec
+</pre>
+<pre style="margin: 0 60px; color: green;">
+......................................
+......................................
+......................................
+......................................
+......................................
+......................................
+......................................
+......................................
+......................................
+...................
+</pre>
+<pre style="margin: 0 60px;">
+
+Finished in 5 seconds
+</pre>
+</section>
+
+<section class="slightly-smaller">
+<script lang="ruby">
+# before
+class AdminNotifier
+  def self.post_added(post)
+    AdminMailer.post_added(post).deliver
+  end
+end
+</script>
+
+<script lang="ruby">
+# after
+class AdminNotifier
+  def self.post_changed(post)
+    AdminMailer.post_changed(post).deliver
+  end
+end
+</script>
+
+<footer>
+Later Johnny implements post editing
+</footer>
+</section>
+
+<section>
+<pre style="margin: 0 60px;">
+
+$ rspec spec
+</pre>
+<pre style="margin: 0 60px; color: green;">
+......................................
+......................................
+......................................
+......................................
+......................................
+......................................
+......................................
+......................................
+...................
+</pre>
+<pre style="margin: 0 60px;">
+
+Finished in 5 seconds
+</pre>
+
+<footer>
+Johnny runs the tests
+</footer>
+</section>
+
+<section>
+<h1>Two hours later on CI</h1>
+</section>
+
+<section>
+<figure>
+<img src="fire.jpg" alt="Fire!" />
+</figure>
+<footer>
+The cucumber features have detected a problem
+</footer>
+</section>
+
+<section class="with-footer">
+<figure>
+<img src="told-you-so.jpg" />
+</figure>
+<footer>Johnny says it wouldn't happen with previous tests</footer>
+</section>
+
+<section class="with-footer">
+<figure>
+<img src="challenge-accepted.jpg" />
+</figure>
+<footer>Bob is not convinced</footer>
+</section>
+
+<section>
+<script lang="ruby">
+# Gemfile
+group :test do
+  gem 'bogus'
+end
+</script>
+
+<script lang="ruby">
+# spec/spec_helper.rb
+
+require 'bogus/rspec'
+</script>
+
+<footer>
+Bob switches from Mocking Framework X to Bogus
+</footer>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+describe PostAdder do
+  before do
+    fake_class(PostRepository)
+    fake_class(AdminNotifier)
+
+    stub(PostRepository).add(any_args) { post }
+
+    # NameError!
+    stub(AdminNotifier).post_added(post)
+  end
+
+  it "saves the blog posts" # ...
+  it "notifies the administrators" # ...
+end
+</script>
+
+<footer>
+The unit tests fail when the stubbed method does not exist
+</footer>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+describe PostAdder do
+  let(:post) { build(:post) }
+  let(:details) { {title: "Hello"} }
+
+  before do
+    fake_class(PostRepository, add: post)
+    fake_class(AdminNotifier)
+
+    PostAdder.add(details)
+  end
+
+  it "saves the blog posts" do
+    PostRepository.should have_received.add(details)
+  end
+
+  it "notifies the administrators" do
+    AdminNotifier.should have_received.post_changed(post)
+  end
+end
+</script>
+
+<footer>
+  Bob takes advantage of spies
+</footer>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+# before
+class AdminNotifier
+  def self.post_changed(post)
+    AdminMailer.post_changed(post).deliver
+  end
+end
+</script>
+
+<script lang="ruby">
+# after
+class AdminNotifier
+  def self.post_changed(post, author)
+    return if author.admin?
+    AdminMailer.post_changed(post).deliver
+  end
+end
+</script>
+
+<footer>
+  Johnny implements another feature
+</footer>
+</section>
+
+<section>
+<pre style="margin: 0 60px;">
+
+$ rspec spec
+</pre>
+<div class="test-out">
+......................................<br>
+......................................<br>
+......................................<br>
+......................................<br>
+......................................<br>
+......................................<br>
+......................................<br>
+...................<span class="fail">F</span>
+</div>
+<div class="test-out">
+<br>
+<span class="fail">
+  Finished in 5 seconds<br>
+  1 Failure
+</span>
+</div>
+
+<footer>
+Johnny runs the tests
+</footer>
+</section>
+
+<section class="with-footer">
+<figure>
+<img src="success.jpg" alt="Success!" />
+</figure>
+<footer>Bob has managed to make the tests fool-proof!</footer>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+class SocialMediaNotifier
+  def self.post_added(post)
+    # takes about 30s to run
+  end
+end
+</script>
+
+<script lang="ruby">
+class PostAdder
+  def self.add(details)
+    post = PostRepository.add(details)
+    AdminNotifier.post_changed(post, post.author)
+
+    SocialMediaNotifier.post_added(post)
+  end
+end
+</script>
+
+<footer>Or did he?</footer>
+</section>
+
+<section>
+<pre style="margin: 0 60px;">
+
+$ rspec spec
+</pre>
+<pre style="margin: 0 60px; color: green;">
+......................................
+......................................
+......................................
+......................................
+......................................
+......................................
+......................................
+......................................
+...................
+</pre>
+<pre style="margin: 0 60px;">
+
+Finished in 1 minute 5 seconds
+</pre>
+
+<footer>
+Back to slow tests once more
+</footer>
+</section>
+
+<section class="with-footer">
+<figure>
+<img src="it-really-isnt.jpg" />
+</figure>
+<footer>Bob wouldn't like this to happen again...</footer>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+describe PostAdder do
+  let(:post_repository) {
+    fake(:post_repository, as: :class, add: post)
+  }
+  fake(:admin_notifier, as: :class)
+  fake(:social_media_notifier, as: :class)
+
+  let(:post_adder) {
+    PostAdder.new(post_repository,
+                  admin_notifier,
+                  social_media_notifier) }
+
+  before { post_adder.add(details) }
+
+  it "saves the blog posts" # ...
+  it "notifies the administrators" # ...
+  it "notifies social media sites" # ...
+end
+</script>
+
+<footer>
+  ... so he uses Dependency Injection
+</footer>
+</section>
+
+<section>
+<script lang="ruby">
+describe PostAdder do
+  let(:post_repository) {
+    fake(:post_repository, add: post)
+  }
+  fake(:admin_notifier)
+  fake(:social_media_notifier)
+end
+</script>
+
+<script lang="ruby">
+Bogus.fakes do
+  fake(:post_repository, as: :class)
+  fake(:admin_notifier, as: :class)
+  fake(:social_media_notifier, as: :class)
+end
+</script>
+
+<footer>
+Bob moves unimportant details to configuration
+</footer>
+</section>
+
+<section>
+<script lang="ruby">
+describe PostAdder do
+  let(:post_adder) { isolate(PostAdder) }
+end
+</script>
+
+<script lang="ruby">
+class PostAdder
+  takes :post_repository, :admin_notifier,
+        :social_media_notifier
+end
+</script>
+
+<footer>
+... and uses <a href="https://github.com/psyho/dependor">Dependor</a> to remove DI boilerplate
+</footer>
+</section>
+
+<section>
+  <figure><img src="theres-more.jpg" alt="There's more" /></figure>
+</section>
+
+<section>
+<h1>Other features</h1>
+
+<ul>
+  <li>Faking roles (duck types)</li>
+  <li>Contract tests</li>
+</ul>
+</section>
+
+<section>
+<h1>
+  <a href="https://www.relishapp.com/bogus/bogus/docs">Check out the docs</a>
+</h1>
+</section>
+
+<section>
+<h1>Bogus</h1>
+
+<ul>
+  <li>Safer isolated tests</li>
+  <li>Shorter feedback loop</li>
+  <li>Fearless refactoring</li>
+</ul>
+</section>
+
+<section>
+<h1>Me</h1>
+</section>
+
+<section>
+<h1>@apohorecki<br>github.com/psyho</h1>
+</section>
+
+<section>
+<figure>
+<img src="sckrk-large.png" alt="[sckrk]" />
+</figure>
+</section>
+
+<section>
+<figure>
+<img src="hypnotoad.gif" />
+<figcaption>you shall ask<br>questions now</figcaption>
+</figure>
+</section>
+
+<section>
+<h1>Thanks!</h1>
+</section>
+
+<style type="text/css">
+  div.highlight {
+    margin-bottom: 50px;
+    margin-top: 50px;
+  }
+
+  .higher {
+    margin-top: 120px;
+  }
+
+  h1.octocat {
+    height: 200px;
+    background: url("octocat.jpg") top left no-repeat;
+    padding-left: 100px;
+    padding-top: 25px;
+    margin-left: 40px;
+  }
+
+  emph {
+    color: #08c;
+  }
+
+  .smaller .highlight {
+    font-size: 60%;
+  }
+
+  .slightly-smaller .highlight {
+    font-size: 70%;
+  }
+
+  .with-footer figure img {
+    height: 80%;
+  }
+
+  .test-out {
+    margin: 0 60px;
+    color: green;
+    font-family: monospace;
+  }
+
+  .test-out .fail {
+    color: red;
+  }
+</style>
