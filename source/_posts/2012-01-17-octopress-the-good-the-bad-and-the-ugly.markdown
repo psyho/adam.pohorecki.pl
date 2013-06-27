@@ -3,7 +3,7 @@ layout: post
 title: "Octopress - the Good, the Bad and the Ugly"
 date: 2012-01-17 17:11
 comments: true
-categories: ruby, gem, octopress
+categories: [ruby, gem, octopress]
 ---
 
 {% img left /images/blog/octopress.png Octopress logo %}

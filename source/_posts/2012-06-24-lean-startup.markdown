@@ -3,7 +3,7 @@ layout: post
 title: "Lean Startup"
 date: 2012-06-24 02:25
 comments: true
-categories: lean-startup tdd
+categories: [lean-startup, tdd]
 ---
 
 {% img left /images/blog/lean-startup.png Lean Startup cover %}

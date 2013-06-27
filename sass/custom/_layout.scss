@@ -27,7 +27,17 @@ $indented-lists: true;
   }
 }
 
+@mixin shadow-box($border: #fff .5em solid, $shadow: rgba(#000, .15) 0 1px 4px, $border-radius: .3em) {
+  @include border-radius($border-radius);
+  @include box-shadow($shadow);
+  @include box-sizing(border-box);
+  border: $border;
+}
+
 iframe.slides {
+  @extend .flex-content;
+  @extend .basic-alignment;
+  @include shadow-box;
   width: 100%;
-  height: 600px;
+  height: 620px !important;
 }

@@ -3,10 +3,10 @@ layout: post
 title: "AngularJS talk from 33rd Degree Conference"
 date: 2013-06-27 15:52
 comments: true
-categories: slides, AngularJS
+categories: [slides, AngularJS]
 ---
 
-On 15th of March this year I gave a talk about AngularJS on the 33rd Degree Conference. Instead of trying to introduce the building blocks of AngularJS like I did a couple of times before, this time I tried to concentrate on the things that I consider the biggest advantages as compared to other JS MVC frameworks.
+On 15th of March this year I gave a talk about [AngularJS][angular] on the [33rd Degree Conference][33rd-degree]. Instead of trying to introduce the building blocks of AngularJS like I did a couple of times before, this time I tried to concentrate on the things that I consider the biggest advantages as compared to other JS MVC frameworks.
 
 ## Two-way data binding
 
@@ -22,3 +22,6 @@ The code you write in AngularJS is mostly written in Plain Old JavaScript, witho
 </iframe>
 
 Unfortunately the talk was not recorded, so there's no video, but I hope the slides alone will give you some idea what I talked about.
+
+[angular]: http://angularjs.org/
+[33rd-degree]: http://2013.33degree.org/
