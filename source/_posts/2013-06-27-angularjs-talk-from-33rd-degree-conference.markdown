@@ -6,7 +6,7 @@ comments: true
 categories: [slides, AngularJS]
 ---
 
-On 15th of March this year I gave a talk about [AngularJS][angular] on the [33rd Degree Conference][33rd-degree]. Instead of trying to introduce the building blocks of AngularJS like I did a couple of times before, this time I tried to concentrate on the things that I consider the biggest advantages as compared to other JS MVC frameworks.
+On 15th of March this year I gave a talk about [AngularJS][angular] on the [33rd Degree Conference][33rd-degree]. Instead of trying to introduce the building blocks of AngularJS like I did a [couple of times before][old-slides], this time I tried to concentrate on the things that I consider the biggest advantages as compared to other JS MVC frameworks.
 
 ## Two-way data binding
 
@@ -25,3 +25,4 @@ Unfortunately the talk was not recorded, so there's no video, but I hope the sli
 
 [angular]: http://angularjs.org/
 [33rd-degree]: http://2013.33degree.org/
+[old-slides]: /slides/angular/angular.html
