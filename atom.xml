@@ -4,7 +4,7 @@
   <title><![CDATA[Adam Pohorecki]]></title>
   <link href="http://adam.pohorecki.pl/atom.xml" rel="self"/>
   <link href="http://adam.pohorecki.pl/"/>
-  <updated>2013-05-21T19:12:06+02:00</updated>
+  <updated>2013-06-28T15:23:16+02:00</updated>
   <id>http://adam.pohorecki.pl/</id>
   <author>
     <name><![CDATA[Adam Pohorecki]]></name>
@@ -12,6 +12,202 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PPPPP talk at DRUG]]></title>
+    <link href="http://adam.pohorecki.pl/blog/2013/06/27/ppppp-talk-at-drug/"/>
+    <updated>2013-06-27T20:10:00+02:00</updated>
+    <id>http://adam.pohorecki.pl/blog/2013/06/27/ppppp-talk-at-drug</id>
+    <content type="html"><![CDATA[<p>Along with the <a href="http://adam.pohorecki.pl/blog/2013/06/27/bogus-talk-at-drug/">presentation about Bogus on DRUG</a> I also gave a lightning talk about the way I work every day with <a href="https://github.com/wrozka">Rudy</a>.</p>
+
+<p>Most people I know don&#8217;t pair program at all or only do it occasionally and for a couple of hours or days at a time. We spend pretty much 100% of our time at work pair-programming. Heck, we actually have only one computer between us, so we can&#8217;t do it any other way, even if we wanted to.</p>
+
+<p>While pair-programming itself is not really that hard, maintaining that way of working over an extended period of time is not trivial. We use a certain mix of techniques that allows us to do it and we call it PPPPP, which stands for Ping-Pong Pomodoro Pair-Programming.</p>
+
+<h2>Pair Programming</h2>
+
+<p>Many Extreme Programming techniques have managed to achieve mass adoption, but pair programming is not one of them. Most programmers I know use TDD, do continuous integration and work in iterations, but pair programming somehow does not have the same appeal.</p>
+
+<p>Pair programming promotes shared code ownership, improves code quality and helps in knowledge sharing within a team. It gives you a line-by-line code review as you work, which lets you avoid making mistakes instead of correcting them after the fact. It even simplifies project management, because a team that does pair programming has half as many tasks in progress as a team that doesn&#8217;t.</p>
+
+<p>Beneficial as it is, pair programming is also hard work, in a quite literal sense. Things that you take for granted, like taking breaks when you feel like it, checking email and RSS, spending an hour reading documentation, etc. are all gone. Pair programming forces you to concentrate on the task at hand pretty much the whole day, and that can be very tiring.</p>
+
+<h2>Pomodoro</h2>
+
+<p>Pomodoro is a technique where you concentrate for 25 minutes on a single task and nothing else (no checking email, IM, etc.). After every such iteration you get a 5 minute break. After every four iterations you get a longer break. You start each day by planning and estimating the tasks for the day and end with a short retrospective.</p>
+
+<p>We use Pomodoro because of the rhythm it introduces. We no longer have to ask each other to stop working when we feel tired, because we know that in a couple of minutes we will have a few minutes to rest. It helps us maintain concentration during the day, because we only have to keep it for less than half an hour at a time. In short, it keeps us from getting burned out.</p>
+
+<h2>Ping-Pong</h2>
+
+<p>Once you start pair programming you will observe that once you spend more than a couple of minutes away from keyboard, you concentration flutters. To combat that we use a pairing technique called Ping-Pong.</p>
+
+<p>When you write your code using TDD, you go through a well-known red-green-refactor cycle. In Ping-Pong, person A writes the failing test, then person B makes it pass and finally person A performs refactoring. Next cycle starts with person B, and so on and so forth.</p>
+
+<p>This technique helps us maintain concentration and improves shared code ownership, because there&#8217;s never any code that &#8220;you wrote and I just watched&#8221;.</p>
+
+<h2>Slides</h2>
+
+<p>I apologize for the quality of the slides, but they were supposed to be more of a discussion starter than means of conveying information. Hopefully the ones from a talk I&#8217;m giving this month at KRUG will be more useful.</p>
+
+<iframe class="slides" src="http://adam.pohorecki.pl/slides/embedder.html#/slides/ppppp-drug/" frameborder="0"></iframe>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Bogus talk at DRUG]]></title>
+    <link href="http://adam.pohorecki.pl/blog/2013/06/27/bogus-talk-at-drug/"/>
+    <updated>2013-06-27T18:41:00+02:00</updated>
+    <id>http://adam.pohorecki.pl/blog/2013/06/27/bogus-talk-at-drug</id>
+    <content type="html"><![CDATA[<p>On the 20th of May this year I gave a talk about <a href="https://github.com/psyho/bogus/">Bogus</a> on <a href="http://drug.org.pl">DRUG</a>.</p>
+
+<p>About a week earlier I gave a <a href="http://adam.pohorecki.pl/blog/2013/06/27/bogus-talk-at-krug/">longer talk with the same title</a> on KRUG, but even though I kept the title, the second presentation couldn&#8217;t be more different from the previous one. While the talk on KRUG was more encyclopedic and giving an overview of most of the Bogus&#8217;s features, on DRUG I decided to go with a more storyline-oriented approach to give people a better idea of what Bogus&#8217;s motivation is and why it really is a new generation mocking framework.</p>
+
+<p>Event though this presentation does not fully describe the features of Bogus, it does show a few testing/implementation patterns and the problems you might run into (or avoid) with them.</p>
+
+<p>I&#8217;m much happier with this presentation than the previous one, mainly because while safe stubbing is a very useful feature, it is also important to realize that the design of your system can have a huge impact on the reliability of your test suite.</p>
+
+<iframe class="slides" src="http://adam.pohorecki.pl/slides/embedder.html#/slides/bogus-drug/" frameborder="0"></iframe>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Bogus talk at KRUG]]></title>
+    <link href="http://adam.pohorecki.pl/blog/2013/06/27/bogus-talk-at-krug/"/>
+    <updated>2013-06-27T18:18:00+02:00</updated>
+    <id>http://adam.pohorecki.pl/blog/2013/06/27/bogus-talk-at-krug</id>
+    <content type="html"><![CDATA[<p>On the 14th of May this year I gave a talk about <a href="https://github.com/psyho/bogus/">Bogus</a>, my mocking library, at the local <a href="http://www.meetup.com/Krakow-Ruby-Users-Group/">Ruby Users Group</a>.</p>
+
+<h2>Bogus</h2>
+
+<p>Bogus is a mocking library that I&#8217;ve been working on for over a year now. It&#8217;s what I like to call a &#8220;new generation&#8221; mocking library, as opposed to gems like Mocha, RR or rspec-mocks, which represent the &#8220;old generation&#8221;.</p>
+
+<p>What makes the new generation of mocking libraries different is the fact that it emphasizes safety. The new generation libraries won&#8217;t let you stub methods that don&#8217;t exist or with a wrong number of arguments. When creating test doubles, the new generation also tries to preserve the interface of a real collaborator, so that you don&#8217;t run into problems with API drift.</p>
+
+<p>Bogus implements all of the aforementioned safety features and more. Our goal is to give you a much higher degree of confidence in your (isolated) unit tests and to speed up your builds by letting you get rid of unneeded integration tests.</p>
+
+<h2>Slides</h2>
+
+<iframe class="slides" src="http://adam.pohorecki.pl/slides/embedder.html#/slides/bogus-krug/" frameborder="0"></iframe>
+
+
+<h2>Video</h2>
+
+<iframe width="600" height="338" src="http://adam.pohorecki.pl//www.youtube.com/embed/XGT66XRXCwk?rel=0" frameborder="0" allowfullscreen></iframe>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS talk at meet.js]]></title>
+    <link href="http://adam.pohorecki.pl/blog/2013/06/27/angularjs-talk-at-meet-dot-js/"/>
+    <updated>2013-06-27T17:25:00+02:00</updated>
+    <id>http://adam.pohorecki.pl/blog/2013/06/27/angularjs-talk-at-meet-dot-js</id>
+    <content type="html"><![CDATA[<p>On the 20th of April this year I gave a talk at <a href="https://www.facebook.com/meetjspl">meet.js</a> about <a href="http://angularjs.org/">AngularJS</a>. It was a much shorter (30min vs 1h) version of the one I gave at the <a href="http://adam.pohorecki.pl/blog/2013/06/27/angularjs-talk-from-33rd-degree-conference/">33rd Degree Conference a month before</a>.</p>
+
+<p>Since it was a JavaScript meetup, most of the listeners were already familiar with JS MVC frameworks, and a fair percentage of them was already familiar with AngularJS. That&#8217;s quite impressive if you consider there were well more than a hundred developers there.</p>
+
+<p>Not having to explain that SPAs are now a viable choice for writing web applications saved me some precious minutes and there was a lot more audience participation than I usually encounter - a good sign that the people could relate to what I talked about.</p>
+
+<p>If things progress the way they do with AngularJS adoption, maybe the next time I talk about it I will be able to talk about advanced application patterns in AngularJS instead of introducing it for the nth time:) Fingers crossed.</p>
+
+<h2>Slides</h2>
+
+<iframe class="slides" src="http://adam.pohorecki.pl/slides/embedder.html#/slides/angular-meetjs/" frameborder="0">
+</iframe>
+
+
+<p>The presentations on meet.js were not recorded, so there&#8217;s no video.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Clojure talk at Lambda Lounge]]></title>
+    <link href="http://adam.pohorecki.pl/blog/2013/06/27/clojure-talk-at-lambda-lounge/"/>
+    <updated>2013-06-27T17:17:00+02:00</updated>
+    <id>http://adam.pohorecki.pl/blog/2013/06/27/clojure-talk-at-lambda-lounge</id>
+    <content type="html"><![CDATA[<p>On the 28th of March this year I gave a talk about <a href="http://clojure.org/">Clojure</a> on the inaugural meeting of <a href="http://www.meetup.com/Lambda-Lounge-Krakow/">Kraków&#8217;s Lambda Lounge</a>.</p>
+
+<p>With the questions from the audience this talk run way too long - over an hour and a half. I definitely tried to cram too much content into the presentation - from protocols and multimethods, through macros, first-order functions, immutability to concurrency constructs. Most of those things really deserve a presentation of their own.</p>
+
+<h2>Protocols and Multimethods</h2>
+
+<p>If you ever used an Object-Oriented language like Ruby, you are probably familiar with the concept of polymorphism. Since Clojure is a functional language and it&#8217;s primary unit of composition is a function, you&#8217;d think that by using it you have to sacrifice polymorphic dispatch, but you don&#8217;t.</p>
+
+<p>Even better, Clojure&#8217;s polymorphism is much more advanced than that of Ruby, and allows you to dispatch on arbitrary properties of any number of function arguments. Defining type relationships is also more powerful, since they can be defined on a per-function basis (if needed of course). Function-first approach also saves us the headaches of naming conflicts that could happen when including multiple modules into a class in Ruby.</p>
+
+<h2>Functional Programming</h2>
+
+<p>Functional programming is all the rage right now, but many people seem to think that it&#8217;s all about using first order functions. Once you get to use it however, you suddenly realize that the thing that makes the biggest difference is state management and immutability.</p>
+
+<p>Immutability not only helps in multithreaded environments, but it also makes reasoning about code much easier, because any state change made very explicit by forcing functions to return updated data. This approach to handling state also helps testability by separating your code into the functional core (super easy to test), which you can unit test to your heart&#8217;s content and imperative shell (interaction with the external world, state management), which you can easily integration test, because there are only a couple of paths possible through it.</p>
+
+<h2>Concurrency Constructs</h2>
+
+<p>I spent a good deal of time in my presentation showing a laundry list of Clojure&#8217;s concurrency constructs, which certainly are plentiful and seem like a very nice addition to java.util.concurrent. So far I only used atoms, but I don&#8217;t really deal with multithreaded apps much, hopefully one day that will change:)</p>
+
+<h2>Slides</h2>
+
+<iframe class="slides" src="http://adam.pohorecki.pl/slides/embedder.html#/slides/clojure-lambda/" frameborder="0">
+</iframe>
+
+
+<p>The presentation unfortunately wasn&#8217;t recorded on video.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS talk from 33rd Degree Conference]]></title>
+    <link href="http://adam.pohorecki.pl/blog/2013/06/27/angularjs-talk-from-33rd-degree-conference/"/>
+    <updated>2013-06-27T15:52:00+02:00</updated>
+    <id>http://adam.pohorecki.pl/blog/2013/06/27/angularjs-talk-from-33rd-degree-conference</id>
+    <content type="html"><![CDATA[<p>On 15th of March this year I gave a talk about <a href="http://angularjs.org/">AngularJS</a> on the <a href="http://2013.33degree.org/">33rd Degree Conference</a>. Instead of trying to introduce the building blocks of AngularJS like I did a <a href="http://adam.pohorecki.pl/slides/angular/angular.html">couple of times before</a>, this time I tried to concentrate on the things that I consider the biggest advantages as compared to other JS MVC frameworks.</p>
+
+<h2>Two-way data binding</h2>
+
+<p>Something that really changed the way I write JS code is two-way data binding. It removes a ton of boilerplate code from your applications and allows you to completely remove the coupling of your controllers to DOM. Honestly, I can&#8217;t imagine using a framework that does not have this feature any more.</p>
+
+<h2>AngularJS is POJO</h2>
+
+<p>The code you write in AngularJS is mostly written in Plain Old JavaScript, without the need to inherit from any framework base classes or introducing a custom object model. This gives you a lot of freedom when it comes to modeling your domain, saving you from putting most of your logic on your &#8220;model classes&#8221;, which many other solutions seem to default to. The fact that pretty much all the code you write is Plain Old JavaScript Objects also helps a lot with testability, since isolating yourself from the framework is much easier if your are not inheriting from classes you don&#8217;t own.</p>
+
+<h2>Slides</h2>
+
+<iframe class="slides" src="http://adam.pohorecki.pl/slides/embedder.html#/slides/angular33/" frameborder="0">
+</iframe>
+
+
+<p>Unfortunately the talk was not recorded, so there&#8217;s no video, but I hope the slides alone will give you some idea what I talked about.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[JS MVC Framework Fight at wroc_love.rb]]></title>
+    <link href="http://adam.pohorecki.pl/blog/2013/06/27/js-mvc-framework-fight-at-wroclove-dot-rb/"/>
+    <updated>2013-06-27T14:35:00+02:00</updated>
+    <id>http://adam.pohorecki.pl/blog/2013/06/27/js-mvc-framework-fight-at-wroclove-dot-rb</id>
+    <content type="html"><![CDATA[<p>On the 3rd of March this year I took part in a panel discussion (or more precisely: a &#8220;fight&#8221;) about the current state of JavaScript MVC frameworks on <a href="http://wrocloverb.com/">wroc_love.rb</a>. I represented <a href="http://angularjs.org/">AngularJS</a>, which is my framework of choice since early 2011. The other contenders were <a href="http://backbonejs.org/">Backbone.js</a>, <a href="http://emberjs.com/">Ember.js</a> and <a href="http://hexagonaljs.com/">Hexagonal.js</a>.</p>
+
+<p>We discussed the role of single page apps, architecture, two-way data binding and a bunch of other stuff. The introduction slide I presented pretty much summarizes my position about how the frameworks in question compare to each other:</p>
+
+<p><img src="http://adam.pohorecki.pl/slides/js-fight.jpg"></p>
+
+<p>You can view the whole thing online on youtube:</p>
+
+<iframe width="600" height="338" src="http://adam.pohorecki.pl//www.youtube.com/embed/h8XeZFW1Ad0" frameborder="0" allowfullscreen></iframe>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Lean Startup]]></title>

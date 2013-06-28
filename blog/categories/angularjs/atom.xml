@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: AngularJS | Adam Pohorecki]]></title>
+  <link href="http://adam.pohorecki.pl/blog/categories/angularjs/atom.xml" rel="self"/>
+  <link href="http://adam.pohorecki.pl/"/>
+  <updated>2013-06-28T15:23:16+02:00</updated>
+  <id>http://adam.pohorecki.pl/</id>
+  <author>
+    <name><![CDATA[Adam Pohorecki]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS talk at meet.js]]></title>
+    <link href="http://adam.pohorecki.pl/blog/2013/06/27/angularjs-talk-at-meet-dot-js/"/>
+    <updated>2013-06-27T17:25:00+02:00</updated>
+    <id>http://adam.pohorecki.pl/blog/2013/06/27/angularjs-talk-at-meet-dot-js</id>
+    <content type="html"><![CDATA[<p>On the 20th of April this year I gave a talk at <a href="https://www.facebook.com/meetjspl">meet.js</a> about <a href="http://angularjs.org/">AngularJS</a>. It was a much shorter (30min vs 1h) version of the one I gave at the <a href="/blog/2013/06/27/angularjs-talk-from-33rd-degree-conference/">33rd Degree Conference a month before</a>.</p>
+
+<p>Since it was a JavaScript meetup, most of the listeners were already familiar with JS MVC frameworks, and a fair percentage of them was already familiar with AngularJS. That's quite impressive if you consider there were well more than a hundred developers there.</p>
+
+<p>Not having to explain that SPAs are now a viable choice for writing web applications saved me some precious minutes and there was a lot more audience participation than I usually encounter - a good sign that the people could relate to what I talked about.</p>
+
+<p>If things progress the way they do with AngularJS adoption, maybe the next time I talk about it I will be able to talk about advanced application patterns in AngularJS instead of introducing it for the nth time:) Fingers crossed.</p>
+
+<h2>Slides</h2>
+
+<iframe class="slides" src="http://adam.pohorecki.pl/slides/embedder.html#/slides/angular-meetjs/" frameborder="0">
+</iframe>
+
+
+<p>The presentations on meet.js were not recorded, so there's no video.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS talk from 33rd Degree Conference]]></title>
+    <link href="http://adam.pohorecki.pl/blog/2013/06/27/angularjs-talk-from-33rd-degree-conference/"/>
+    <updated>2013-06-27T15:52:00+02:00</updated>
+    <id>http://adam.pohorecki.pl/blog/2013/06/27/angularjs-talk-from-33rd-degree-conference</id>
+    <content type="html"><![CDATA[<p>On 15th of March this year I gave a talk about <a href="http://angularjs.org/">AngularJS</a> on the <a href="http://2013.33degree.org/">33rd Degree Conference</a>. Instead of trying to introduce the building blocks of AngularJS like I did a <a href="/slides/angular/angular.html">couple of times before</a>, this time I tried to concentrate on the things that I consider the biggest advantages as compared to other JS MVC frameworks.</p>
+
+<h2>Two-way data binding</h2>
+
+<p>Something that really changed the way I write JS code is two-way data binding. It removes a ton of boilerplate code from your applications and allows you to completely remove the coupling of your controllers to DOM. Honestly, I can't imagine using a framework that does not have this feature any more.</p>
+
+<h2>AngularJS is POJO</h2>
+
+<p>The code you write in AngularJS is mostly written in Plain Old JavaScript, without the need to inherit from any framework base classes or introducing a custom object model. This gives you a lot of freedom when it comes to modeling your domain, saving you from putting most of your logic on your "model classes", which many other solutions seem to default to. The fact that pretty much all the code you write is Plain Old JavaScript Objects also helps a lot with testability, since isolating yourself from the framework is much easier if your are not inheriting from classes you don't own.</p>
+
+<h2>Slides</h2>
+
+<iframe class="slides" src="http://adam.pohorecki.pl/slides/embedder.html#/slides/angular33/" frameborder="0">
+</iframe>
+
+
+<p>Unfortunately the talk was not recorded, so there's no video, but I hope the slides alone will give you some idea what I talked about.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[JS MVC Framework Fight at wroc_love.rb]]></title>
+    <link href="http://adam.pohorecki.pl/blog/2013/06/27/js-mvc-framework-fight-at-wroclove-dot-rb/"/>
+    <updated>2013-06-27T14:35:00+02:00</updated>
+    <id>http://adam.pohorecki.pl/blog/2013/06/27/js-mvc-framework-fight-at-wroclove-dot-rb</id>
+    <content type="html"><![CDATA[<p>On the 3rd of March this year I took part in a panel discussion (or more precisely: a "fight") about the current state of JavaScript MVC frameworks on <a href="http://wrocloverb.com/">wroc_love.rb</a>. I represented <a href="http://angularjs.org/">AngularJS</a>, which is my framework of choice since early 2011. The other contenders were <a href="http://backbonejs.org/">Backbone.js</a>, <a href="http://emberjs.com/">Ember.js</a> and <a href="http://hexagonaljs.com/">Hexagonal.js</a>.</p>
+
+<p>We discussed the role of single page apps, architecture, two-way data binding and a bunch of other stuff. The introduction slide I presented pretty much summarizes my position about how the frameworks in question compare to each other:</p>
+
+<p><img src="/slides/js-fight.jpg"></p>
+
+<p>You can view the whole thing online on youtube:</p>
+
+<iframe width="600" height="338" src="http://adam.pohorecki.pl//www.youtube.com/embed/h8XeZFW1Ad0" frameborder="0" allowfullscreen></iframe>
+
+
+
+]]></content>
+  </entry>
+  
+</feed>

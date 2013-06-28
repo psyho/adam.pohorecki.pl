@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: bogus | Adam Pohorecki]]></title>
+  <link href="http://adam.pohorecki.pl/blog/categories/bogus/atom.xml" rel="self"/>
+  <link href="http://adam.pohorecki.pl/"/>
+  <updated>2013-06-28T15:23:16+02:00</updated>
+  <id>http://adam.pohorecki.pl/</id>
+  <author>
+    <name><![CDATA[Adam Pohorecki]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Bogus talk at DRUG]]></title>
+    <link href="http://adam.pohorecki.pl/blog/2013/06/27/bogus-talk-at-drug/"/>
+    <updated>2013-06-27T18:41:00+02:00</updated>
+    <id>http://adam.pohorecki.pl/blog/2013/06/27/bogus-talk-at-drug</id>
+    <content type="html"><![CDATA[<p>On the 20th of May this year I gave a talk about <a href="https://github.com/psyho/bogus/">Bogus</a> on <a href="http://drug.org.pl">DRUG</a>.</p>
+
+<p>About a week earlier I gave a <a href="/blog/2013/06/27/bogus-talk-at-krug/">longer talk with the same title</a> on KRUG, but even though I kept the title, the second presentation couldn't be more different from the previous one. While the talk on KRUG was more encyclopedic and giving an overview of most of the Bogus's features, on DRUG I decided to go with a more storyline-oriented approach to give people a better idea of what Bogus's motivation is and why it really is a new generation mocking framework.</p>
+
+<p>Event though this presentation does not fully describe the features of Bogus, it does show a few testing/implementation patterns and the problems you might run into (or avoid) with them.</p>
+
+<p>I'm much happier with this presentation than the previous one, mainly because while safe stubbing is a very useful feature, it is also important to realize that the design of your system can have a huge impact on the reliability of your test suite.</p>
+
+<iframe class="slides" src="http://adam.pohorecki.pl/slides/embedder.html#/slides/bogus-drug/" frameborder="0"></iframe>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Bogus talk at KRUG]]></title>
+    <link href="http://adam.pohorecki.pl/blog/2013/06/27/bogus-talk-at-krug/"/>
+    <updated>2013-06-27T18:18:00+02:00</updated>
+    <id>http://adam.pohorecki.pl/blog/2013/06/27/bogus-talk-at-krug</id>
+    <content type="html"><![CDATA[<p>On the 14th of May this year I gave a talk about <a href="https://github.com/psyho/bogus/">Bogus</a>, my mocking library, at the local <a href="http://www.meetup.com/Krakow-Ruby-Users-Group/">Ruby Users Group</a>.</p>
+
+<h2>Bogus</h2>
+
+<p>Bogus is a mocking library that I've been working on for over a year now. It's what I like to call a "new generation" mocking library, as opposed to gems like Mocha, RR or rspec-mocks, which represent the "old generation".</p>
+
+<p>What makes the new generation of mocking libraries different is the fact that it emphasizes safety. The new generation libraries won't let you stub methods that don't exist or with a wrong number of arguments. When creating test doubles, the new generation also tries to preserve the interface of a real collaborator, so that you don't run into problems with API drift.</p>
+
+<p>Bogus implements all of the aforementioned safety features and more. Our goal is to give you a much higher degree of confidence in your (isolated) unit tests and to speed up your builds by letting you get rid of unneeded integration tests.</p>
+
+<h2>Slides</h2>
+
+<iframe class="slides" src="http://adam.pohorecki.pl/slides/embedder.html#/slides/bogus-krug/" frameborder="0"></iframe>
+
+
+<h2>Video</h2>
+
+<iframe width="600" height="338" src="http://adam.pohorecki.pl//www.youtube.com/embed/XGT66XRXCwk?rel=0" frameborder="0" allowfullscreen></iframe>
+
+
+
+]]></content>
+  </entry>
+  
+</feed>

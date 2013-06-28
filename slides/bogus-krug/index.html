@@ -2,26 +2,13 @@
 
 <meta charset="utf-8">
 
-<title>Isolate like a boss with Bogus</title>
-
-<section>
-<h1 class="higher">Isolate like a boss<br>with <emph>Bogus</emph>
+<title>Isolate like a boss with Bogus</title><section><h1 class="higher">Isolate like a boss<br>with <emph>Bogus</emph>
 </h1>
-<footer>Adam Pohorecki - 14.05.2013</footer>
-</section>
-
-<section>
-<h1 class="octocat">
+<footer>Adam Pohorecki - 14.05.2013</footer></section><section><h1 class="octocat">
   <a href="https://github.com/psyho/bogus">psyho/bogus</a>
 </h1>
-</section>
-
-<section>
-  <h1>Have you ever seen this?</h1>
-</section>
-
-<section>
-<pre style="margin: 0 60px;">
+</section><section><h1>Have you ever seen this?</h1>
+</section><section><pre style="margin: 0 60px;">
 
 $ rspec spec
 </pre>
@@ -41,64 +28,15 @@ $ rspec spec
 
 Finished in 15 minutes 32 seconds
 </pre>
-</section>
-
-<section>
-<figure>
-<img src="zombies.jpg">
-</figure>
-<footer><emph>Slow tests are like zombies</emph> - they don't run fast, but they will eventually get you</footer>
-</section>
-
-<section>
-<h1>
+</section><section><figure><img src="zombies.jpg"></figure><footer><emph>Slow tests are like zombies</emph> - they don't run fast, but they will eventually get you</footer></section><section><h1>
   Why slow tests?
 </h1>
-</section>
-
-<section>
-<figure>
-<img src="pyramides.jpg" alt="Pyramids">
-</figure>
-<footer>Because of the <emph>testing pyramid</emph></footer>
-</section>
-
-<section>
-<figure>
-<img src="pyramid/theory.jpg" alt="Testing pyramid">
-</figure>
-</section>
-
-<section>
-<figure>
-<img src="pyramid/timing.jpg" alt="Testing pyramid timing">
-</figure>
-</section>
-
-<section>
-<figure>
-<img src="pyramid/rails.jpg" alt="Testing pyramid vs Rails">
-</figure>
-</section>
-
-<section>
-<figure>
-<img src="pyramid/state-of-the-art.jpg" alt="Testing pyramid state-of-the-art">
-</figure>
-<footer>Current state-of-the-art approach</footer>
-</section>
-
-<section>
-<h1>End-to-end tests</h1>
+</section><section><figure><img src="pyramides.jpg" alt="Pyramids"></figure><footer>Because of the <emph>testing pyramid</emph></footer></section><section><figure><img src="pyramid/theory.jpg" alt="Testing pyramid"></figure></section><section><figure><img src="pyramid/timing.jpg" alt="Testing pyramid timing"></figure></section><section><figure><img src="pyramid/rails.jpg" alt="Testing pyramid vs Rails"></figure></section><section><figure><img src="pyramid/state-of-the-art.jpg" alt="Testing pyramid state-of-the-art"></figure><footer>Current state-of-the-art approach</footer></section><section><h1>End-to-end tests</h1>
 <ul>
-  <li>top-down development</li>
+<li>top-down development</li>
   <li>integrate many things at once</li>
   <li>slow as hell</li>
-</ul>
-</section>
-
-<section>
-<div class="highlight"><table><tr>
+</ul></section><section><div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
@@ -118,28 +56,19 @@ Finished in 15 minutes 32 seconds
 </span><span class="line">    <span class="n">login_as</span><span class="p">(</span><span class="n">joe</span><span class="p">)</span>
 </span><span class="line">
 </span><span class="line">    <span class="n">dashboard</span><span class="o">.</span><span class="n">add_blog_post</span><span class="p">(</span>
-</span><span class="line">      <span class="n">entitled</span><span class="p">:</span> <span class="s2">"Hello"</span><span class="p">)</span>
+</span><span class="line">      <span class="ss">entitled</span><span class="p">:</span> <span class="s2">"Hello"</span><span class="p">)</span>
 </span><span class="line">
 </span><span class="line">    <span class="n">home_page</span><span class="o">.</span><span class="n">should</span> <span class="n">have_post</span><span class="p">(</span>
-</span><span class="line">      <span class="n">entitled</span><span class="p">:</span> <span class="s2">"Hello"</span><span class="p">)</span>
+</span><span class="line">      <span class="ss">entitled</span><span class="p">:</span> <span class="s2">"Hello"</span><span class="p">)</span>
 </span><span class="line">  <span class="k">end</span>
 </span><span class="line"><span class="k">end</span></span></code></pre></td>
 </tr></table></div>
-
-<footer>Sample e2e test</footer>
-</section>
-
-<section>
-<h1>integrated tests</h1>
+<footer>Sample e2e test</footer></section><section><h1>integrated tests</h1>
 <ul>
-  <li>don't mock what you don't own</li>
+<li>don't mock what you don't own</li>
   <li>integrate 2-3 things at once</li>
   <li>relatively slow</li>
-</ul>
-</section>
-
-<section>
-<div class="highlight"><table><tr>
+</ul></section><section><div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
@@ -156,28 +85,19 @@ Finished in 15 minutes 32 seconds
 </span><span class="line">    <span class="n">joe</span> <span class="o">=</span> <span class="n">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span>
 </span><span class="line">    <span class="n">posts</span> <span class="o">=</span> <span class="no">PostRepository</span><span class="o">.</span><span class="n">for_user</span><span class="p">(</span><span class="n">joe</span><span class="p">)</span>
 </span><span class="line">
-</span><span class="line">    <span class="n">post</span> <span class="o">=</span> <span class="n">posts</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s2">"Hello"</span><span class="p">)</span> <span class="c1"># ...</span>
+</span><span class="line">    <span class="n">post</span> <span class="o">=</span> <span class="n">posts</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">title</span><span class="p">:</span> <span class="s2">"Hello"</span><span class="p">)</span> <span class="c1"># ...</span>
 </span><span class="line">
 </span><span class="line">    <span class="n">posts</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="o">[</span><span class="n">post</span><span class="o">]</span>
 </span><span class="line">  <span class="k">end</span>
 </span><span class="line"><span class="k">end</span></span></code></pre></td>
 </tr></table></div>
-
-<footer>Sample integrated test</footer>
-</section>
-
-<section>
-<h1>isolated tests</h1>
+<footer>Sample integrated test</footer></section><section><h1>isolated tests</h1>
 <ul>
-  <li>isolated from everything else</li>
+<li>isolated from everything else</li>
   <li>give design feedback</li>
   <li>pinpoint errors in logic</li>
   <li>very fast</li>
-</ul>
-</section>
-
-<section class="smaller">
-<div class="highlight"><table><tr>
+</ul></section><section class="smaller"><div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
@@ -198,32 +118,24 @@ Finished in 15 minutes 32 seconds
 </pre></td>
 <td class="code"><pre><code class="ruby"><span class="line"><span class="n">describe</span> <span class="no">PostAdder</span> <span class="k">do</span>
 </span><span class="line">  <span class="n">let</span><span class="p">(</span><span class="ss">:admin_notifier</span><span class="p">)</span> <span class="p">{</span> <span class="n">stub</span><span class="p">(</span><span class="n">post_added</span><span class="p">:</span> <span class="kp">nil</span><span class="p">)</span> <span class="p">}</span>
-</span><span class="line">  <span class="n">let</span><span class="p">(</span><span class="ss">:post_repository</span><span class="p">)</span> <span class="p">{</span> <span class="n">stub</span><span class="p">(</span><span class="n">add</span><span class="p">:</span> <span class="n">post</span><span class="p">)</span> <span class="p">}</span>
+</span><span class="line">  <span class="n">let</span><span class="p">(</span><span class="ss">:post_repository</span><span class="p">)</span> <span class="p">{</span> <span class="n">stub</span><span class="p">(</span><span class="ss">add</span><span class="p">:</span> <span class="n">post</span><span class="p">)</span> <span class="p">}</span>
 </span><span class="line">
 </span><span class="line">  <span class="n">let</span><span class="p">(</span><span class="ss">:adder</span><span class="p">)</span> <span class="p">{</span> <span class="no">PostAdder</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">admin_notifier</span><span class="p">,</span>
 </span><span class="line">                              <span class="n">post_repository</span><span class="p">)</span> <span class="p">}</span>
 </span><span class="line">
 </span><span class="line">  <span class="n">it</span> <span class="s2">"adds the blog post"</span> <span class="k">do</span>
-</span><span class="line">    <span class="n">adder</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s2">"Hello"</span><span class="p">)</span>
+</span><span class="line">    <span class="n">adder</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">title</span><span class="p">:</span> <span class="s2">"Hello"</span><span class="p">)</span>
 </span><span class="line">
 </span><span class="line">    <span class="n">post_repository</span><span class="o">.</span><span class="n">should</span><span class="p">(</span>
-</span><span class="line">      <span class="n">have_received</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s2">"Hello"</span><span class="p">))</span>
+</span><span class="line">      <span class="n">have_received</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">title</span><span class="p">:</span> <span class="s2">"Hello"</span><span class="p">))</span>
 </span><span class="line">  <span class="k">end</span>
 </span><span class="line">
 </span><span class="line">  <span class="n">it</span> <span class="s2">"notifies the admin"</span>
 </span><span class="line">  <span class="c1">#...</span>
 </span><span class="line"><span class="k">end</span></span></code></pre></td>
 </tr></table></div>
-
-<footer>Sample isolated test</footer>
-</section>
-
-<section>
-<h1>The problem</h1>
-</section>
-
-<section>
-<div class="highlight"><table><tr>
+<footer>Sample isolated test</footer></section><section><h1>The problem</h1>
+</section><section><div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
@@ -236,22 +148,17 @@ Finished in 15 minutes 32 seconds
 <span class="line-number">10</span>
 </pre></td>
 <td class="code"><pre><code class="ruby"><span class="line"><span class="n">post</span> <span class="o">=</span> <span class="n">stub</span>
-</span><span class="line"><span class="n">post_repository</span> <span class="o">=</span> <span class="n">stub</span><span class="p">(</span><span class="n">add</span><span class="p">:</span> <span class="n">post</span><span class="p">)</span>
+</span><span class="line"><span class="n">post_repository</span> <span class="o">=</span> <span class="n">stub</span><span class="p">(</span><span class="ss">add</span><span class="p">:</span> <span class="n">post</span><span class="p">)</span>
 </span><span class="line"><span class="n">admin_notifier</span> <span class="o">=</span> <span class="n">stub</span><span class="p">(</span><span class="n">post_added</span><span class="p">:</span> <span class="kp">nil</span><span class="p">)</span>
 </span><span class="line"><span class="n">post_adder</span> <span class="o">=</span> <span class="no">PostAdder</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">post_repository</span><span class="p">,</span>
 </span><span class="line">                           <span class="n">admin_notifier</span><span class="p">)</span>
 </span><span class="line">
-</span><span class="line"><span class="n">post_adder</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s2">"Hello"</span><span class="p">)</span>
+</span><span class="line"><span class="n">post_adder</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">title</span><span class="p">:</span> <span class="s2">"Hello"</span><span class="p">)</span>
 </span><span class="line">
 </span><span class="line"><span class="n">admin_notifier</span><span class="o">.</span><span class="n">should</span><span class="p">(</span>
 </span><span class="line">  <span class="n">have_received</span><span class="o">.</span><span class="n">post_added</span><span class="p">(</span><span class="n">post</span><span class="p">))</span></span></code></pre></td>
 </tr></table></div>
-
-<footer>AdminNotifier used to take 1 argument...</footer>
-</section>
-
-<section>
-<div class="highlight"><table><tr>
+<footer>AdminNotifier used to take 1 argument...</footer></section><section><div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
@@ -278,39 +185,23 @@ Finished in 15 minutes 32 seconds
 </span><span class="line">  <span class="k">end</span>
 </span><span class="line"><span class="k">end</span></span></code></pre></td>
 </tr></table></div>
-
-<footer>... but now it takes two</footer>
-</section>
-
-<section>
-<h1>e2e tests<br>should catch this</h1>
-</section>
-
-<section>
-<h1>Feedback time</h1>
+<footer>... but now it takes two</footer></section><section><h1>e2e tests<br>should catch this</h1>
+</section><section><h1>Feedback time</h1>
 <ul>
-  <li>isolated tests: <emph>1-10s</emph>
+<li>isolated tests: <emph>1-10s</emph>
 </li>
   <li>integrated tests: <emph>30s-5m</emph>
 </li>
   <li>e2e tests: <emph>10m-1h</emph>
 </li>
-</ul>
-</section>
-
-<section>
-  <h1>Fakes to the rescue</h1>
-</section>
-
-<section class="slightly-smaller">
-<div class="highlight"><table><tr>
+</ul></section><section><h1>Fakes to the rescue</h1>
+</section><section class="slightly-smaller"><div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 </pre></td>
 <td class="code"><pre><code class="ruby"><span class="line"><span class="c1"># many definitions in multiple files</span>
 </span><span class="line"><span class="n">stub</span><span class="p">(</span><span class="n">post_added</span><span class="p">:</span> <span class="kp">nil</span><span class="p">)</span></span></code></pre></td>
 </tr></table></div>
-
 <div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -334,28 +225,17 @@ Finished in 15 minutes 32 seconds
 </span><span class="line">  <span class="k">end</span>
 </span><span class="line"><span class="k">end</span></span></code></pre></td>
 </tr></table></div>
-
-<footer>Define your stubs just once</footer>
-</section>
-
-<section>
-<div class="highlight"><table><tr>
+<footer>Define your stubs just once</footer></section><section><div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td>
 <td class="code"><pre><code class="ruby"><span class="line"><span class="n">stub</span><span class="p">(</span><span class="n">post_added</span><span class="p">:</span> <span class="kp">nil</span><span class="p">)</span></span></code></pre></td>
 </tr></table></div>
-
 <div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td>
 <td class="code"><pre><code class="ruby"><span class="line"><span class="n">fake</span><span class="p">(</span><span class="ss">:admin_notifier</span><span class="p">)</span></span></code></pre></td>
 </tr></table></div>
-
-<footer>Bogus to the rescue!</footer>
-</section>
-
-<section>
-<div class="highlight"><table><tr>
+<footer>Bogus to the rescue!</footer></section><section><div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
@@ -366,7 +246,6 @@ Finished in 15 minutes 32 seconds
 </span><span class="line">    <span class="n">fake</span><span class="p">(</span><span class="ss">:admin_notifier</span><span class="p">)</span> <span class="p">}</span>
 </span><span class="line"><span class="k">end</span></span></code></pre></td>
 </tr></table></div>
-
 <div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -376,12 +255,7 @@ Finished in 15 minutes 32 seconds
 </span><span class="line">  <span class="n">fake</span><span class="p">(</span><span class="ss">:admin_notifier</span><span class="p">)</span>
 </span><span class="line"><span class="k">end</span></span></code></pre></td>
 </tr></table></div>
-
-<footer>Syntactic sugar included</footer>
-</section>
-
-<section>
-<div class="highlight"><table><tr>
+<footer>Syntactic sugar included</footer></section><section><div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
@@ -394,22 +268,16 @@ Finished in 15 minutes 32 seconds
 </span><span class="line">  <span class="k">end</span>
 </span><span class="line"><span class="k">end</span></span></code></pre></td>
 </tr></table></div>
-
 <div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
 </pre></td>
-<td class="code"><pre><code class="ruby"><span class="line"><span class="n">fake</span><span class="p">(</span><span class="ss">:admin_notifier</span><span class="p">,</span> <span class="n">as</span><span class="p">:</span> <span class="ss">:class</span><span class="p">)</span> <span class="p">{</span>
+<td class="code"><pre><code class="ruby"><span class="line"><span class="n">fake</span><span class="p">(</span><span class="ss">:admin_notifier</span><span class="p">,</span> <span class="ss">as</span><span class="p">:</span> <span class="ss">:class</span><span class="p">)</span> <span class="p">{</span>
 </span><span class="line">  <span class="no">BackgroundAdminNotifier</span>
 </span><span class="line"><span class="p">}</span></span></code></pre></td>
 </tr></table></div>
-
-<footer>Customizable</footer>
-</section>
-
-<section>
-<div class="highlight"><table><tr>
+<footer>Customizable</footer></section><section><div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
@@ -420,11 +288,10 @@ Finished in 15 minutes 32 seconds
 <td class="code"><pre><code class="ruby"><span class="line"><span class="c1"># global configuration</span>
 </span><span class="line"><span class="no">Bogus</span><span class="o">.</span><span class="n">fakes</span> <span class="k">do</span>
 </span><span class="line">  <span class="n">fake</span> <span class="ss">:admin_notifier</span><span class="p">,</span>
-</span><span class="line">    <span class="n">as</span><span class="p">:</span> <span class="ss">:class</span><span class="p">,</span>
-</span><span class="line">    <span class="n">class</span><span class="p">:</span> <span class="nb">proc</span><span class="p">{</span> <span class="no">BackgroundAdminNotifier</span> <span class="p">}</span>
+</span><span class="line">    <span class="ss">as</span><span class="p">:</span> <span class="ss">:class</span><span class="p">,</span>
+</span><span class="line">    <span class="ss">class</span><span class="p">:</span> <span class="nb">proc</span><span class="p">{</span> <span class="no">BackgroundAdminNotifier</span> <span class="p">}</span>
 </span><span class="line"><span class="k">end</span></span></code></pre></td>
 </tr></table></div>
-
 <div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -432,12 +299,7 @@ Finished in 15 minutes 32 seconds
 <td class="code"><pre><code class="ruby"><span class="line"><span class="c1"># in specs</span>
 </span><span class="line"><span class="n">fake</span><span class="p">(</span><span class="ss">:admin_notifier</span><span class="p">)</span></span></code></pre></td>
 </tr></table></div>
-
-<footer>DRY fakes with global configuration</footer>
-</section>
-
-<section>
-<div class="highlight"><table><tr>
+<footer>DRY fakes with global configuration</footer></section><section><div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
@@ -449,17 +311,12 @@ Finished in 15 minutes 32 seconds
 <td class="code"><pre><code class="ruby"><span class="line"><span class="n">admin_notifier</span> <span class="o">=</span> <span class="n">fake</span><span class="p">(</span><span class="ss">:admin_notifier</span><span class="p">)</span>
 </span><span class="line"><span class="c1"># ...</span>
 </span><span class="line">
-</span><span class="line"><span class="n">post_adder</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s2">"hello"</span><span class="p">)</span>
+</span><span class="line"><span class="n">post_adder</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">title</span><span class="p">:</span> <span class="s2">"hello"</span><span class="p">)</span>
 </span><span class="line">
 </span><span class="line"><span class="n">admin_notifier</span><span class="o">.</span><span class="n">should</span><span class="p">(</span>
 </span><span class="line">  <span class="n">have_received</span><span class="o">.</span><span class="n">post_added</span><span class="p">(</span><span class="n">post</span><span class="p">))</span></span></code></pre></td>
 </tr></table></div>
-
-<footer>Spy on fakes without stubbing</footer>
-</section>
-
-<section class="smaller">
-<div class="highlight"><table><tr>
+<footer>Spy on fakes without stubbing</footer></section><section class="smaller"><div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
@@ -474,7 +331,6 @@ Finished in 15 minutes 32 seconds
 </span><span class="line">  <span class="k">end</span>
 </span><span class="line"><span class="k">end</span></span></code></pre></td>
 </tr></table></div>
-
 <div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -484,20 +340,15 @@ Finished in 15 minutes 32 seconds
 <span class="line-number">6</span>
 <span class="line-number">7</span>
 </pre></td>
-<td class="code"><pre><code class="ruby"><span class="line"><span class="n">fake_class</span><span class="p">(</span><span class="no">PostRepository</span><span class="p">,</span> <span class="n">add</span><span class="p">:</span> <span class="n">post</span><span class="p">)</span>
+<td class="code"><pre><code class="ruby"><span class="line"><span class="n">fake_class</span><span class="p">(</span><span class="no">PostRepository</span><span class="p">,</span> <span class="ss">add</span><span class="p">:</span> <span class="n">post</span><span class="p">)</span>
 </span><span class="line"><span class="n">fake_class</span><span class="p">(</span><span class="no">AdminNotifier</span><span class="p">)</span>
 </span><span class="line">
-</span><span class="line"><span class="no">PostRepository</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s2">"Hello"</span><span class="p">)</span>
+</span><span class="line"><span class="no">PostRepository</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">title</span><span class="p">:</span> <span class="s2">"Hello"</span><span class="p">)</span>
 </span><span class="line">
 </span><span class="line"><span class="no">AdminNotifier</span><span class="o">.</span><span class="n">should</span><span class="p">(</span>
 </span><span class="line">  <span class="n">have_received</span><span class="o">.</span><span class="n">post_added</span><span class="p">(</span><span class="n">post</span><span class="p">))</span></span></code></pre></td>
 </tr></table></div>
-
-<footer>Fakes without dependency injection</footer>
-</section>
-
-<section class="slightly-smaller">
-<div class="highlight"><table><tr>
+<footer>Fakes without dependency injection</footer></section><section class="slightly-smaller"><div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
@@ -518,7 +369,6 @@ Finished in 15 minutes 32 seconds
 </span><span class="line">  <span class="k">def</span> <span class="nf">ensure_log_dir_exists</span><span class="p">;</span> <span class="k">end</span>
 </span><span class="line"><span class="k">end</span></span></code></pre></td>
 </tr></table></div>
-
 <div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -528,41 +378,25 @@ Finished in 15 minutes 32 seconds
 </span><span class="line"><span class="n">fake</span><span class="p">(</span><span class="ss">:error_notifier</span><span class="p">)</span> <span class="p">{</span> <span class="o">[</span><span class="no">AirbrakeNotifier</span><span class="p">,</span>
 </span><span class="line">                         <span class="no">FileErrorLogger</span><span class="o">]</span> <span class="p">}</span></span></code></pre></td>
 </tr></table></div>
-
-
-<footer>Fake roles, not classes</footer>
-</section>
-
-<section>
-  <h1>Safe stubbing</h1>
-</section>
-
-<section class="slightly-smaller">
+<footer>Fake roles, not classes</footer></section><section><h1>Safe stubbing</h1>
+</section><section class="slightly-smaller"><div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td>
+<td class="code"><pre><code class="ruby"><span class="line"><span class="n">stub</span><span class="p">(</span><span class="n">repository</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">title</span><span class="p">:</span> <span class="s2">"Hello"</span><span class="p">)</span> <span class="p">{</span> <span class="n">post</span> <span class="p">}</span></span></code></pre></td>
+</tr></table></div>
 <div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td>
-<td class="code"><pre><code class="ruby"><span class="line"><span class="n">stub</span><span class="p">(</span><span class="n">repository</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s2">"Hello"</span><span class="p">)</span> <span class="p">{</span> <span class="n">post</span> <span class="p">}</span></span></code></pre></td>
+<td class="code"><pre><code class="ruby"><span class="line"><span class="n">mock</span><span class="p">(</span><span class="n">repository</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">title</span><span class="p">:</span> <span class="s2">"Hello"</span><span class="p">)</span> <span class="p">{</span> <span class="n">post</span> <span class="p">}</span></span></code></pre></td>
 </tr></table></div>
-
-<div class="highlight"><table><tr>
-<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td>
-<td class="code"><pre><code class="ruby"><span class="line"><span class="n">mock</span><span class="p">(</span><span class="n">repository</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s2">"Hello"</span><span class="p">)</span> <span class="p">{</span> <span class="n">post</span> <span class="p">}</span></span></code></pre></td>
-</tr></table></div>
-
 <div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 </pre></td>
 <td class="code"><pre><code class="ruby"><span class="line"><span class="n">repository</span><span class="o">.</span><span class="n">should</span> <span class="n">have_received</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
-</span><span class="line">  <span class="n">title</span><span class="p">:</span> <span class="s2">"Hello"</span><span class="p">)</span></span></code></pre></td>
+</span><span class="line">  <span class="ss">title</span><span class="p">:</span> <span class="s2">"Hello"</span><span class="p">)</span></span></code></pre></td>
 </tr></table></div>
-
-<footer>Short stubbing/mocking/spying syntax inspired by RR</footer>
-</section>
-
-<section class="slightly-smaller">
-<div class="highlight"><table><tr>
+<footer>Short stubbing/mocking/spying syntax inspired by RR</footer></section><section class="slightly-smaller"><div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
@@ -585,7 +419,6 @@ Finished in 15 minutes 32 seconds
 </span><span class="line">  <span class="k">end</span>
 </span><span class="line"><span class="k">end</span></span></code></pre></td>
 </tr></table></div>
-
 <div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -593,14 +426,9 @@ Finished in 15 minutes 32 seconds
 </pre></td>
 <td class="code"><pre><code class="ruby"><span class="line"><span class="n">stub</span><span class="p">(</span><span class="no">PostRepository</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">any_args</span><span class="p">)</span> <span class="p">{</span> <span class="n">post</span> <span class="p">}</span>
 </span><span class="line">
-</span><span class="line"><span class="no">PostAdder</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="s2">"Hello"</span><span class="p">)</span> <span class="c1"># ArgumentError</span></span></code></pre></td>
+</span><span class="line"><span class="no">PostAdder</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">title</span><span class="p">:</span> <span class="s2">"Hello"</span><span class="p">)</span> <span class="c1"># ArgumentError</span></span></code></pre></td>
 </tr></table></div>
-
-<footer>Stubbing does not overwrite arity</footer>
-</section>
-
-<section>
-<div class="highlight"><table><tr>
+<footer>Stubbing does not overwrite arity</footer></section><section><div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
@@ -609,12 +437,7 @@ Finished in 15 minutes 32 seconds
 </span><span class="line"><span class="n">stub</span><span class="p">(</span><span class="no">PostRepository</span><span class="p">)</span><span class="o">.</span><span class="n">add_post</span><span class="p">(</span><span class="n">any_args</span><span class="p">)</span> <span class="p">{</span>
 </span><span class="line">  <span class="n">post</span> <span class="p">}</span></span></code></pre></td>
 </tr></table></div>
-
-<footer>Can't stub methods that do not exist</footer>
-</section>
-
-<section>
-<div class="highlight"><table><tr>
+<footer>Can't stub methods that do not exist</footer></section><section><div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
@@ -625,7 +448,6 @@ Finished in 15 minutes 32 seconds
 </span><span class="line">  <span class="k">end</span>
 </span><span class="line"><span class="k">end</span></span></code></pre></td>
 </tr></table></div>
-
 <div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -633,12 +455,7 @@ Finished in 15 minutes 32 seconds
 <td class="code"><pre><code class="ruby"><span class="line"><span class="c1"># NameError</span>
 </span><span class="line"><span class="n">stub</span><span class="p">(</span><span class="no">PostRepository</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"Hello"</span><span class="p">)</span> <span class="p">{</span> <span class="n">post</span> <span class="p">}</span></span></code></pre></td>
 </tr></table></div>
-
-<footer>Can't stub method with wrong number of arguments</footer>
-</section>
-
-<section class="smaller">
-<div class="highlight"><table><tr>
+<footer>Can't stub method with wrong number of arguments</footer></section><section class="smaller"><div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
@@ -657,7 +474,6 @@ Finished in 15 minutes 32 seconds
 </span><span class="line"><span class="c1"># when</span>
 </span><span class="line"><span class="n">post_adder</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"Hello"</span><span class="p">)</span></span></code></pre></td>
 </tr></table></div>
-
 <div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -677,12 +493,7 @@ Finished in 15 minutes 32 seconds
 </span><span class="line"><span class="c1"># then</span>
 </span><span class="line"><span class="n">post_repository</span><span class="o">.</span><span class="n">should</span> <span class="n">have_received</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"Hello"</span><span class="p">)</span></span></code></pre></td>
 </tr></table></div>
-
-<footer>Spying instead of mocking</footer>
-</section>
-
-<section>
-<div class="highlight"><table><tr>
+<footer>Spying instead of mocking</footer></section><section><div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
@@ -693,7 +504,6 @@ Finished in 15 minutes 32 seconds
 </span><span class="line">  <span class="k">end</span>
 </span><span class="line"><span class="k">end</span></span></code></pre></td>
 </tr></table></div>
-
 <div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -703,16 +513,8 @@ Finished in 15 minutes 32 seconds
 </span><span class="line"><span class="n">post_repository</span><span class="o">.</span><span class="n">should_not</span><span class="p">(</span>
 </span><span class="line">  <span class="n">have_received</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"Hello"</span><span class="p">))</span></span></code></pre></td>
 </tr></table></div>
-
-<footer>Safe to make negative expectations</footer>
-</section>
-
-<section>
-<h1>Contract tests</h1>
-</section>
-
-<section class="slightly-smaller">
-<div class="highlight"><table><tr>
+<footer>Safe to make negative expectations</footer></section><section><h1>Contract tests</h1>
+</section><section class="slightly-smaller"><div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
@@ -743,12 +545,7 @@ Finished in 15 minutes 32 seconds
 </span><span class="line">  <span class="k">end</span>
 </span><span class="line"><span class="k">end</span></span></code></pre></td>
 </tr></table></div>
-
-<footer>When we expect certain behavior...</footer>
-</section>
-
-<section class="slightly-smaller">
-<div class="highlight"><table><tr>
+<footer>When we expect certain behavior...</footer></section><section class="slightly-smaller"><div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
@@ -769,16 +566,8 @@ Finished in 15 minutes 32 seconds
 </span><span class="line">  <span class="k">end</span>
 </span><span class="line"><span class="k">end</span></span></code></pre></td>
 </tr></table></div>
-
-<footer>... we verify that the collaborator really behaves that way</footer>
-</section>
-
-<section>
-<h1>1 year later...</h1>
-</section>
-
-<section class="slightly-smaller">
-<div class="highlight"><table><tr>
+<footer>... we verify that the collaborator really behaves that way</footer></section><section><h1>1 year later...</h1>
+</section><section class="slightly-smaller"><div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
@@ -797,7 +586,6 @@ Finished in 15 minutes 32 seconds
 </span><span class="line">  <span class="k">end</span>
 </span><span class="line"><span class="k">end</span></span></code></pre></td>
 </tr></table></div>
-
 <div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -809,11 +597,7 @@ Finished in 15 minutes 32 seconds
 </span><span class="line"><span class="n">stub</span><span class="p">(</span><span class="n">authenticator</span><span class="p">)</span><span class="o">.</span><span class="n">authenticate</span> <span class="p">{</span>
 </span><span class="line">  <span class="k">raise</span> <span class="no">Unauthorized</span> <span class="p">}</span></span></code></pre></td>
 </tr></table></div>
-<footer>Authenticator was changed, controller wasn't</footer>
-</section>
-
-<section class="slightly-smaller">
-<div class="highlight"><table><tr>
+<footer>Authenticator was changed, controller wasn't</footer></section><section class="slightly-smaller"><div class="highlight"><table><tr>
 <td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
 <span class="line-number">3</span>
@@ -842,54 +626,20 @@ Finished in 15 minutes 32 seconds
 </span><span class="line">  <span class="c1"># behavior</span>
 </span><span class="line"><span class="k">end</span></span></code></pre></td>
 </tr></table></div>
-
-<footer>Single-line to add automatic contract verification</footer>
-</section>
-
-<section>
-<h1>Downsides</h1>
+<footer>Single-line to add automatic contract verification</footer></section><section><h1>Downsides</h1>
 <ul>
-  <li>Opinionated</li>
+<li>Opinionated</li>
   <li>RSpec-only for now</li>
   <li>Contract tests need more love</li>
-</ul>
-</section>
-
-<section>
-<h1>Upsides</h1>
+</ul></section><section><h1>Upsides</h1>
 <ul>
-  <li>Less code, more safety</li>
+<li>Less code, more safety</li>
   <li>Faster feedback for regressions</li>
   <li>Fearless refactoring</li>
-</ul>
-</section>
-
-<section>
-<h1>Me</h1>
-</section>
-
-<section>
-<h1>@apohorecki<br>github.com/psyho</h1>
-</section>
-
-<section>
-<figure>
-<img src="sckrk-large.png" alt="[sckrk]">
-</figure>
-</section>
-
-<section>
-<figure>
-<img src="hypnotoad.gif">
-<figcaption>you shall ask<br>questions now</figcaption>
-</figure>
-</section>
-
-<section>
-<h1>Thanks!</h1>
-</section>
-
-<style type="text/css">
+</ul></section><section><h1>Me</h1>
+</section><section><h1>@apohorecki<br>github.com/psyho</h1>
+</section><section><figure><img src="powow.png"></figure><footer>Software Consultant at <a href="http://www.powow.no">Powow</a></footer></section><section><figure><img src="sckrk-large.png" alt="[sckrk]"></figure></section><section><figure><img src="hypnotoad.gif"><figcaption>you shall ask<br>questions now</figcaption></figure></section><section><h1>Thanks!</h1>
+</section><style type="text/css">
   div.highlight {
     margin-bottom: 50px;
     margin-top: 50px;
@@ -918,8 +668,7 @@ Finished in 15 minutes 32 seconds
   .slightly-smaller .highlight {
     font-size: 70%;
   }
-</style>
-<style>
+</style><style>
   .highlight {
     font-size: 0.8em;
     background-color: #FDF6E3;
@@ -1013,7 +762,6 @@ Finished in 15 minutes 32 seconds
 .highlight .vi { color: #268BD2 } /* Name.Variable.Instance */
 .highlight .il { color: #2AA198 } /* Literal.Number.Integer.Long */
 </style>
-
 
 <!-- Maybe a font from http://www.google.com/webfonts ? -->
 <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>

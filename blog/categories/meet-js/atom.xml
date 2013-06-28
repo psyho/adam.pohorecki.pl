@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: meet.js | Adam Pohorecki]]></title>
+  <link href="http://adam.pohorecki.pl/blog/categories/meet-js/atom.xml" rel="self"/>
+  <link href="http://adam.pohorecki.pl/"/>
+  <updated>2013-06-28T15:23:16+02:00</updated>
+  <id>http://adam.pohorecki.pl/</id>
+  <author>
+    <name><![CDATA[Adam Pohorecki]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS talk at meet.js]]></title>
+    <link href="http://adam.pohorecki.pl/blog/2013/06/27/angularjs-talk-at-meet-dot-js/"/>
+    <updated>2013-06-27T17:25:00+02:00</updated>
+    <id>http://adam.pohorecki.pl/blog/2013/06/27/angularjs-talk-at-meet-dot-js</id>
+    <content type="html"><![CDATA[<p>On the 20th of April this year I gave a talk at <a href="https://www.facebook.com/meetjspl">meet.js</a> about <a href="http://angularjs.org/">AngularJS</a>. It was a much shorter (30min vs 1h) version of the one I gave at the <a href="/blog/2013/06/27/angularjs-talk-from-33rd-degree-conference/">33rd Degree Conference a month before</a>.</p>
+
+<p>Since it was a JavaScript meetup, most of the listeners were already familiar with JS MVC frameworks, and a fair percentage of them was already familiar with AngularJS. That's quite impressive if you consider there were well more than a hundred developers there.</p>
+
+<p>Not having to explain that SPAs are now a viable choice for writing web applications saved me some precious minutes and there was a lot more audience participation than I usually encounter - a good sign that the people could relate to what I talked about.</p>
+
+<p>If things progress the way they do with AngularJS adoption, maybe the next time I talk about it I will be able to talk about advanced application patterns in AngularJS instead of introducing it for the nth time:) Fingers crossed.</p>
+
+<h2>Slides</h2>
+
+<iframe class="slides" src="http://adam.pohorecki.pl/slides/embedder.html#/slides/angular-meetjs/" frameborder="0">
+</iframe>
+
+
+<p>The presentations on meet.js were not recorded, so there's no video.</p>
+]]></content>
+  </entry>
+  
+</feed>

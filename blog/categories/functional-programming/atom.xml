@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: functional programming | Adam Pohorecki]]></title>
+  <link href="http://adam.pohorecki.pl/blog/categories/functional-programming/atom.xml" rel="self"/>
+  <link href="http://adam.pohorecki.pl/"/>
+  <updated>2013-06-28T15:23:16+02:00</updated>
+  <id>http://adam.pohorecki.pl/</id>
+  <author>
+    <name><![CDATA[Adam Pohorecki]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Clojure talk at Lambda Lounge]]></title>
+    <link href="http://adam.pohorecki.pl/blog/2013/06/27/clojure-talk-at-lambda-lounge/"/>
+    <updated>2013-06-27T17:17:00+02:00</updated>
+    <id>http://adam.pohorecki.pl/blog/2013/06/27/clojure-talk-at-lambda-lounge</id>
+    <content type="html"><![CDATA[<p>On the 28th of March this year I gave a talk about <a href="http://clojure.org/">Clojure</a> on the inaugural meeting of <a href="http://www.meetup.com/Lambda-Lounge-Krakow/">Kraków's Lambda Lounge</a>.</p>
+
+<p>With the questions from the audience this talk run way too long - over an hour and a half. I definitely tried to cram too much content into the presentation - from protocols and multimethods, through macros, first-order functions, immutability to concurrency constructs. Most of those things really deserve a presentation of their own.</p>
+
+<h2>Protocols and Multimethods</h2>
+
+<p>If you ever used an Object-Oriented language like Ruby, you are probably familiar with the concept of polymorphism. Since Clojure is a functional language and it's primary unit of composition is a function, you'd think that by using it you have to sacrifice polymorphic dispatch, but you don't.</p>
+
+<p>Even better, Clojure's polymorphism is much more advanced than that of Ruby, and allows you to dispatch on arbitrary properties of any number of function arguments. Defining type relationships is also more powerful, since they can be defined on a per-function basis (if needed of course). Function-first approach also saves us the headaches of naming conflicts that could happen when including multiple modules into a class in Ruby.</p>
+
+<h2>Functional Programming</h2>
+
+<p>Functional programming is all the rage right now, but many people seem to think that it's all about using first order functions. Once you get to use it however, you suddenly realize that the thing that makes the biggest difference is state management and immutability.</p>
+
+<p>Immutability not only helps in multithreaded environments, but it also makes reasoning about code much easier, because any state change made very explicit by forcing functions to return updated data. This approach to handling state also helps testability by separating your code into the functional core (super easy to test), which you can unit test to your heart's content and imperative shell (interaction with the external world, state management), which you can easily integration test, because there are only a couple of paths possible through it.</p>
+
+<h2>Concurrency Constructs</h2>
+
+<p>I spent a good deal of time in my presentation showing a laundry list of Clojure's concurrency constructs, which certainly are plentiful and seem like a very nice addition to java.util.concurrent. So far I only used atoms, but I don't really deal with multithreaded apps much, hopefully one day that will change:)</p>
+
+<h2>Slides</h2>
+
+<iframe class="slides" src="http://adam.pohorecki.pl/slides/embedder.html#/slides/clojure-lambda/" frameborder="0">
+</iframe>
+
+
+<p>The presentation unfortunately wasn't recorded on video.</p>
+]]></content>
+  </entry>
+  
+</feed>

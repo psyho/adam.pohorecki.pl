@@ -1,0 +1,578 @@
+<title>AngularJS</title>
+
+<script src="jquery-1.9.1.min.js"></script>
+<script src="angular-1.1.3.min.js"></script>
+
+<script type="text/javascript">
+  angular.module('samples', ['ng']);
+  jQuery(function() {
+    jQuery('.sample.ng').each(function() {
+      angular.bootstrap(this, ['samples']);
+    })
+  });
+</script>
+
+<style type="text/css">
+  img.center {
+    margin: 150px auto;
+    text-align: center;
+    display: block;
+  }
+
+  emph {
+    color: #08c;
+  }
+</style>
+
+<section>
+<h1>AngularJS - TL;DR</h1>
+<footer>Adam Pohorecki - 11.04.2013</footer>
+</section>
+
+<section>
+<h1>Agenda</h1>
+</section>
+
+<section>
+<h1><emph>Bazillion</emph> of frameworks</h1>
+</section>
+
+<section>
+<h1>Managing Complexity</h1>
+</section>
+
+<section>
+  <figure><img src="every-app-ever-blank.png" alt="every app" /></figure>
+</section>
+
+<section>
+<h1>every application ever</h1>
+</section>
+
+<section>
+  <figure><img src="every-app-ever.png" alt="every app" /></figure>
+</section>
+
+<section>
+  <figure><img src="every-app-ever-bumpers.png" alt="every app" /></figure>
+</section>
+
+<section>
+<h1>The <emph>killer features</emph> of AngularJS</h1>
+</section>
+
+<section>
+<h1><emph>2-way</emph> data binding</h1>
+</section>
+
+<section>
+<h1>(<emph>eliminates</emph> hard to test parts)</h1>
+</section>
+
+<section>
+<h1>your application is<br><emph>pure JS</emph> code</h1>
+</section>
+
+<section>
+<h1>(<emph>freedom</emph> of design)</h1>
+</section>
+
+<section>
+<h1>Dependency Injection</h1>
+</section>
+
+<section>
+<h1>loosely-coupled <emph>by design</emph></h1>
+</section>
+
+<section>
+<h1><emph>2-way</emph> data binding</h1>
+</section>
+
+<section>
+<h1>the obligatory<br>Hello World</h1>
+</section>
+
+<section>
+<div class="sample ng">
+  <div>
+    <label for="name">Your name:</label>
+    <input type="text" ng-model="name" id="name" />
+  </div>
+
+  <div>Hello {{name}}!</div>
+</div>
+</section>
+
+<section>
+<h1>JQuery</h1>
+</section>
+
+<section>
+<h1>no data binding</h1>
+</section>
+
+<section>
+<script lang="html">
+<label for="name">Your name:</label>
+<input type="text" name="name" id="name" />
+
+<p class="hello">Hello <span></span>!</p>
+</script>
+
+<script lang="js">
+$(function() {
+  $("input[name=name]").keydown(function() {
+    $('.hello span').html($(this).val());
+  });
+});
+</script>
+</section>
+
+<section>
+<h1>hypothetical MVC framework</h1>
+</section>
+
+<section>
+<h1>1-way data binding</h1>
+</section>
+
+<section>
+<script lang="html">
+<script type="handlebars" id="foo">
+  <label for="name">Your name:</label>
+  <input type="text" name="name" id="name" />
+
+  <p>Hello {{name}}!</p>
+</script>
+</script>
+</section>
+
+<section>
+<script lang="js">
+var model = FrameworkModel.extend({
+  name: ''
+});
+
+var view = new Template("foo");
+
+var controller = FrameworkController.extend({
+  element: 'body',
+  model: model,
+  template: view,
+  events: {
+    '#name keydown': 'nameChanged'
+  },
+  nameChanged: function() {
+    model.set('name', $("#name").val());
+  }
+});
+</script>
+</section>
+
+<section>
+<h1>AngularJS</h1>
+</section>
+
+<section>
+<h1>2-way data binding</h1>
+</section>
+
+<section>
+<script lang="html">
+<div ng-app>
+  <label for="name">Your name</label>
+  <input type="text" ng-model="name"
+    id="name"/>
+
+  <p>Hello {{name}}!</p>
+</div>
+</script>
+</section>
+
+<section>
+<h1>no cheating<br>this time</h1>
+</section>
+
+<section>
+<script lang="js">
+function NameController($scope) {
+  $scope.name = 'initial name value';
+}
+</script>
+
+<script lang="html">
+<div ng-controller="NameController">
+  <label for="name">Your name</label>
+  <input type="text" ng-model="name"
+    id="name"/>
+
+  <p>Hello {{name}}!</p>
+</div>
+</script>
+</section>
+
+<section>
+<h1>$scope is for communication</h1>
+</section>
+
+<section>
+<h1>The controller is an adapter</h1>
+</section>
+
+<section>
+<h1>PO<emph>JS</emph>O</h1>
+</section>
+
+<section>
+<h1>Your domain is<br><emph>your</emph> domain</h1>
+</section>
+
+<section>
+<h1>Classical</h1>
+</section>
+
+<section>
+<script lang="js">
+function TodoList() {
+  this._items = [];
+}
+
+TodoList.prototype = {
+  add: function(name) {
+    this._items.push({name: name, done: false});
+  },
+
+  // ...
+
+  items: function() {
+    return this._items;
+  }
+}
+
+myModule.service('todos', TodoList);
+</script>
+</section>
+
+<section class="smaller">
+<script lang="js">
+function TodoController($scope, todos) {
+  $scope.todos = todos;
+  $scope.newItem = '';
+
+  $scope.addItem = function() {
+    todos.add($scope.newItem);
+    $scope.newItem = '';
+  };
+}
+</script>
+
+<script lang="html">
+<div ng-controller="TodoController">
+  <ul>
+    <li ng-repeat="item in todos.items()">
+      {{item.name}}
+    </li>
+  </ul>
+  <input type="text" ng-model="newItem" />
+  <a href ng-click="addItem()">Add</a>
+</div>
+</script>
+</section>
+
+<section>
+<h1>Object-oriented</h1>
+</section>
+
+<section>
+<script lang="js">
+function makeTodoList() {
+  var items = [];
+
+  return {
+    add: function(name) {
+      items.push({name: name, done: false});
+    },
+
+    // ...
+
+    items: function() {
+      return items;
+    }
+  };
+}
+
+myModule.factory('todos', makeTodoList);
+</script>
+</section>
+
+<section class="smaller">
+<script lang="js">
+function TodoController($scope, todos) {
+  $scope.items = todos.items;
+  $scope.newItem = '';
+
+  $scope.addItem = function() {
+    todos.add($scope.newItem);
+    $scope.newItem = '';
+  };
+}
+</script>
+
+<script lang="html">
+<div ng-controller="TodoController">
+  <ul>
+    <li ng-repeat="item in items()">
+      {{item.name}}
+    </li>
+  </ul>
+  <input type="text" ng-model="newItem" />
+  <a href ng-click="addItem()">Add</a>
+</div>
+</script>
+</section>
+
+<section>
+<h1>Functional</h1>
+</section>
+
+<section>
+<script lang="js">
+function addTodo(todos, name) {
+  return todos.concat([
+    {name: name, done: false}
+  ]);
+}
+
+myModule.value('addTodo', addTodo);
+</script>
+</section>
+
+<section class="smaller">
+<script lang="js">
+function TodoController($scope, addTodo) {
+  $scope.todos = [];
+  $scope.newItem = '';
+
+  $scope.addItem = function() {
+    $scope.todos = addTodo($scope.todos, $scope.newItem);
+    $scope.newItem = '';
+  };
+}
+</script>
+
+<script lang="html">
+<div ng-controller="TodoController">
+  <ul>
+    <li ng-repeat="item in todos">
+      {{item.name}}
+    </li>
+  </ul>
+  <input type="text" ng-model="newItem" />
+  <a href ng-click="addItem()">Add</a>
+</div>
+</script>
+</section>
+
+<section>
+<img src="freedom.jpg" alt="freedom" class="center" />
+</section>
+
+<section>
+<h1>Testing</h1>
+</section>
+
+<section>
+	<h1>Unit</h1>
+</section>
+
+<section>
+	<h1>Extremely easy</h1>
+</section>
+
+<section>
+<script lang="js">
+function TodoController($scope, todos) {
+  $scope.todos = todos;
+
+  $scope.addItem = function() {
+    todos.add($scope.newItem);
+    $scope.newItem = '';
+  };
+}
+</script>
+</section>
+
+<section class="smaller">
+<script lang="js">
+describe("TodoController", function() {
+  it("adds a new todo item", function() {
+    var scope = { newItem: "Learn JS" };
+    var todos = {
+      add: jasmine.createSpy()
+    };
+    var ctrl = new TodoController(scope, todos);
+
+    scope.addItem();
+
+    expect(todos.add).toHaveBeenCalledWith("Learn JS");
+    expect(scope.newItem).toEqual('');
+  });
+});
+</script>
+</section>
+
+<section>
+<h1>Built in mocks for non-testable stuff</h1>
+</section>
+
+<section>
+<h1>XHR / console.log / setTimeout</h1>
+</section>
+
+<section>
+	<h1>E2E</h1>
+</section>
+
+<section>
+	<h1>Possible to mock HTTP</h1>
+</section>
+
+<section>
+	<h1>More reliable than Selenium</h1>
+</section>
+
+<section>
+	<h1>Much harder to use than Selenium</h1>
+</section>
+
+
+<section>
+<h1>The (not so) important stuff</h1>
+</section>
+
+<section>
+<h1>HTML <emph>enhanced</emph> for web apps</h1>
+</section>
+
+<section>
+<script lang="html">
+<ul class="nav nav-tabs" id="myTab">
+  <li class="active"><a href="#foo">Foo</a></li>
+  <li><a href="#bar">Bar</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="foo">
+    foo content
+  </div>
+  <div class="tab-pane" id="bar">
+    bar content
+  </div>
+</div>
+</script>
+</section>
+
+<section>
+<script lang="html">
+<tabs>
+  <pane heading="Foo">
+    foo content
+  </pane>
+  <pane heading="Bar" active="pane.active">
+    bar content
+  </pane>
+</tabs>
+</script>
+</section>
+
+<section>
+<h1>the future of HTML</h1>
+</section>
+
+<section>
+<h1>and a bad marketing decision</h1>
+</section>
+
+<section>
+  <h1>What sucks in Angular</h1>
+</section>
+
+<section>
+  <ul>
+    <li>learning curve</li>
+    <li>O(N) dirty checking</li>
+    <li>directives are still pretty complex</li>
+    <li>can't reuse templates on the backend</li>
+    <li>can't Closure compile</li>
+    <li>IE8+ up</li>
+    <li>HTML as template language</li>
+    <li>$parser not extensible</li>
+  </ul>
+</section>
+
+<section>
+<h1>Highlights</h1>
+</section>
+
+<section>
+<h1>Easy setup</h1>
+</section>
+
+<section>
+<h1>Unmatched testability</h1>
+</section>
+
+<section>
+<h1>Cleaner code with less callbacks an boilerplate</h1>
+</section>
+
+<section>
+<h1>Build your own HTML</h1>
+</section>
+
+<section>
+<h1>@apohorecki<br>github.com/psyho</h1>
+</section>
+
+<section>
+<figure>
+<img src="powow.png" />
+</figure>
+<footer>Software Consultant at <a href="http://www.powow.no">Powow</a></footer>
+</section>
+
+<section>
+<figure>
+<img src="hypnotoad.gif" />
+<figcaption>you shall ask<br>questions now</figcaption>
+</figure>
+</section>
+
+<section>
+<h1>Thank you</h1>
+</section>
+
+<style type="text/css">
+div.highlight, .sample {
+  font-size: 0.7em;
+}
+
+.smaller div.highlight {
+  font-size: 0.6em;
+}
+
+.sample p {
+  font-size: 0.7em;
+  margin: 5px;
+}
+
+.sample {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px #ccc;
+  box-shadow: 5px 5px 5px #ccc;
+  margin: 73px;
+  padding: 1em;
+}
+</style>

@@ -1,0 +1,347 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>PPPPP talk at DRUG - Adam Pohorecki</title>
+  <meta name="author" content="Adam Pohorecki">
+
+  
+  <meta name="description" content="Along with the presentation about Bogus on DRUG I also gave a lightning talk about the way I work every day with Rudy. Most people I know don&#8217;t &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://adam.pohorecki.pl/blog/2013/06/27/ppppp-talk-at-drug">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Adam Pohorecki" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-28409670-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Adam Pohorecki</a></h1>
+  
+    <h2>Test first, ask questions later</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:adam.pohorecki.pl" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">PPPPP talk at DRUG</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-27T20:10:00+02:00" pubdate data-updated="true">Jun 27<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Along with the <a href="/blog/2013/06/27/bogus-talk-at-drug/">presentation about Bogus on DRUG</a> I also gave a lightning talk about the way I work every day with <a href="https://github.com/wrozka">Rudy</a>.</p>
+
+<p>Most people I know don&#8217;t pair program at all or only do it occasionally and for a couple of hours or days at a time. We spend pretty much 100% of our time at work pair-programming. Heck, we actually have only one computer between us, so we can&#8217;t do it any other way, even if we wanted to.</p>
+
+<p>While pair-programming itself is not really that hard, maintaining that way of working over an extended period of time is not trivial. We use a certain mix of techniques that allows us to do it and we call it PPPPP, which stands for Ping-Pong Pomodoro Pair-Programming.</p>
+
+<h2>Pair Programming</h2>
+
+<p>Many Extreme Programming techniques have managed to achieve mass adoption, but pair programming is not one of them. Most programmers I know use TDD, do continuous integration and work in iterations, but pair programming somehow does not have the same appeal.</p>
+
+<p>Pair programming promotes shared code ownership, improves code quality and helps in knowledge sharing within a team. It gives you a line-by-line code review as you work, which lets you avoid making mistakes instead of correcting them after the fact. It even simplifies project management, because a team that does pair programming has half as many tasks in progress as a team that doesn&#8217;t.</p>
+
+<p>Beneficial as it is, pair programming is also hard work, in a quite literal sense. Things that you take for granted, like taking breaks when you feel like it, checking email and RSS, spending an hour reading documentation, etc. are all gone. Pair programming forces you to concentrate on the task at hand pretty much the whole day, and that can be very tiring.</p>
+
+<h2>Pomodoro</h2>
+
+<p>Pomodoro is a technique where you concentrate for 25 minutes on a single task and nothing else (no checking email, IM, etc.). After every such iteration you get a 5 minute break. After every four iterations you get a longer break. You start each day by planning and estimating the tasks for the day and end with a short retrospective.</p>
+
+<p>We use Pomodoro because of the rhythm it introduces. We no longer have to ask each other to stop working when we feel tired, because we know that in a couple of minutes we will have a few minutes to rest. It helps us maintain concentration during the day, because we only have to keep it for less than half an hour at a time. In short, it keeps us from getting burned out.</p>
+
+<h2>Ping-Pong</h2>
+
+<p>Once you start pair programming you will observe that once you spend more than a couple of minutes away from keyboard, you concentration flutters. To combat that we use a pairing technique called Ping-Pong.</p>
+
+<p>When you write your code using TDD, you go through a well-known red-green-refactor cycle. In Ping-Pong, person A writes the failing test, then person B makes it pass and finally person A performs refactoring. Next cycle starts with person B, and so on and so forth.</p>
+
+<p>This technique helps us maintain concentration and improves shared code ownership, because there&#8217;s never any code that &#8220;you wrote and I just watched&#8221;.</p>
+
+<h2>Slides</h2>
+
+<p>I apologize for the quality of the slides, but they were supposed to be more of a discussion starter than means of conveying information. Hopefully the ones from a talk I&#8217;m giving this month at KRUG will be more useful.</p>
+
+<iframe class="slides" src="/slides/embedder.html#/slides/ppppp-drug/" frameborder="0"></iframe>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Adam Pohorecki</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-27T20:10:00+02:00" pubdate data-updated="true">Jun 27<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ppppp/'>PPPPP</a>, <a class='category' href='/blog/categories/drug/'>drug</a>, <a class='category' href='/blog/categories/pair-programming/'>pair-programming</a>, <a class='category' href='/blog/categories/slides/'>slides</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://adam.pohorecki.pl/blog/2013/06/27/ppppp-talk-at-drug/" data-via="apohorecki" data-counturl="http://adam.pohorecki.pl/blog/2013/06/27/ppppp-talk-at-drug/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/06/27/bogus-talk-at-drug/" title="Previous Post: Bogus talk at DRUG">&laquo; Bogus talk at DRUG</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About</h1>
+  <div id="about">
+    A software development blog by Adam Pohorecki.
+    <a href="/about">Read more...</a>
+
+    <div class="avatar">
+      <img src="/images/avatar.jpg" alt="Adam Pohorecki" />
+    </div>
+  </div>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/06/27/ppppp-talk-at-drug/">PPPPP talk at DRUG</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/27/bogus-talk-at-drug/">Bogus talk at DRUG</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/27/bogus-talk-at-krug/">Bogus talk at KRUG</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/27/angularjs-talk-at-meet-dot-js/">AngularJS talk at meet.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/27/clojure-talk-at-lambda-lounge/">Clojure talk at Lambda Lounge</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("apohorecki", 3, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/apohorecki" class="twitter-follow-button" data-show-count="false">Follow @apohorecki</a>
+  
+</section>
+
+<section>
+  <h1>My company</h1>
+
+  <div id="about">
+    Hire me at:
+
+    <div class="avatar">
+      <a href="http://www.powow.no"><img src="/images/powow.png" alt="powow!" /></a>
+    </div>
+  </div>
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Adam Pohorecki -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'adampohoreckipl';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://adam.pohorecki.pl/blog/2013/06/27/ppppp-talk-at-drug/';
+        var disqus_url = 'http://adam.pohorecki.pl/blog/2013/06/27/ppppp-talk-at-drug/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
