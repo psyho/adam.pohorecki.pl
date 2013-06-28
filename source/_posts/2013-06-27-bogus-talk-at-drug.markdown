@@ -3,7 +3,7 @@ layout: post
 title: "Bogus talk at DRUG"
 date: 2013-06-27 18:41
 comments: true
-categories: [slides, bogus, krug, ruby]
+categories: [slides, bogus, drug, ruby]
 ---
 
 On the 20th of May this year I gave a talk about [Bogus][bogus] on [DRUG][drug].
