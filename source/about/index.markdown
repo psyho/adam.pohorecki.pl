@@ -6,8 +6,8 @@ sharing: false
 footer: true
 ---
 
-Adam Pohorecki is a Ruby developer based in Kraków, Poland.
-He works as a software developer for the oldest Ruby/Rails shop in Poland, [Lunar Logic Polska][llp].
+Adam Pohorecki is a Ruby, Clojure and JavaScript developer based in Kraków, Poland.
+He works (and is available for hire;) as a software consultant with a [bunch][hakon] of [other][rolf] [very][rudy] [talented][sickill] [developers][solnic] at [Powow!][powow].
 
 He is an aspiring Software Craftsman and the leader of the [local Software Craftsmanship group][sckrk].
 He also organizes [NoSQL Summer][nosql-summer] meetings in summer and facilitates [open spaces][open-spaces] and [code retreats][code-retreat].
@@ -26,6 +26,14 @@ Some links
 * [Twitter][twitter]
 * [Google+][googlep]
 * [SCKRK][sckrk]
+
+[powow]: http://www.powow.no/
+
+[hakon]: https://github.com/Hakon
+[rolf]: https://github.com/rolfb
+[rudy]: https://github.com/wrozka
+[sickill]: https://github.com/sickill
+[solnic]: https://github.com/solnic
 
 [sckrk]: http://sckrk.com
 [llp]: http://lunarlogicpolska.com
