@@ -42,7 +42,12 @@ This technique helps us maintain concentration and improves shared code ownershi
 
 I apologize for the quality of the slides, but they were supposed to be more of a discussion starter than means of conveying information. Hopefully the ones from a talk I'm giving this month at KRUG will be more useful.
 
+**EDIT:**
+
+The [slides and video from my PPPPP presentation at KRUG][new-slides] are already available. Check them out if you are interested in learning more about this topic.
+
 <iframe class="slides" src="/slides/embedder.html#/slides/ppppp-drug/" frameborder="0"></iframe>
 
 [bogus-talk]: /blog/2013/06/27/bogus-talk-at-drug/
 [rudy]: https://github.com/wrozka
+[new-slides]: /blog/2013/07/15/ppppp-talk-at-krug/
