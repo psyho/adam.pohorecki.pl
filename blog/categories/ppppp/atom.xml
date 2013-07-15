@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: PPPPP | Adam Pohorecki]]></title>
+  <title><![CDATA[Category: ppppp | Adam Pohorecki]]></title>
   <link href="http://adam.pohorecki.pl/blog/categories/ppppp/atom.xml" rel="self"/>
   <link href="http://adam.pohorecki.pl/"/>
-  <updated>2013-06-28T15:23:16+02:00</updated>
+  <updated>2013-07-15T20:59:03+02:00</updated>
   <id>http://adam.pohorecki.pl/</id>
   <author>
     <name><![CDATA[Adam Pohorecki]]></name>
@@ -14,43 +14,50 @@
 
   
   <entry>
-    <title type="html"><![CDATA[PPPPP talk at DRUG]]></title>
-    <link href="http://adam.pohorecki.pl/blog/2013/06/27/ppppp-talk-at-drug/"/>
-    <updated>2013-06-27T20:10:00+02:00</updated>
-    <id>http://adam.pohorecki.pl/blog/2013/06/27/ppppp-talk-at-drug</id>
-    <content type="html"><![CDATA[<p>Along with the <a href="/blog/2013/06/27/bogus-talk-at-drug/">presentation about Bogus on DRUG</a> I also gave a lightning talk about the way I work every day with <a href="https://github.com/wrozka">Rudy</a>.</p>
+    <title type="html"><![CDATA[PPPPP talk at KRUG]]></title>
+    <link href="http://adam.pohorecki.pl/blog/2013/07/15/ppppp-talk-at-krug/"/>
+    <updated>2013-07-15T20:06:00+02:00</updated>
+    <id>http://adam.pohorecki.pl/blog/2013/07/15/ppppp-talk-at-krug</id>
+    <content type="html"><![CDATA[<p>On the 9th of July this year I gave a talk about Ping-Pong Pomodoro Pair Programming on <a href="http://www.meetup.com/Krakow-Ruby-Users-Group/">KRUG</a>.</p>
 
-<p>Most people I know don't pair program at all or only do it occasionally and for a couple of hours or days at a time. We spend pretty much 100% of our time at work pair-programming. Heck, we actually have only one computer between us, so we can't do it any other way, even if we wanted to.</p>
+<h2>Ping-Pong Pomodoro Pair-Programming</h2>
 
-<p>While pair-programming itself is not really that hard, maintaining that way of working over an extended period of time is not trivial. We use a certain mix of techniques that allows us to do it and we call it PPPPP, which stands for Ping-Pong Pomodoro Pair-Programming.</p>
+<p><img class="right" src="/images/ppppp/pair-programming.png"></p>
 
-<h2>Pair Programming</h2>
+<p>I always wanted to do pair programming, but every time I tried, I failed to get much benefit out of it and I walked away tired and frustrated. I didn't really know what I was doing wrong. Every time I raised questions at conferences about how to succeed at pair programming I didn't get any good answers.</p>
 
-<p>Many Extreme Programming techniques have managed to achieve mass adoption, but pair programming is not one of them. Most programmers I know use TDD, do continuous integration and work in iterations, but pair programming somehow does not have the same appeal.</p>
-
-<p>Pair programming promotes shared code ownership, improves code quality and helps in knowledge sharing within a team. It gives you a line-by-line code review as you work, which lets you avoid making mistakes instead of correcting them after the fact. It even simplifies project management, because a team that does pair programming has half as many tasks in progress as a team that doesn't.</p>
-
-<p>Beneficial as it is, pair programming is also hard work, in a quite literal sense. Things that you take for granted, like taking breaks when you feel like it, checking email and RSS, spending an hour reading documentation, etc. are all gone. Pair programming forces you to concentrate on the task at hand pretty much the whole day, and that can be very tiring.</p>
+<p>The problem is that pair programming is not that easy to get right. If you want to be successful doing it, you need to be at least twice as performant (for some definition of performance) as a single person. You also need to avoid burnout that comes with working harder than you would by yourself.</p>
 
 <h2>Pomodoro</h2>
 
-<p>Pomodoro is a technique where you concentrate for 25 minutes on a single task and nothing else (no checking email, IM, etc.). After every such iteration you get a 5 minute break. After every four iterations you get a longer break. You start each day by planning and estimating the tasks for the day and end with a short retrospective.</p>
+<p><img class="left" src="/images/ppppp/pomodoro.png"></p>
 
-<p>We use Pomodoro because of the rhythm it introduces. We no longer have to ask each other to stop working when we feel tired, because we know that in a couple of minutes we will have a few minutes to rest. It helps us maintain concentration during the day, because we only have to keep it for less than half an hour at a time. In short, it keeps us from getting burned out.</p>
+<p>Thankfully I kept trying and at one point when programming with <a href="https://github.com/wrozka">Rudy</a> we started doing <a href="http://www.pomodorotechnique.com/">Pomodoro Technique</a> in addition to pair programming.</p>
+
+<p>Pomodoro is a personal productivity technique that says you should concentrate on a single task for 25 minutes and than take a 5 minute break afterwards, with a longer, 20 minute break every 4 pomodoros.</p>
+
+<p>It turned out that by using Pomodoro we not only got all the advantages of that technique (focus, work rythm, daily planning) but also <strong>we avoided the burnout that has followed pair programming</strong> for me before.</p>
 
 <h2>Ping-Pong</h2>
 
-<p>Once you start pair programming you will observe that once you spend more than a couple of minutes away from keyboard, you concentration flutters. To combat that we use a pairing technique called Ping-Pong.</p>
+<p><img class="right" src="/images/ppppp/red-green-refactor.png"></p>
 
-<p>When you write your code using TDD, you go through a well-known red-green-refactor cycle. In Ping-Pong, person A writes the failing test, then person B makes it pass and finally person A performs refactoring. Next cycle starts with person B, and so on and so forth.</p>
+<p>Once we realized that frequent switching during coding keeps us both fully concentrated, we also added <a href="http://c2.com/cgi/wiki?PairProgrammingPingPongPattern">Ping-Pong</a> pair switching technique to the mix.</p>
 
-<p>This technique helps us maintain concentration and improves shared code ownership, because there's never any code that "you wrote and I just watched".</p>
+<p>Ping-pong is a natural extension of TDD to pair programming. You switch at the keyboard for every part of the red-green-refactor cycle, with the first person writing a failing test, the second making it pass and the first person refactoring.</p>
 
-<h2>Slides</h2>
+<p>In traditional pair programming you switch at the keyboard every couple of minutes, but what I've found is that it is very easy for one person to keep typing for much longer than that. What I've also found is that <strong>after being away from the keyboard for about ten minutes your mind starts to drift away</strong> and you lose your focus on the code being written. With ping-pong we make sure that both of us are fully engaged and focused on the code that we are writing.</p>
 
-<p>I apologize for the quality of the slides, but they were supposed to be more of a discussion starter than means of conveying information. Hopefully the ones from a talk I'm giving this month at KRUG will be more useful.</p>
+<h2>The Presentation</h2>
 
-<iframe class="slides" src="http://adam.pohorecki.pl/slides/embedder.html#/slides/ppppp-drug/" frameborder="0"></iframe>
+<p>If you want to learn more about PPPPP, I recommend that you check out the full presentation below:</p>
+
+<iframe width="600" height="338" src="http://adam.pohorecki.pl//www.youtube.com/embed/Qc_tehYzxI0?rel=0" frameborder="0" allowfullscreen></iframe>
+
+
+
+
+<script async class="speakerdeck-embed" data-id="08530b10cb7601305ae10eeaf12a37c4" data-ratio="1.33333333333333" src="http://adam.pohorecki.pl//speakerdeck.com/assets/embed.js"></script>
 
 
 

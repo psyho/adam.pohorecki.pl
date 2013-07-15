@@ -4,7 +4,7 @@
   <title><![CDATA[Category: drug | Adam Pohorecki]]></title>
   <link href="http://adam.pohorecki.pl/blog/categories/drug/atom.xml" rel="self"/>
   <link href="http://adam.pohorecki.pl/"/>
-  <updated>2013-06-28T15:23:16+02:00</updated>
+  <updated>2013-07-15T20:59:03+02:00</updated>
   <id>http://adam.pohorecki.pl/</id>
   <author>
     <name><![CDATA[Adam Pohorecki]]></name>
@@ -49,6 +49,10 @@
 <h2>Slides</h2>
 
 <p>I apologize for the quality of the slides, but they were supposed to be more of a discussion starter than means of conveying information. Hopefully the ones from a talk I'm giving this month at KRUG will be more useful.</p>
+
+<p><strong>EDIT:</strong></p>
+
+<p>The <a href="/blog/2013/07/15/ppppp-talk-at-krug/">slides and video from my PPPPP presentation at KRUG</a> are already available. Check them out if you are interested in learning more about this topic.</p>
 
 <iframe class="slides" src="http://adam.pohorecki.pl/slides/embedder.html#/slides/ppppp-drug/" frameborder="0"></iframe>
 

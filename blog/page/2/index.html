@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Pohorecki">
 
   
-  <meta name="description" content="On the 20th of April this year I gave a talk at meet.js about AngularJS. It was a much shorter (30min vs 1h) version of the one I gave at the 33rd &hellip;">
+  <meta name="description" content="On the 14th of May this year I gave a talk about Bogus, my mocking library, at the local Ruby Users Group. Bogus Bogus is a mocking library that I&# &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,64 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/27/bogus-talk-at-krug/">Bogus talk at KRUG</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-27T18:18:00+02:00" pubdate data-updated="true">Jun 27<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/27/bogus-talk-at-krug/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>On the 14th of May this year I gave a talk about <a href="https://github.com/psyho/bogus/">Bogus</a>, my mocking library, at the local <a href="http://www.meetup.com/Krakow-Ruby-Users-Group/">Ruby Users Group</a>.</p>
+
+<h2>Bogus</h2>
+
+<p>Bogus is a mocking library that I&#8217;ve been working on for over a year now. It&#8217;s what I like to call a &#8220;new generation&#8221; mocking library, as opposed to gems like Mocha, RR or rspec-mocks, which represent the &#8220;old generation&#8221;.</p>
+
+<p>What makes the new generation of mocking libraries different is the fact that it emphasizes safety. The new generation libraries won&#8217;t let you stub methods that don&#8217;t exist or with a wrong number of arguments. When creating test doubles, the new generation also tries to preserve the interface of a real collaborator, so that you don&#8217;t run into problems with API drift.</p>
+
+<p>Bogus implements all of the aforementioned safety features and more. Our goal is to give you a much higher degree of confidence in your (isolated) unit tests and to speed up your builds by letting you get rid of unneeded integration tests.</p>
+
+<h2>Slides</h2>
+
+<iframe class="slides" src="/slides/embedder.html#/slides/bogus-krug/" frameborder="0"></iframe>
+
+
+<h2>Video</h2>
+
+<iframe width="600" height="338" src="//www.youtube.com/embed/XGT66XRXCwk?rel=0" frameborder="0" allowfullscreen></iframe>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -195,60 +253,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/27/angularjs-talk-from-33rd-degree-conference/">AngularJS talk from 33rd Degree Conference</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-27T15:52:00+02:00" pubdate data-updated="true">Jun 27<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/06/27/angularjs-talk-from-33rd-degree-conference/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>On 15th of March this year I gave a talk about <a href="http://angularjs.org/">AngularJS</a> on the <a href="http://2013.33degree.org/">33rd Degree Conference</a>. Instead of trying to introduce the building blocks of AngularJS like I did a <a href="/slides/angular/angular.html">couple of times before</a>, this time I tried to concentrate on the things that I consider the biggest advantages as compared to other JS MVC frameworks.</p>
-
-<h2>Two-way data binding</h2>
-
-<p>Something that really changed the way I write JS code is two-way data binding. It removes a ton of boilerplate code from your applications and allows you to completely remove the coupling of your controllers to DOM. Honestly, I can&#8217;t imagine using a framework that does not have this feature any more.</p>
-
-<h2>AngularJS is POJO</h2>
-
-<p>The code you write in AngularJS is mostly written in Plain Old JavaScript, without the need to inherit from any framework base classes or introducing a custom object model. This gives you a lot of freedom when it comes to modeling your domain, saving you from putting most of your logic on your &#8220;model classes&#8221;, which many other solutions seem to default to. The fact that pretty much all the code you write is Plain Old JavaScript Objects also helps a lot with testability, since isolating yourself from the framework is much easier if your are not inheriting from classes you don&#8217;t own.</p>
-
-<h2>Slides</h2>
-
-<iframe class="slides" src="/slides/embedder.html#/slides/angular33/" frameborder="0">
-</iframe>
-
-
-<p>Unfortunately the talk was not recorded, so there&#8217;s no video, but I hope the slides alone will give you some idea what I talked about.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -278,6 +282,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/07/15/ppppp-talk-at-krug/">PPPPP talk at KRUG</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/06/27/ppppp-talk-at-drug/">PPPPP talk at DRUG</a>
       </li>
     
@@ -291,10 +299,6 @@
     
       <li class="post">
         <a href="/blog/2013/06/27/angularjs-talk-at-meet-dot-js/">AngularJS talk at meet.js</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/27/clojure-talk-at-lambda-lounge/">Clojure talk at Lambda Lounge</a>
       </li>
     
   </ul>
