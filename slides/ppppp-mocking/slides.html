@@ -1,0 +1,214 @@
+<title>Isolated tests</title>
+
+<section>
+<h1>Isolated tests</h1>
+</section>
+
+<section>
+<figure>
+<img src="pyramid.jpg" alt="Testing pyramid" />
+</figure>
+</section>
+
+<section>
+<figure>
+<img src="pyramid-rails.jpg" alt="Testing pyramid and Rails" />
+</figure>
+</section>
+
+<section>
+<script lang="ruby">
+it "calculates order value" do
+  order = Order.new(milk, cookies)
+
+  value = OrderCalculator.value_of(order)
+
+  value.should == 123.45
+end
+</script>
+
+<footer>Integrated test</footer>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+it "calculates order value" do
+  tax = fake(:tax_calculator)
+  net = fake(:net_value_calculator)
+  calculator = OrderCalculator.new(tax, net)
+
+  order = Order.new(milk, cookies)
+
+  stub(tax).value(milk) { 15 }
+  stub(tax).value(cookies) { 32 }
+
+  stub(net).value(milk) { 19 }
+  stub(net).value(cookies) { 23 }
+
+  calculator.value.should == 15 + 32 + 19 + 23
+end
+</script>
+
+<footer>Isolated test</footer>
+</section>
+
+<section>
+<h1>Programming by<br><emph>wishful thinking</emph></h1>
+</section>
+
+<section>
+<h1>top-down vs bottom-up</h1>
+<ul>
+  <li>emergent design</li>
+  <li>less rework</li>
+  <li>faster feedback</li>
+</ul>
+</section>
+
+<section>
+<script lang="ruby">
+it "calculates order value" do
+  tax = fake(:tax_calculator)
+  net = fake(:net_value_calculator)
+  calculator = OrderCalculator.new(tax, net)
+
+  # ...
+end
+
+class TaxCalculator
+  def value(item)
+    raise 'not implemented'
+  end
+end
+</script>
+
+<footer>TIP: inline first</footer>
+</section>
+
+<section>
+<ul>
+  <li>bogus</li>
+  <li>rspec-fire</li>
+  <li>quacky</li>
+  <li>minitest-firemock</li>
+  <li>RSpec 3</li>
+</ul>
+
+<footer>TIP: use next-gen mocking framework</footer>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+module OrderCalculator
+  def self.value(order)
+    sum_values(order, TaxCalculator) +
+    sum_values(order, NetCalculator)
+  end
+
+  private
+
+  def self.sum_values(order, calculator)
+    order.items.map { |i| calculator.value(i) }.sum
+  end
+end
+</script>
+
+<footer>Static wiring</footer>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+it "calculates value from tax and net" do
+  stub(TaxCalculator).value(milk) { 12 }
+  stub(NetCalculator).value(milk) { 13 }
+
+  OrderCalculator.value(order).should == 25
+end
+</script>
+
+<script lang="ruby">
+module OrderCalculator
+  def self.value(order)
+    sum_values(order, TaxCalculator) +
+    sum_values(order, NetCalculator) +
+    sum_values(order, RebateCalculator)
+  end
+end
+</script>
+
+<footer>Testing vs static wiring</footer>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+class OrderCalculator
+  attr_reader :tax_calculator, :net_calculator
+
+  def initialize(tax_calculator, net_calculator)
+    @tax_calculator = tax_calculator
+    @net_calculator = net_calculator
+  end
+end
+</script>
+
+<script lang="ruby">
+require 'dependor'
+
+class OrderCalculator
+  takes :tax_calculator, :net_calculator
+end
+</script>
+
+<footer>Dependency injection</footer>
+</section>
+
+<section>
+<h1>Some rules</h1>
+</section>
+
+<section>
+<script lang="ruby">
+# BAD!
+stub(Post).where(author: "Adam") { post }
+
+# Better
+stub(Post).written_by("Adam") { post }
+</script>
+
+<footer>Don't mock what you don't own</footer>
+</section>
+
+<section>
+<script lang="ruby">
+stub(Post).written_by("Adam") { post }
+stub(Post).written_by("John") { nil }
+</script>
+
+<script lang="ruby">
+post = create(:post, author: "Adam")
+
+Post.written_by("Adam").should == post
+Post.written_by("John").should be_nil
+</script>
+
+<footer>Make sure it works</footer>
+</section>
+
+<section>
+<h1>One assertion per test?</h1>
+</section>
+
+<section>
+<h1>The exercise</h1>
+</section>
+
+<style type="text/css">
+  emph {
+    color: #08c;
+  }
+
+  .smaller div.highlight {
+    font-size: 0.6em;
+  }
+</style>
+
