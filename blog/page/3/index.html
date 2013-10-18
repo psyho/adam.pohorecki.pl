@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Pohorecki">
 
   
-  <meta name="description" content="On 15th of March this year I gave a talk about AngularJS on the 33rd Degree Conference. Instead of trying to introduce the building blocks of &hellip;">
+  <meta name="description" content="On the 28th of March this year I gave a talk about Clojure on the inaugural meeting of Kraków&#8217;s Lambda Lounge. With the questions from the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,70 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/27/clojure-talk-at-lambda-lounge/">Clojure talk at Lambda Lounge</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-27T17:17:00+02:00" pubdate data-updated="true">Jun 27<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/27/clojure-talk-at-lambda-lounge/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>On the 28th of March this year I gave a talk about <a href="http://clojure.org/">Clojure</a> on the inaugural meeting of <a href="http://www.meetup.com/Lambda-Lounge-Krakow/">Kraków&#8217;s Lambda Lounge</a>.</p>
+
+<p>With the questions from the audience this talk run way too long - over an hour and a half. I definitely tried to cram too much content into the presentation - from protocols and multimethods, through macros, first-order functions, immutability to concurrency constructs. Most of those things really deserve a presentation of their own.</p>
+
+<h2>Protocols and Multimethods</h2>
+
+<p>If you ever used an Object-Oriented language like Ruby, you are probably familiar with the concept of polymorphism. Since Clojure is a functional language and it&#8217;s primary unit of composition is a function, you&#8217;d think that by using it you have to sacrifice polymorphic dispatch, but you don&#8217;t.</p>
+
+<p>Even better, Clojure&#8217;s polymorphism is much more advanced than that of Ruby, and allows you to dispatch on arbitrary properties of any number of function arguments. Defining type relationships is also more powerful, since they can be defined on a per-function basis (if needed of course). Function-first approach also saves us the headaches of naming conflicts that could happen when including multiple modules into a class in Ruby.</p>
+
+<h2>Functional Programming</h2>
+
+<p>Functional programming is all the rage right now, but many people seem to think that it&#8217;s all about using first order functions. Once you get to use it however, you suddenly realize that the thing that makes the biggest difference is state management and immutability.</p>
+
+<p>Immutability not only helps in multithreaded environments, but it also makes reasoning about code much easier, because any state change made very explicit by forcing functions to return updated data. This approach to handling state also helps testability by separating your code into the functional core (super easy to test), which you can unit test to your heart&#8217;s content and imperative shell (interaction with the external world, state management), which you can easily integration test, because there are only a couple of paths possible through it.</p>
+
+<h2>Concurrency Constructs</h2>
+
+<p>I spent a good deal of time in my presentation showing a laundry list of Clojure&#8217;s concurrency constructs, which certainly are plentiful and seem like a very nice addition to java.util.concurrent. So far I only used atoms, but I don&#8217;t really deal with multithreaded apps much, hopefully one day that will change:)</p>
+
+<h2>Slides</h2>
+
+<iframe class="slides" src="/slides/embedder.html#/slides/clojure-lambda/" frameborder="0">
+</iframe>
+
+
+<p>The presentation unfortunately wasn&#8217;t recorded on video.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -182,54 +246,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/24/lean-startup/">Lean Startup</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-24T02:25:00+02:00" pubdate data-updated="true">Jun 24<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/06/24/lean-startup/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="/images/blog/lean-startup.png" title="Lean Startup cover" ></p>
-
-<p>I recently read the <a href="http://theleanstartup.com/book">&#8220;Lean Startup&#8221; book by Eric Ries</a> which I can recommend to anyone involved in software development, not just people working with technology startups, like the title suggests.</p>
-
-<p>The book describes a process, which can be used to make innovation more manageable and directed using the Lean Manufacturing principles combined with metrics-driven-development.
-It is written with entrepreneurs in mind, but it also touches on topics such as Continuous Deployment and automated testing, which are important to me.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/06/24/lean-startup/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -259,6 +275,10 @@ It is written with entrepreneurs in mind, but it also touches on topics such as 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/10/18/more-ruby-than-ruby-talk-at-krug/">More Ruby than Ruby talk at KRUG</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/07/15/ppppp-talk-at-krug/">PPPPP talk at KRUG</a>
       </li>
     
@@ -272,10 +292,6 @@ It is written with entrepreneurs in mind, but it also touches on topics such as 
     
       <li class="post">
         <a href="/blog/2013/06/27/bogus-talk-at-krug/">Bogus talk at KRUG</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/27/angularjs-talk-at-meet-dot-js/">AngularJS talk at meet.js</a>
       </li>
     
   </ul>

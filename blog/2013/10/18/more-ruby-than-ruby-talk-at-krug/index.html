@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Bogus talk at DRUG - Adam Pohorecki</title>
+  <title>More Ruby than Ruby talk at KRUG - Adam Pohorecki</title>
   <meta name="author" content="Adam Pohorecki">
 
   
-  <meta name="description" content="On the 20th of May this year I gave a talk about Bogus on DRUG. About a week earlier I gave a longer talk with the same title on KRUG, but even &hellip;">
+  <meta name="description" content="A few days ago a tweet reminded me about a talk I gave on the 6th of August on KRUG: One trend I&#39;m observing is a lot of rubyists being fed up &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://adam.pohorecki.pl/blog/2013/06/27/bogus-talk-at-drug">
+  <link rel="canonical" href="http://adam.pohorecki.pl/blog/2013/10/18/more-ruby-than-ruby-talk-at-krug">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +81,7 @@
   
   <header>
     
-      <h1 class="entry-title">Bogus talk at DRUG</h1>
+      <h1 class="entry-title">More Ruby than Ruby talk at KRUG</h1>
     
     
       <p class="meta">
@@ -97,7 +97,7 @@
   
 
 
-<time datetime="2013-06-27T18:41:00+02:00" pubdate data-updated="true">Jun 27<span>th</span>, 2013</time>
+<time datetime="2013-10-18T00:02:00+02:00" pubdate data-updated="true">Oct 18<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -106,15 +106,48 @@
   </header>
 
 
-<div class="entry-content"><p>On the 20th of May this year I gave a talk about <a href="https://github.com/psyho/bogus/">Bogus</a> on <a href="http://drug.org.pl">DRUG</a>.</p>
+<div class="entry-content"><p>A few days ago a tweet reminded me about a talk I gave on the 6th of August on <a href="http://www.meetup.com/Krakow-Ruby-Users-Group/">KRUG</a>:</p>
 
-<p>About a week earlier I gave a <a href="/blog/2013/06/27/bogus-talk-at-krug/">longer talk with the same title</a> on KRUG, but even though I kept the title, the second presentation couldn&#8217;t be more different from the previous one. While the talk on KRUG was more encyclopedic and giving an overview of most of the Bogus&#8217;s features, on DRUG I decided to go with a more storyline-oriented approach to give people a better idea of what Bogus&#8217;s motivation is and why it really is a new generation mocking framework.</p>
+<blockquote><p>One trend I&#39;m observing is a lot of rubyists being fed up with messy ruby ecosystem are getting excited or even switch to clojure.</p>&mdash; Piotr Solnica (@_solnic_) <a href="https://twitter.com/_solnic_/statuses/390163528138899456">October 15, 2013</a></blockquote>
 
-<p>Event though this presentation does not fully describe the features of Bogus, it does show a few testing/implementation patterns and the problems you might run into (or avoid) with them.</p>
 
-<p>I&#8217;m much happier with this presentation than the previous one, mainly because while safe stubbing is a very useful feature, it is also important to realize that the design of your system can have a huge impact on the reliability of your test suite.</p>
+<h2>I &#10084; Ruby</h2>
 
-<iframe class="slides" src="/slides/embedder.html#/slides/bogus-drug/" frameborder="0"></iframe>
+<p>I have been programming in Ruby professionally for over four years now. When I was starting out, there were probably mere dozens of Ruby programmers in Kraków. Compared being one of the thousands of Java developers, programming Ruby felt almost exotic.</p>
+
+<p>Not that long ago, being a Ruby programmer meant being on the bleeding edge of web development. You had to deal with immature and unstable libraries, crappy deployment options and IDEs that didn&#8217;t offer much more than syntax highlighting. On the other hand, it also meant working with smarter than average people, who were drawn to this technology not just because it was new, but also because it was in many ways superior to the other options out there. I loved it.</p>
+
+<p>A couple of years have passed and I still love Ruby. I actually love it so much, that I called my dog Ruby. However, the times have changed. Rubyland is no longer the domain of adventurous and industrious early adopters. Ruby is now mature, stable and &#8220;enterprise-ready&#8221;. Somewhere along the way Ruby has become the responsible choice of a language for building web apps.</p>
+
+<p>Let&#8217;s face it: Ruby is a good language to know right now. The jobs are plentiful and well-payed, and the technology is still relatively modern, but progressively more safe and boring. The days of exciting and unpredictable Ruby are almost over, and soon I&#8217;ll only be able to like it as a friend.</p>
+
+<h2>I &#10084; Clojure</h2>
+
+<p>I have come across this LISP on the JVM quite a while ago, but having had pretty bad experiences with Common LISP at my university, I never had much interest in it until in May of 2012 I came across a <a href="http://www.youtube.com/watch?v=rI8tNMsozo0">presentation given at RailsConf</a> by Clojure&#8217;s creator, Rich Hickey.</p>
+
+<p>I am a huge believer in Single Responsibility Principle. Most of my classes have one public method. I tend to avoid inheritance and heavily favor composition and delegation. Unfortunately, a language like Ruby punishes you for coding in this style - your small classes end up being split amongst hundreds of files and often wrapping a function in a class seems like an overhead.</p>
+
+<p>Watching that video made me realize that maybe I should look into functional programming languages. After all, functions are smaller units of composition, and they are easier to combine. I watched a bunch of other Hickey&#8217;s presentations and I got hooked on Clojure.</p>
+
+<p>Compared to other functional languages like Scala or Haskell, Clojure, as a dynamically typed language, was much more up my alley (in the dispute between static typing vs TDD, I stand strongly behind TDD). It also appealed to me more than Erlang, since I mostly work on web apps, and Clojure seems to do better with those.</p>
+
+<h2>Clojure > Ruby</h2>
+
+<p>I read a couple of books about Clojure, started playing with the language and I fell in love with it.</p>
+
+<p>Let&#8217;s start with the fact, that Clojure is perfectly capable of expressing pretty much everything that Ruby can, most of the time just as concisely. This in itself is not much of an achievement, but factor into that the syntax of both languages. Even I could write a parser for Clojure. Do you know anyone who could write a parser for Ruby? Clojure&#8217;s syntax is the perfect marriage of power and simplicity.</p>
+
+<p>Clojure has real namespaces, where Ruby only has modules. Clojure&#8217;s keywords can be namespaced as well. It avoids Ruby&#8217;s method naming problems (like when two libraries adding a method with the same name to a class like String of Array). Clojure has ClojureScript. Clojure is well suited for multithreaded programming. Clojure has macros. Clojure is faster&#8230;</p>
+
+<p>I believe that this is a great time to get into Clojure programming. The ecosystem is mature enough that you can find libraries to do pretty much everything you need (even if they are not overly polished). The people in the community are above the average, because they have learned Clojure, not because Clojure programmers are in demand, but because they wanted to. There are also plenty of books, screencasts and other resources to learn Clojure from.</p>
+
+<p>Uncle Bob called Clojure &#8220;The Last Programming Language&#8221;. I would settle for &#8220;The Next Big Thing&#8221;. Dig in while it&#8217;s hot:)</p>
+
+<h2>Slides</h2>
+
+<p>Unfortunately the presentation was not recorded, so all I have are these slides:</p>
+
+<iframe class="slides" src="/slides/embedder.html#/slides/clojure-krug/" frameborder="0"></iframe>
 
 
 
@@ -140,12 +173,12 @@
   
 
 
-<time datetime="2013-06-27T18:41:00+02:00" pubdate data-updated="true">Jun 27<span>th</span>, 2013</time>
+<time datetime="2013-10-18T00:02:00+02:00" pubdate data-updated="true">Oct 18<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/bogus/'>bogus</a>, <a class='category' href='/blog/categories/drug/'>drug</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/slides/'>slides</a>
+    <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/krug/'>krug</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/slides/'>slides</a>
   
 </span>
 
@@ -154,7 +187,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://adam.pohorecki.pl/blog/2013/06/27/bogus-talk-at-drug/" data-via="apohorecki" data-counturl="http://adam.pohorecki.pl/blog/2013/06/27/bogus-talk-at-drug/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://adam.pohorecki.pl/blog/2013/10/18/more-ruby-than-ruby-talk-at-krug/" data-via="apohorecki" data-counturl="http://adam.pohorecki.pl/blog/2013/10/18/more-ruby-than-ruby-talk-at-krug/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -167,10 +200,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/06/27/bogus-talk-at-krug/" title="Previous Post: Bogus talk at KRUG">&laquo; Bogus talk at KRUG</a>
+        <a class="basic-alignment left" href="/blog/2013/07/15/ppppp-talk-at-krug/" title="Previous Post: PPPPP talk at KRUG">&laquo; PPPPP talk at KRUG</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/06/27/ppppp-talk-at-drug/" title="next Post: PPPPP talk at DRUG">PPPPP talk at DRUG &raquo;</a>
       
     </p>
   </footer>
@@ -273,8 +304,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://adam.pohorecki.pl/blog/2013/06/27/bogus-talk-at-drug/';
-        var disqus_url = 'http://adam.pohorecki.pl/blog/2013/06/27/bogus-talk-at-drug/';
+        var disqus_identifier = 'http://adam.pohorecki.pl/blog/2013/10/18/more-ruby-than-ruby-talk-at-krug/';
+        var disqus_url = 'http://adam.pohorecki.pl/blog/2013/10/18/more-ruby-than-ruby-talk-at-krug/';
         var disqus_script = 'embed.js';
       
     (function () {
