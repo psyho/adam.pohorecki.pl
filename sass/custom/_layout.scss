@@ -41,3 +41,20 @@ iframe.slides {
   width: 100%;
   height: 620px !important;
 }
+
+body {
+  header {
+    text-transform: lowercase;
+
+    hgroup {
+      h1 a {
+        font-weight: 900;
+        font-size: 1.2em;
+      }
+
+      h2 {
+        font-weight: bold;
+      }
+    }
+  }
+}
