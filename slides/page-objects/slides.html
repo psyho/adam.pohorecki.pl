@@ -1,0 +1,656 @@
+<title>Curb your Capybara with Page Objects</title>
+
+<section>
+<h1 class="higher">Curb your Capybara with <em>Page Objects</em></h1>
+<footer>Adam Pohorecki - 04.11.2013 @ <a href="http://www.meetup.com/Krakow-Ruby-Users-Group/">KRUG</a></footer>
+</section>
+
+<section>
+<h1>Agenda</h1>
+</section>
+
+<section>
+<h1 class="higher">Pattern<br>for <em>organizing code</em><br>in <em>E2E</em> tests</h1>
+<footer>Page Objects</footer>
+</section>
+
+<section>
+<h1>E2E tests</h1>
+</section>
+
+<section>
+<h1 class="higher">E2E tests</h1>
+<ul>
+  <li>From <em>user's standpoint</em></li>
+  <li><em>Easy</em> to write</li>
+  <li>Automate <em>testers' work</em></li>
+</ul>
+</section>
+
+<section>
+<h1 class="higher">E2E tests</h1>
+<ul class="inverted">
+  <li><em>Slow</em></li>
+  <li><em>Hard</em> to set up</li>
+  <li>Don't <em>pinpoint</em> problems</li>
+</ul>
+</section>
+
+<section>
+<h1 class="higher">E2E tests</h1>
+<ul>
+  <li>Drive <em>outside-in</em> development</li>
+  <li>Remain as <em>smoke tests</em></li>
+</ul>
+</section>
+
+<section>
+<h1>Capybara</h1>
+</section>
+
+<section>
+<h1 class="higher">Capybara</h1>
+<ul>
+  <li><em>DSL</em> for driving the browser</li>
+  <li>The <em>de-facto standard</em> in Ruby</li>
+  <li>Multiple <em>backends</em></li>
+</ul>
+</section>
+
+<section>
+<h1 class="higher">Capybara backends</h1>
+<ul>
+  <li><em>rack-test</em></li>
+  <li>Selenium</li>
+  <li>capybara-webkit</li>
+  <li><em>poltergeist</em> (PhantomJS)</li>
+</ul>
+</section>
+
+<section>
+<script lang="ruby">
+Capybara.app = MyRackApp
+
+include Capybara::DSL
+
+visit "/sessions/new"
+
+within "#new_session" do
+  fill_in "login", with: "foo"
+  fill_in "password", with: "bar"
+  click_button "Log in"
+end
+
+puts find(".welcome").text
+</script>
+
+<footer>Capybara DSL</footer>
+</section>
+
+<section>
+<h1>E2E tests<br>with Capybara</h1>
+</section>
+
+<section>
+<h1>RSpec / Cucumber</h1>
+</section>
+
+<section>
+<script lang="cucumber">
+Feature: Blog posts
+
+Scenario: Adding posts
+  Given that I am logged in as Bob
+  When I add a post titled "hello world"
+  Then Alice should see that post
+    on the home page
+</script>
+
+<footer>Cucumber (good)</footer>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+Given(/^that I am logged in as (\w+)$/) do |user_name|
+  user = user_for(user_name)
+
+  visit login_path
+
+  within "#new_session" do
+    fill_in "login", with: user.login
+    fill_in "password", with: "sikret"
+
+    find(".login").click
+  end
+end
+</script>
+
+<footer>Cucumber contd.</footer>
+</section>
+
+<section>
+<script lang="cucumber">
+Feature: Blog posts
+
+Scenario: Adding posts
+  Given I visit "/sessions/new"
+  And I fill in Login with "bob"
+  And I fill in Password with "sikret"
+  And I click button "Log in"
+
+  When I click link "Add new post"
+  And I fill in "Post title" with
+    "hello world"
+  And I fill in "Body" with "..."
+  ...
+</script>
+
+<footer>Cucumber (bad)</footer>
+</section>
+
+<section>
+<h1 class="higher">Cucumber <em>strengths</em></h1>
+
+<ul>
+  <li><em>High level</em> of abstraction</li>
+  <li><em>Natural</em> language</li>
+</ul>
+</section>
+
+<section class="inverted">
+<h1 class="higher">Cucumber <em>drawbacks</em></h1>
+
+<ul>
+  <li>Programming with <em>RegExps</em></li>
+  <li>Limited <em>parameter passing</em></li>
+  <li>Steps are <em>global</em></li>
+</ul>
+</section>
+
+<section>
+<h1 class="higher">Cucumber</h1>
+
+<ul>
+  <li>Best for describing <em>business rules</em></li>
+  <li><em>Suboptimal</em> for E2E testing</li>
+</ul>
+</section>
+
+<section>
+<script lang="cucumber">
+Given that I am logged in as Bob
+</script>
+
+<script lang="ruby">
+bob = create_user(name: "Bob")
+sign_in(bob)
+</script>
+
+<footer>
+Cucumber vs RSpec
+</footer>
+</section>
+
+<section>
+<h1 class="higher">RSpec</h1>
+
+<ul>
+  <li>Better for describing <em>procedures</em></li>
+  <li><em>Suboptimal</em> for communicating with clients</li>
+  <li>Better for writing <em>E2E tests</em> than Cucumber</li>
+</ul>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+# Typical RSpec E2E test
+
+describe "Blog posts" do
+  it "allows creating blog posts" do
+    bob, alice = FactoryGirl.create_list(:user, 2)
+    log_in(bob)
+
+    visit root_path
+    click_link "Add a new blog post"
+
+    within "#new_post" do
+      fill_in "Title", with: "hello world"
+      fill_in "Body", with: "yada yada"
+      click_button "Add post"
+    end
+
+    Capybara.reset_sessions!
+    log_in(alice)
+
+    visit root_path
+    page.should have_content("hello world")
+  end
+end
+</script>
+</section>
+
+<section>
+<figure>
+<img src="dafuq.jpg" alt="DA FUQ?" />
+</figure>
+</section>
+
+<section>
+<table class="side-by-side tiny">
+  <tr>
+    <td>
+<script lang="cucumber">
+Feature: Blog posts
+
+Scenario: Adding posts
+  Given that I am logged in as Bob
+  When I add a post titled "hello world"
+  Then Alice should see that post
+    on the home page
+</script>
+    </td>
+    <td>
+<script lang="ruby">
+describe "Blog posts" do
+  it "allows creating blog posts" do
+    bob, alice = FactoryGirl.create_list(:user, 2)
+    log_in(bob)
+
+    visit root_path
+    click_link "Add a new blog post"
+
+    within "#new_post" do
+      fill_in "Title", with: "hello world"
+      fill_in "Body", with: "yada yada"
+      click_button "Add post"
+    end
+
+    Capybara.reset_sessions!
+    log_in(alice)
+
+    visit root_path
+    page.should have_content("hello world")
+  end
+end
+</script>
+    </td>
+  </tr>
+</table>
+<footer>
+Typical Cucumber vs Typical RSpec
+</footer>
+</section>
+
+<section>
+<h1>Need to<br><em>organize</em> the code</h1>
+</section>
+
+<section>
+<script lang="ruby">
+feature "Blog Posts" do
+  scenario "Adding Posts" do
+    given_user_logged_in("Bob")
+    when_i_add_new_post("Hello!")
+    then_user_should_see("Alice", "Hello!")
+  end
+end
+</script>
+
+<footer>The naive conversion</footer>
+</section>
+
+<section>
+<script lang="ruby">
+def when_i_add_new_post(title)
+  visit root_path
+  click_link "Add a new blog post"
+
+  within "#new_post" do
+    fill_in "Title", with: title
+    fill_in "Body", with: "yada yada"
+    click_button "Add post"
+  end
+end
+
+# ...
+</script>
+
+<footer>The naive conversion contd.</footer>
+</section>
+
+<section>
+<script lang="ruby">
+feature "Blog Posts" do
+  scenario "Adding Posts" do
+    bob = create_user(name: "Bob")
+    alice = create_user(name: "Alice")
+    post = build_post(title: "hello world")
+
+    log_in(bob)
+    add_blog_post(post)
+
+    log_in(alice)
+    open_home_page
+    should_have_post(post)
+  end
+end
+</script>
+
+<footer>"Imperative" style</footer>
+</section>
+
+<section>
+<script lang="ruby">
+open_home_page
+open_post_page(post)
+open_login_page
+
+create_user(name: "...")
+create_post(title: "...")
+build_comment(body: "...")
+
+edit_comment(...)
+edit_post(...)
+</script>
+
+<footer>Notice anything?</footer>
+</section>
+
+<section>
+<script lang="ruby">
+home_page.open
+post_page(post).open
+login_page.open
+
+users.create(name: "...")
+posts.create(title: "...")
+posts.build(body: "...")
+
+comment_form.edit(...)
+post_form.edit(...)
+</script>
+
+<footer>Why not write it this way?</footer>
+</section>
+
+<section>
+<h1>Page Objects</h1>
+</section>
+
+<section>
+<script lang="ruby">
+feature "Blog Posts" do
+  scenario "Adding Posts" do
+    post = posts.build(title: "hello world")
+
+    sessions.log_in(users.bob)
+    posts_page.add(post)
+
+    sessions.switch_to(users.alice)
+    home_page.open
+    home_page.should_have_post(post)
+  end
+end
+</script>
+
+<footer>With Page Objects</footer>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+class SessionsPage
+  attr_reader :context
+
+  def initialize(context)
+    @context = context
+  end
+
+  def open
+    context.visit context.new_sessions_path
+  end
+end
+
+def sessions
+  SessionsPage.new(self)
+end
+</script>
+
+<footer>Simple Page Object</footer>
+</section>
+
+<section>
+<script lang="ruby">
+class SessionsPage < SimpleDelegator
+  def open
+    visit new_sessions_path
+  end
+end
+
+def sessions
+  SessionsPage.new(self)
+end
+</script>
+
+<footer>Page Object with SimpleDelegator</footer>
+</section>
+
+<section>
+<script lang="ruby">
+class SessionsPage < SimpleDelegator; end
+def sessions; SessionsPage.new(self); end
+
+class OtherPage < SimpleDelegator
+  def do_something
+    sessions.open # raises NameError
+  end
+end
+
+def other_page
+  OtherPage.new(self)
+end
+</script>
+
+<footer>Problem with SimpleDelegator</footer>
+</section>
+
+<section>
+<script lang="ruby">
+class BetterDelegator < BasicObject
+  def initialize(context)
+    @context = context
+  end
+
+  def respond_to_missing?(name, _)
+    @context.respond_to?(name)
+  end
+
+  def method_missing(name, *args, &block)
+    @context.__send__(name, *args, &block)
+  end
+end
+</script>
+
+<footer>BetterDelegator</footer>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+class PostsPage < BetterDelegator
+  def add(post)
+    post.save!
+  end
+end
+</script>
+
+<script lang="ruby">
+class PostsPage < BetterDelegator
+  def add(post)
+    open
+    fill_in "title", with: post.title
+    fill_in "body", with: post.body
+    find(".save").click
+  end
+end
+</script>
+
+<footer>Page Objects &amp; Encapsulation</footer>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+module HasUrl
+  def open
+    visit url
+  end
+
+  def current_page?
+    current_url == url
+  end
+end
+
+class PostsPage < BetterDelegator
+  include HasUrl
+  def url; posts_path; end
+end
+
+class HomePage < BetterDelegator
+  include HasUrl
+  def url; root_path; end
+end
+</script>
+
+<footer>Page Objects &amp; Code Reuse</footer>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+class RegistrationPage < BetterDelegator
+  def register(user)
+    fill_in_authentication(user)
+    upload_avatar(user)
+    invite_friends(user)
+  end
+
+  private
+
+  def fill_in_authentication(user); end
+  def upload_avatar(user); end
+  def invite_friends(user); end
+end
+</script>
+
+<footer>Page Objects &amp; private methods</footer>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+class HomePage < BetterDelegator
+  # worse
+  def has_post?(post)
+    page.has_content?(post.title) &&
+      page.has_content?(post.body) &&
+      page.has_content?(post.author_name)
+  end
+
+  # better
+  def should_have_post(post)
+    page.should have_content(post.title)
+    page.should have_content(post.body)
+    page.should have_content(post.author_name)
+  end
+end
+</script>
+
+<footer>Page Objects &amp; assertions</footer>
+</section>
+
+<section>
+<h1 class="higher">Page Objects</h1>
+<ul>
+  <li><em>Object-Oriented</em> way of organizing test code</li>
+  <li>Keep <em>related selectors</em> in one file</li>
+  <li>Simplified <em>code reuse</em></li>
+  <li><em>Like presenters</em>, but for tests</li>
+</ul>
+</section>
+
+<section>
+<h1>About me</h1>
+</section>
+
+<section>
+<h1>@apohorecki<br>github.com/psyho</h1>
+</section>
+
+<section>
+<figure>
+<img src="powow.png" />
+</figure>
+<footer>Software Consultant at <a href="http://www.powow.no">Powow</a></footer>
+</section>
+
+<section>
+<figure>
+<img src="sckrk-large.png" alt="[sckrk]" />
+</figure>
+</section>
+
+<section>
+<figure>
+<img src="hypnotoad.gif" />
+<figcaption>you shall ask<br>questions now</figcaption>
+</figure>
+</section>
+
+<section>
+<h1>Thanks!</h1>
+</section>
+
+<style type="text/css">
+  div.highlight {
+    margin-bottom: 50px;
+    margin-top: 50px;
+  }
+
+  .higher {
+    margin-top: 120px;
+  }
+
+  h1.octocat {
+    height: 200px;
+    background: url("octocat.jpg") top left no-repeat;
+    padding-left: 100px;
+    padding-top: 25px;
+    margin-left: 40px;
+  }
+
+  em {
+    color: #08c;
+    font-style: normal;
+  }
+
+  .inverted em {
+    color: #c82829;
+  }
+
+  .smaller .highlight {
+    font-size: 60%;
+  }
+
+  .tiny .highlight {
+    font-size: 40%;
+  }
+
+  .slightly-smaller .highlight {
+    font-size: 70%;
+  }
+
+  .side-by-side td {
+    vertical-align: top;
+  }
+
+  .side-by-side .highlight {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+</style>
