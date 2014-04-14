@@ -1,0 +1,765 @@
+<title>Making Ruby Fun(ctional)</title>
+
+<section>
+  <h1 class="lift"><em>Making</em> Ruby<br><em>Fun</em>(ctional)</h1>
+<footer><a href="http://adam.pohorecki.pl/">Adam Pohorecki</a > - 14.04.2014 @ <a href="http://www.meetup.com/Krakow-Ruby-Users-Group/">KRUG</a></footer>
+</section>
+
+<section class="centered-image">
+  <img src="really.jpg" alt="Really?" />
+</section>
+
+<section>
+<h1>Not really</h1>
+</section>
+
+<section>
+<h1>An experiment...</h1>
+</section>
+
+<section>
+<h1>fun.rb</h1>
+</section>
+
+<section>
+<h1>Higher order functions</h1>
+</section>
+
+<section>
+<script lang="js">
+// calling a method
+object.foo();
+
+// assigning method to a local variable
+var foo = object.foo;
+</script>
+
+<script lang="ruby">
+# calling a method
+object.foo
+
+# assigning a method to a local variable
+foo = object.method(:foo).to_proc
+</script>
+<footer>Methods (JS vs Ruby)</footer>
+</section>
+
+<section>
+<script lang="ruby">
+# passing blocks to functions
+[1,2,3].map {|x| x + 1}
+
+# can't assign blocks to variables
+inc = {|x| x + 1} # error!
+
+# can't return blocks from functions
+def make_incrementer(n)
+  {|x| x + n} # error!
+end
+</script>
+<footer>Blocks aren't first-order functions</footer>
+</section>
+
+<section>
+<script lang="ruby">
+# passing blocks to other blocks
+odd = proc{|n| n % 2 == 1 }
+filter[odd, [1, 2, 3]]
+
+# assigning blocks to variables
+inc = proc{|x| x + 1}
+
+# returning blocks from blocks
+make_incrementer = proc{ |n|
+  proc{|x| x + n}
+}
+inc = make_incrementer[1]
+</script>
+<footer>Procs = Higher-Order Functions</footer>
+</section>
+
+<section>
+<script lang="ruby">
+Proc.new{|x| x + 1}
+proc{|x| x + 1}
+lambda{|x| x + 1}
+->(x) {x + 1}
+
+def p1(&block); block; end
+def p2; Proc.new; end
+def p3; proc; end
+def p4; lambda; end
+
+p1{|x| x + 1}
+p2{|x| x + 1}
+p4{|x| x + 1} # warning
+</script>
+<footer>Ways of creating Procs</footer>
+</section>
+
+<section>
+<h1>proc vs lambda vs -></h1>
+</section>
+
+<section>
+<script lang="ruby">
+foo = proc{|x, y, z|
+  [x, y, z].compact.join(', ') }
+
+bar = lambda{|x, y, z|
+  [x, y, z].compact.join(', ') }
+
+baz = ->(x, y, z) {
+  [x, y, z].compact.join(', ') }
+
+foo[1, 2] # => "1, 2"
+bar[1, 2] # => ArgumentError!
+baz[1, 2] # => ArgumentError!
+</script>
+<footer>proc vs lambda vs -&gt;</footer>
+</section>
+
+<section>
+<script lang="ruby">
+def foo
+  x = proc{ return 1 }
+  x[] + 1
+end
+
+def bar
+  x = lambda{ return 1 }
+  x[] + 1
+end
+
+foo # => 1
+bar # => 2
+</script>
+<footer>proc vs lambda</footer>
+</section>
+
+<section>
+<script lang="ruby">
+foo = proc{ |n| return n + 1 }
+bar = lambda{ |n| return n + 1 }
+
+foo[2] # LocalJumpError!
+bar[2] # => 3
+</script>
+<footer>proc vs lambda</footer>
+</section>
+
+<section>
+<script lang="ruby">
+factorial = proc(n) {
+  if n <= 1
+    1
+  else
+    n * factorial[n - 1]
+  end
+}
+</script>
+
+<script lang="ruby">
+factorial = ->(n) {
+  return 1 if n <= 1
+  n * factorial[n - 1]
+}
+</script>
+<footer>proc vs lambda</footer>
+</section>
+
+<section>
+<script lang="ruby">
+divisible = ->(x, y) { x % y == 0 }
+
+odd = ->(x) { divisible[x, 2] }
+
+odd[5] # => false
+divisible[6, 3] # => true
+</script>
+<footer>Currying</footer>
+</section>
+
+<section>
+<script lang="ruby">
+divisible = ->(x) {
+  ->(y) { y % x == 0 }
+}
+
+odd = divisible[2]
+
+odd[5] # => false
+divisible[3][6] # weird...
+</script>
+<footer>Designing for currying</footer>
+</section>
+
+<section>
+<script lang="ruby">
+divisible = ->(x, y) {
+  y % x == 0
+}.curry
+
+odd = divisible[2]
+
+odd[5] # => false
+divisible[6, 3] # much better
+</script>
+<footer>Automatic currying</footer>
+</section>
+
+<section>
+<script lang="ruby">
+def fn(&block)
+  block.curry
+end
+
+add = fn{|a, b| a + b}
+inc = add[1]
+
+add[2, 3] # => 5
+inc[6] # => 7
+</script>
+<footer>Let's alias it</footer>
+</section>
+
+<section>
+<script lang="ruby">
+def fn(&block)
+  block.curry
+end
+
+factorial = fn{|n|
+  return 1 if n <= 1
+  n * factorial[n-1]
+}
+
+factorial[5] # => LocalJumpError!
+</script>
+<footer>Oops!</footer>
+</section>
+
+<section>
+<script lang="ruby">
+def fn(&block)
+  lambda(&block).curry
+end
+
+factorial = fn{|n|
+  return 1 if n <= 1
+  n * factorial[n-1]
+}
+
+factorial[5] # => LocalJumpError!
+</script>
+<footer>WTF?!</footer>
+</section>
+
+<section>
+<script lang="ruby">
+def fn(&block)
+  obj = Object.new
+  obj.define_singleton_method(:_, &block)
+  obj.method(:_).to_proc.curry
+end
+
+factorial = fn{|n|
+  return 1 if n <= 1
+  n * factorial[n-1]
+}
+
+factorial[5] # => 120
+</script>
+<footer>WTF?!</footer>
+</section>
+
+<section>
+<script lang="ruby">
+def fn(&block)
+  obj = Object.new
+  obj.define_singleton_method(:_, &block)
+  obj.method(:_).to_proc.curry
+end
+
+def increment
+  123
+end
+
+inc = fn{|x| x + increment}
+
+inc[10] # NameError!
+</script>
+<footer>:(((</footer>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+class ProcContext < BasicObject
+  def initialize(block)
+    @self = block.binding.eval('self')
+    define_singleton_method(:__call__, &block)
+  end
+
+  def to_proc
+    method(:__call__).to_proc
+  end
+
+  def method_missing(name, *args, &block)
+    @self.__send__(name, *args, &block)
+  end
+end
+
+def fn(&block)
+  ProcContext.new(block).to_proc.curry
+end
+</script>
+
+<footer>BasicObject to the rescue!</footer>
+</section>
+
+<section>
+<script lang="ruby">
+def increment
+  123
+end
+
+inc = fn{|x| x + increment}
+add = fn{|a, b| return a + b}
+
+inc[10] # => 133
+add[5][6] # => 11
+</script>
+<footer>It works!</footer>
+</section>
+
+<section>
+<script lang="ruby">
+BasicObject.instance_methods
+# => [
+  :==, :equal?, :!, :!=,
+  :instance_eval, :instance_exec,
+  :__send__, :__id__]
+</script>
+<footer>Oh wait...</footer>
+</section>
+
+<section>
+<script lang="ruby">
+class ProcContext
+  keep_methods = [:object_id, :method,
+     :define_singleton_method]
+
+  extra_methods = Object.instance_methods -
+    BasicObject.instance_methods -
+    keep_methods
+
+  undef_method(*extra_methods)
+
+  # ...
+end
+</script>
+<footer>Going old-school</footer>
+</section>
+
+<section>
+<script lang="ruby">
+foo = fn{"Hello #{@name}"}
+bar = ->{"Hello #{@name}"}
+
+@name = "world"
+
+foo[] # => "Hello "
+bar[] # => "Hello world"
+</script>
+
+<footer>Another piece missing...</footer>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+class ProcContext
+  def initialize(block)
+    @__self__ = block.binding.eval("self")
+    define_singleton_method(:__call_block__, &block)
+  end
+
+  def __call__(*args)
+    __copy_instance_variables__
+    __call_block__(*args)
+  end
+
+  # ...
+
+  private
+
+  def __copy_instance_variables__
+    @__self__.instance_variables.each do |name|
+      value = @__self__.instance_variable_get(name)
+      instance_variable_set(name, value)
+    end
+  end
+end
+</script>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+class ProcContext
+  def __call__(*args)
+    # ...
+  end
+
+  def to_proc
+    method(:__call__).to_proc
+  end
+end
+
+def fn(&block)
+  ProcContext.new(block).to_proc.curry
+end
+
+add = fn{|a, b| a + b}
+inc = add[1] # TypeError!
+</script>
+
+<footer>Seriously?</footer>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+def fn(&block)
+  ProcContext.new(block).to_proc.curry(block.arity)
+end
+
+add = fn{|a, b| a + b}
+inc = add[1]
+
+inc[5] # => 6
+</script>
+
+<footer>That was easy...</footer>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+->{}.arity # => 0
+
+->(a,b,c){}.arity # => 3
+
+->(a,b,c,d=1,e=2){}.arity # => 3
+
+->(*args){}.arity # => -1
+
+->(a, b, c, *rest){}.arity # => ?
+</script>
+
+<footer>Too easy...</footer>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+->(a, b, c, *rest){}.arity # => -4
+
+->(*args){}.curry(-4) # ArgumentError!
+
+def fn(&block)
+  min_args = block.arity
+  min_args = -(min_args+1) if min_args < 0
+  ProcContext.new(block).to_proc.curry(min_args)
+end
+</script>
+
+<footer>arity != minimum number of arguments</footer>
+</section>
+
+<section>
+<script lang="ruby">
+formula = fn{ |a, *rest|
+  return a * rest.reduce(:+) }
+
+foo = formula[1]
+bar = formula[2]
+
+foo[1, 2, 3] # => 6
+bar[1, 2, 3] # => 12
+</script>
+
+<footer>What we have so far...</footer>
+</section>
+
+<section>
+<script lang="ruby">
+factorial = fn{ |n|
+  return 1 if n <= 1
+  n * factorial[n-1] }
+
+factorial[10000] # SystemStackError!
+
+factorial2 = fn{ |n, result = 1|
+  return result if n <= 1
+  factorial2[n - 1, n * result] }
+
+factorial2[10000] # SystemStackError!
+</script>
+
+<footer>Tail Recursion</footer>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+Recur = Struct.new(:args)
+
+class RecurContext < ProcContext
+  def recur(*args)
+    Recur.new(args)
+  end
+
+  def __call__(*args)
+    result = super
+    while result.is_a?(Recur)
+      result = __call_block__(*result.args)
+    end
+    result
+  end
+end
+</script>
+
+<footer>Tail Recursion</footer>
+</section>
+
+<section>
+<script lang="ruby">
+def fn(&block)
+  # to_proc already does proper currying
+  RecurContext.new(block).to_proc
+end
+
+factorial = fn{ |n, result = 1|
+  return result if n <= 1
+  recur(n-1,  n * result)
+}
+
+factorial[10000] # => 1*2*...*10000
+</script>
+
+<footer>Profit!</footer>
+</section>
+
+<section>
+<script lang="clojure">
+#(+ % 10)
+</script>
+
+<script lang="ruby">
+fn{|a| a + 10}
+</script>
+
+<script lang="ruby">
+# How about this?
+f{a + 10}
+</script>
+<footer>Anonymous function arguments</footer>
+</section>
+
+<section>
+<script lang="ruby">
+a = 1
+foo = ->{ a + 1 }
+
+foo[] # => 2
+
+# eval in Ruby < 2.0
+foo.binding.local_variable_set(:a, 10)
+
+foo[] # => 11
+</script>
+<footer>Binding</footer>
+</section>
+
+<section class="smaller">
+<script lang="ruby">
+def f(&block)
+  ->(*args) {
+    block.binding.local_variable_set(:a, args[0])
+    block[]
+  }
+end
+
+foo = f{a+10}
+
+foo[1] # NameError!
+</script>
+<footer>First attempt...</footer>
+</section>
+
+<section>
+<script lang="ruby">
+class ImplicitArgsContext < ProcContext
+  def __call__(*args)
+    @__args__ == args
+    super()
+  end
+
+  ('a'..'z').each_with_index do |name, idx|
+    define_method name do
+      @__args__[idx]
+    end
+  end
+end
+</script>
+<footer>ProcContext strikes back!</footer>
+</section>
+
+<section>
+<script lang="ruby">
+def f(&block)
+  ImplicitArgsContext.new(block).to_proc
+end
+
+add = f{a+b}
+
+add[1, 2] # => 4
+</script>
+<footer>Implicit function arguments:)</footer>
+</section>
+
+<section>
+<script lang="ruby">
+add = f{a+b+c}
+
+add[1] # TypeError!
+</script>
+<footer>No currying for you!</footer>
+</section>
+
+<section>
+<script lang="ruby">
+class ProcContext
+  def to_proc
+    proc = method(:__call__).to_proc
+    proc.curry(__arg_count__)
+  end
+
+  def __arg_count__
+    arity = method(:__call_block__).arity
+    return arity if arity >= 0
+    -(arity + 1)
+  end
+end
+</script>
+<footer>The problem</footer>
+</section>
+
+<section>
+<script lang="ruby">
+foo = ->{a+b+c}
+puts RubyVM::InstructionSequence.disasm(foo)
+</script>
+
+<div class="very-small">
+<script lang="ruby">
+== disasm: <RubyVM::InstructionSequence:block in <main>@/tmp/test2.rb>==
+== catch table
+| catch type: redo   st: 0000 ed: 0017 sp: 0000 cont: 0000
+| catch type: next   st: 0000 ed: 0017 sp: 0000 cont: 0017
+|------------------------------------------------------------------------
+0000 trace            256                                             (   1)
+0002 trace            1
+0004 putself
+0005 opt_send_simple  <callinfo!mid:a, argc:0, FCALL|VCALL|ARGS_SKIP>
+0007 putself
+0008 opt_send_simple  <callinfo!mid:b, argc:0, FCALL|VCALL|ARGS_SKIP>
+0010 opt_plus         <callinfo!mid:+, argc:1, ARGS_SKIP>
+0012 putself
+0013 opt_send_simple  <callinfo!mid:c, argc:0, FCALL|VCALL|ARGS_SKIP>
+0015 opt_plus         <callinfo!mid:+, argc:1, ARGS_SKIP>
+0017 trace            512
+0019 leave
+</script>
+</div>
+<footer>Why? Because I can.</footer>
+</section>
+
+<section>
+<script lang="ruby">
+add = f{a+b+c}
+
+add[1][2][3] # => 6
+add[1, 2][3] # => 6
+add[1, 2, 3] # => 6
+</script>
+<footer>Implicit arguments with currying</footer>
+</section>
+
+<section>
+<ul class="bullets smaller">
+  <li>How to transparently proxy a Proc?</li>
+  <li>How basic is BasicObject?</li>
+  <li>The fun with Binding</li>
+  <li>How many arguments is arity=-4?</li>
+  <li>Disassembling for fun and profit</li>
+</ul>
+<footer>Summing up</footer>
+</section>
+
+<section>
+<h1>Me</h1>
+</section>
+
+<section>
+<h1>@apohorecki<br>github.com/psyho</h1>
+</section>
+
+<section>
+<h1><a href="http://gunpowderlabs.com">GunpowderLabs</a></h1>
+<footer>Senior Developer @ GunpowderLabs</footer>
+</section>
+
+<section>
+<h1>Questions?</h1>
+</section>
+
+<section>
+<h1>Thanks</h1>
+</section>
+
+<style type="text/css">
+  em {
+    color: #08c;
+    font-style: normal;
+  }
+
+  .lift {
+    margin-top: 120px;
+  }
+
+  .centered-image {
+    text-align: center;
+    background-color: black;
+  }
+
+  .centered-image img {
+    margin: auto;
+  }
+
+  .bullets.smaller {
+    font-size: 1.4em;
+  }
+
+  .smaller .highlight {
+    font-size: 60%;
+  }
+
+  .very-small .highlight {
+    font-size: 40%;
+  }
+
+  ul.bullets {
+    color: #08c;
+    font-size: 2em;
+    text-align: right;
+    list-style-type: none;
+    margin: 50px 100px;
+  }
+</style>
+
