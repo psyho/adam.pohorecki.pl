@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | Adam Pohorecki]]></title>
   <link href="http://adam.pohorecki.pl/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://adam.pohorecki.pl/"/>
-  <updated>2014-04-14T22:35:21+02:00</updated>
+  <updated>2014-04-14T22:54:13+02:00</updated>
   <id>http://adam.pohorecki.pl/</id>
   <author>
     <name><![CDATA[Adam Pohorecki]]></name>
@@ -166,10 +166,11 @@ This is a huge win, because you don't want to worry about loosing your data.</p>
 <p>Another great thing about Octopress is Solarized theme for syntax highlighting.
 Check it out:</p>
 
-<pre><code class="ruby Sample of syntax highliting">def hello_world
+<p><code>ruby Sample of syntax highliting
+def hello_world
   puts "Octopress is awesome!"
 end
-</code></pre>
+</code></p>
 
 <h2>The bad</h2>
 
