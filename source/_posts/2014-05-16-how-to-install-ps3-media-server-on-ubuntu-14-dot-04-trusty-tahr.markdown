@@ -6,7 +6,7 @@ comments: true
 categories: [Ubuntu, How-To]
 ---
 
-At the moment I'm writing this, the official Ubuntu guide to installing PS3 Media Server suggests doing the following:
+At the moment I'm writing this, the [official Ubuntu guide][guide] to installing PS3 Media Server suggests doing the following:
 
 ```bash Installation Procedure
 sudo add-apt-repository ppa:happy-neko/ps3mediaserver
@@ -24,3 +24,5 @@ sudo apt-get install ps3mediaserver
 ```
 
 Et voilà! PS3 Media Server is installed.
+
+[guide]: https://help.ubuntu.com/community/Ps3MediaServer
