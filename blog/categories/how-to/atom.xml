@@ -4,7 +4,7 @@
   <title><![CDATA[Category: How-To | Adam Pohorecki]]></title>
   <link href="http://adam.pohorecki.pl/blog/categories/how-to/atom.xml" rel="self"/>
   <link href="http://adam.pohorecki.pl/"/>
-  <updated>2014-05-16T15:58:57+02:00</updated>
+  <updated>2014-05-16T16:00:16+02:00</updated>
   <id>http://adam.pohorecki.pl/</id>
   <author>
     <name><![CDATA[Adam Pohorecki]]></name>
@@ -18,7 +18,7 @@
     <link href="http://adam.pohorecki.pl/blog/2014/05/16/how-to-install-ps3-media-server-on-ubuntu-14-dot-04-trusty-tahr/"/>
     <updated>2014-05-16T15:06:00+02:00</updated>
     <id>http://adam.pohorecki.pl/blog/2014/05/16/how-to-install-ps3-media-server-on-ubuntu-14-dot-04-trusty-tahr</id>
-    <content type="html"><![CDATA[<p>At the moment I'm writing this, the official Ubuntu guide to installing PS3 Media Server suggests doing the following:</p>
+    <content type="html"><![CDATA[<p>At the moment I'm writing this, the <a href="https://help.ubuntu.com/community/Ps3MediaServer">official Ubuntu guide</a> to installing PS3 Media Server suggests doing the following:</p>
 
 <p><code>bash Installation Procedure
 sudo add-apt-repository ppa:happy-neko/ps3mediaserver
