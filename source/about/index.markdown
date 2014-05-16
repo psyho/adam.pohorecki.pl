@@ -7,12 +7,12 @@ footer: true
 ---
 
 Adam Pohorecki is a Ruby, Clojure and JavaScript developer based in Kraków, Poland.
-He works (and is available for hire;) as a software consultant with a [bunch][hakon] of [other][rolf] [very][rudy] [talented][sickill] [developers][solnic] at [Powow!][powow].
+He works (and is available for hire;) as a software consultant at [GunpowderLabs][gunpowder].
 
 He is an aspiring Software Craftsman and the leader of the [local Software Craftsmanship group][sckrk].
 He also organizes [NoSQL Summer][nosql-summer] meetings in summer and facilitates [open spaces][open-spaces] and [code retreats][code-retreat].
 
-Adam is an avid TDD practitioner and evangelist.
+Adam is an avid TDD practitioner and enthusiast.
 He is interested in new technologies, lean and agile software development processes and machine learning.
 
 Oh, and he apparently enjoys writing about himself in the third person :)
@@ -27,13 +27,7 @@ Some links
 * [Google+][googlep]
 * [SCKRK][sckrk]
 
-[powow]: http://www.powow.no/
-
-[hakon]: https://github.com/Hakon
-[rolf]: https://github.com/rolfb
-[rudy]: https://github.com/wrozka
-[sickill]: https://github.com/sickill
-[solnic]: https://github.com/solnic
+[gunpowder]: http://www.gunpowderlabs.com
 
 [sckrk]: http://sckrk.com
 [llp]: http://lunarlogicpolska.com
