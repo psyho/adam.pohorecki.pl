@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: How-To | Adam Pohorecki]]></title>
+  <link href="http://adam.pohorecki.pl/blog/categories/how-to/atom.xml" rel="self"/>
+  <link href="http://adam.pohorecki.pl/"/>
+  <updated>2014-05-16T15:38:05+02:00</updated>
+  <id>http://adam.pohorecki.pl/</id>
+  <author>
+    <name><![CDATA[Adam Pohorecki]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to Install PS3 Media Server on Ubuntu 14.04 Trusty Tahr]]></title>
+    <link href="http://adam.pohorecki.pl/blog/2014/05/16/how-to-install-ps3-media-server-on-ubuntu-14-dot-04-trusty-tahr/"/>
+    <updated>2014-05-16T15:06:00+02:00</updated>
+    <id>http://adam.pohorecki.pl/blog/2014/05/16/how-to-install-ps3-media-server-on-ubuntu-14-dot-04-trusty-tahr</id>
+    <content type="html"><![CDATA[<p>At the moment I'm writing this, the official Ubuntu guide to installing PS3 Media Server suggests doing the following:</p>
+
+<p><code>bash Installation Procedure
+sudo add-apt-repository ppa:happy-neko/ps3mediaserver
+sudo apt-get update
+sudo apt-get install ps3mediaserver
+</code></p>
+
+<p>Unfortunately, the second step of this process fails, because the happy-neko/ps3mediaserver repository does not have the packages for trusty yet. Luckily, we can still use the packages for raring:</p>
+
+<p><code>bash Installation Procedure, Updated
+sudo add-apt-repository ppa:happy-neko/ps3mediaserver
+sudo sed -i s/trusty/raring/ /etc/apt/sources.list.d/happy-neko-ps3mediaserver-trusty.list
+sudo apt-get update
+sudo apt-get install ps3mediaserver
+</code></p>
+
+<p>Et voilà! PS3 Media Server is installed.</p>
+]]></content>
+  </entry>
+  
+</feed>

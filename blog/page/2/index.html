@@ -9,7 +9,7 @@
   <meta name="author" content="Adam Pohorecki">
 
   
-  <meta name="description" content="On the 20th of May this year I gave a talk about Bogus on DRUG. About a week earlier I gave a longer talk with the same title on KRUG, but even &hellip;">
+  <meta name="description" content="Along with the presentation about Bogus on DRUG I also gave a lightning talk about the way I work every day with Rudy. Most people I know don&#8217;t &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,83 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/27/ppppp-talk-at-drug/">PPPPP talk at DRUG</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-27T20:10:00+02:00" pubdate data-updated="true">Jun 27<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/27/ppppp-talk-at-drug/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Along with the <a href="/blog/2013/06/27/bogus-talk-at-drug/">presentation about Bogus on DRUG</a> I also gave a lightning talk about the way I work every day with <a href="https://github.com/wrozka">Rudy</a>.</p>
+
+<p>Most people I know don&#8217;t pair program at all or only do it occasionally and for a couple of hours or days at a time. We spend pretty much 100% of our time at work pair-programming. Heck, we actually have only one computer between us, so we can&#8217;t do it any other way, even if we wanted to.</p>
+
+<p>While pair-programming itself is not really that hard, maintaining that way of working over an extended period of time is not trivial. We use a certain mix of techniques that allows us to do it and we call it PPPPP, which stands for Ping-Pong Pomodoro Pair-Programming.</p>
+
+<h2>Pair Programming</h2>
+
+<p>Many Extreme Programming techniques have managed to achieve mass adoption, but pair programming is not one of them. Most programmers I know use TDD, do continuous integration and work in iterations, but pair programming somehow does not have the same appeal.</p>
+
+<p>Pair programming promotes shared code ownership, improves code quality and helps in knowledge sharing within a team. It gives you a line-by-line code review as you work, which lets you avoid making mistakes instead of correcting them after the fact. It even simplifies project management, because a team that does pair programming has half as many tasks in progress as a team that doesn&#8217;t.</p>
+
+<p>Beneficial as it is, pair programming is also hard work, in a quite literal sense. Things that you take for granted, like taking breaks when you feel like it, checking email and RSS, spending an hour reading documentation, etc. are all gone. Pair programming forces you to concentrate on the task at hand pretty much the whole day, and that can be very tiring.</p>
+
+<h2>Pomodoro</h2>
+
+<p>Pomodoro is a technique where you concentrate for 25 minutes on a single task and nothing else (no checking email, IM, etc.). After every such iteration you get a 5 minute break. After every four iterations you get a longer break. You start each day by planning and estimating the tasks for the day and end with a short retrospective.</p>
+
+<p>We use Pomodoro because of the rhythm it introduces. We no longer have to ask each other to stop working when we feel tired, because we know that in a couple of minutes we will have a few minutes to rest. It helps us maintain concentration during the day, because we only have to keep it for less than half an hour at a time. In short, it keeps us from getting burned out.</p>
+
+<h2>Ping-Pong</h2>
+
+<p>Once you start pair programming you will observe that once you spend more than a couple of minutes away from keyboard, you concentration flutters. To combat that we use a pairing technique called Ping-Pong.</p>
+
+<p>When you write your code using TDD, you go through a well-known red-green-refactor cycle. In Ping-Pong, person A writes the failing test, then person B makes it pass and finally person A performs refactoring. Next cycle starts with person B, and so on and so forth.</p>
+
+<p>This technique helps us maintain concentration and improves shared code ownership, because there&#8217;s never any code that &#8220;you wrote and I just watched&#8221;.</p>
+
+<h2>Slides</h2>
+
+<p>I apologize for the quality of the slides, but they were supposed to be more of a discussion starter than means of conveying information. Hopefully the ones from a talk I&#8217;m giving this month at KRUG will be more useful.</p>
+
+<p><strong>EDIT:</strong></p>
+
+<p>The <a href="/blog/2013/07/15/ppppp-talk-at-krug/">slides and video from my PPPPP presentation at KRUG</a> are already available. Check them out if you are interested in learning more about this topic.</p>
+
+<iframe class="slides" src="/slides/embedder.html#/slides/ppppp-drug/" frameborder="0"></iframe>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -186,58 +263,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/27/angularjs-talk-at-meet-dot-js/">AngularJS talk at meet.js</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-27T17:25:00+02:00" pubdate data-updated="true">Jun 27<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/06/27/angularjs-talk-at-meet-dot-js/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>On the 20th of April this year I gave a talk at <a href="https://www.facebook.com/meetjspl">meet.js</a> about <a href="http://angularjs.org/">AngularJS</a>. It was a much shorter (30min vs 1h) version of the one I gave at the <a href="/blog/2013/06/27/angularjs-talk-from-33rd-degree-conference/">33rd Degree Conference a month before</a>.</p>
-
-<p>Since it was a JavaScript meetup, most of the listeners were already familiar with JS MVC frameworks, and a fair percentage of them was already familiar with AngularJS. That&#8217;s quite impressive if you consider there were well more than a hundred developers there.</p>
-
-<p>Not having to explain that SPAs are now a viable choice for writing web applications saved me some precious minutes and there was a lot more audience participation than I usually encounter - a good sign that the people could relate to what I talked about.</p>
-
-<p>If things progress the way they do with AngularJS adoption, maybe the next time I talk about it I will be able to talk about advanced application patterns in AngularJS instead of introducing it for the nth time:) Fingers crossed.</p>
-
-<h2>Slides</h2>
-
-<iframe class="slides" src="/slides/embedder.html#/slides/angular-meetjs/" frameborder="0">
-</iframe>
-
-
-<p>The presentations on meet.js were not recorded, so there&#8217;s no video.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -267,6 +292,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/05/16/how-to-install-ps3-media-server-on-ubuntu-14-dot-04-trusty-tahr/">How to Install PS3 Media Server on Ubuntu 14.04 Trusty Tahr</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/10/18/more-ruby-than-ruby-talk-at-krug/">More Ruby than Ruby talk at KRUG</a>
       </li>
     
@@ -280,10 +309,6 @@
     
       <li class="post">
         <a href="/blog/2013/06/27/bogus-talk-at-drug/">Bogus talk at DRUG</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/27/bogus-talk-at-krug/">Bogus talk at KRUG</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Adam Pohorecki]]></title>
   <link href="http://adam.pohorecki.pl/atom.xml" rel="self"/>
   <link href="http://adam.pohorecki.pl/"/>
-  <updated>2014-04-14T22:54:13+02:00</updated>
+  <updated>2014-05-16T15:38:05+02:00</updated>
   <id>http://adam.pohorecki.pl/</id>
   <author>
     <name><![CDATA[Adam Pohorecki]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to Install PS3 Media Server on Ubuntu 14.04 Trusty Tahr]]></title>
+    <link href="http://adam.pohorecki.pl/blog/2014/05/16/how-to-install-ps3-media-server-on-ubuntu-14-dot-04-trusty-tahr/"/>
+    <updated>2014-05-16T15:06:00+02:00</updated>
+    <id>http://adam.pohorecki.pl/blog/2014/05/16/how-to-install-ps3-media-server-on-ubuntu-14-dot-04-trusty-tahr</id>
+    <content type="html"><![CDATA[<p>At the moment I&#8217;m writing this, the official Ubuntu guide to installing PS3 Media Server suggests doing the following:</p>
+
+<figure class='code'><figcaption><span>Installation Procedure</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo add-apt-repository ppa:happy-neko/ps3mediaserver
+</span><span class='line'>sudo apt-get update
+</span><span class='line'>sudo apt-get install ps3mediaserver
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Unfortunately, the second step of this process fails, because the happy-neko/ps3mediaserver repository does not have the packages for trusty yet. Luckily, we can still use the packages for raring:</p>
+
+<figure class='code'><figcaption><span>Installation Procedure, Updated</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo add-apt-repository ppa:happy-neko/ps3mediaserver
+</span><span class='line'>sudo sed -i s/trusty/raring/ /etc/apt/sources.list.d/happy-neko-ps3mediaserver-trusty.list
+</span><span class='line'>sudo apt-get update
+</span><span class='line'>sudo apt-get install ps3mediaserver
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Et voilà! PS3 Media Server is installed.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[More Ruby than Ruby talk at KRUG]]></title>
