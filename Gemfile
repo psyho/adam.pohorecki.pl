@@ -5,7 +5,7 @@ group :development do
   gem 'rack'
   gem 'jekyll'
   gem 'rdiscount'
-  gem 'pygments.rb'
+  gem 'pygments.rb', '~> 0.3.2'
   gem 'RedCloth'
   gem 'haml', '>= 3.1'
   gem 'compass', '>= 0.11'
