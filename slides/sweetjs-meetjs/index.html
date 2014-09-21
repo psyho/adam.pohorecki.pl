@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+
+<title>Boilerplate-B-Gone: DIY Syntactic Sugar with Sweet.js</title>
+
+<section>
+  <h1 class="higher">Boilerplate - B - Gone:<br> DIY Syntactic Sugar with <em>Sweet.js</em>
+</h1>
+  <footer>Adam Pohorecki - 27.09.2014 @ <a href="http://summit.meetjs.pl/2014/">Meet.js Summit</a></footer>
+</section>
+
+<section>
+<h1 class="higher">Agenda</h1>
+<ul>
+  <li>What are macros?</li>
+  <li>Why macros?</li>
+  <li>Sweet.js</li>
+  <li>Practical example</li>
+</ul>
+</section>
+
+<section>
+<h1>Macros</h1>
+</section>
+
+<section>
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td>
+<td class="code"><pre><code class="c"><span class="line"><span class="cp">#define ever (;;)</span></span></code></pre></td>
+</tr></table></div>
+
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td>
+<td class="code"><pre><code class="c"><span class="line"><span class="k">for</span> <span class="n">ever</span> <span class="p">{</span>
+</span><span class="line">   <span class="p">...</span>
+</span><span class="line"><span class="p">}</span></span></code></pre></td>
+</tr></table></div>
+
+<footer>C Preprocessor Macros</footer>
+</section>
+
+<section>
+  <h1>C Macros: Glorified <em>Search &amp; Replace</em>
+</h1>
+</section>
+
+<section>
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td>
+<td class="code"><pre><code class="clojure"><span class="line"><span class="p">(</span><span class="kd">defmacro </span><span class="nv">unless</span> <span class="p">[</span><span class="nb">cond </span><span class="o">&amp;</span> <span class="nv">body</span><span class="p">]</span>
+</span><span class="line">  <span class="o">`</span><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">not </span><span class="o">~</span><span class="nv">cond</span><span class="p">)</span> <span class="o">~@</span><span class="nv">body</span><span class="p">))</span></span></code></pre></td>
+</tr></table></div>
+
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td>
+<td class="code"><pre><code class="clojure"><span class="line"><span class="p">(</span><span class="nf">unless</span> <span class="p">(</span><span class="nf">admin?</span> <span class="nv">user</span><span class="p">)</span>
+</span><span class="line">  <span class="p">(</span><span class="nb">println </span><span class="s">"Can't touch this"</span><span class="p">))</span></span></code></pre></td>
+</tr></table></div>
+
+<footer>LISP (Clojure) Macros</footer>
+</section>
+
+<section>
+  <h1>In LISP <em>code is data</em>
+</h1>
+</section>
+
+<section>
+  <h1 class="higher"><em>Macro</em></h1>
+  <ul>
+    <li>Function</li>
+    <li>Accepts code as arguments</li>
+    <li>Returns transformed code</li>
+  </ul>
+</section>
+
+<section>
+  <h1>LISPs have <em>very little</em> syntax</h1>
+</section>
+
+<section>
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td>
+<td class="code"><pre><code class="clojure"><span class="line"><span class="c1">; define a function</span>
+</span><span class="line"><span class="p">(</span><span class="kd">defn </span><span class="nv">add</span> <span class="p">[</span><span class="nv">x</span> <span class="nv">y</span><span class="p">]</span> <span class="p">(</span><span class="nb">+ </span><span class="nv">x</span> <span class="nv">y</span><span class="p">))</span></span></code></pre></td>
+</tr></table></div>
+
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td>
+<td class="code"><pre><code class="clojure"><span class="line"><span class="c1">; call a function</span>
+</span><span class="line"><span class="p">(</span><span class="nf">add</span> <span class="mi">1</span> <span class="mi">2</span><span class="p">)</span></span></code></pre></td>
+</tr></table></div>
+
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td>
+<td class="code"><pre><code class="clojure"><span class="line"><span class="c1">; loop over an array</span>
+</span><span class="line"><span class="p">(</span><span class="nb">for </span><span class="p">[</span><span class="nv">x</span> <span class="nv">arr</span><span class="p">]</span> <span class="p">(</span><span class="nb">println </span><span class="nv">x</span><span class="p">))</span></span></code></pre></td>
+</tr></table></div>
+
+<footer>Notice anything <em>similar</em>?</footer>
+</section>
+
+<section>
+  <h1>JavaScript has<br> a lot <em>more syntax</em>
+</h1>
+</section>
+
+<section>
+  <h1>Macros in JavaScript use <em>pattern matching</em>
+</h1>
+</section>
+
+<section>
+  <h1>Sweet.js "Hello World"</h1>
+</section>
+
+<section>
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="nx">macro</span> <span class="nx">def</span> <span class="p">{</span>
+</span><span class="line">  <span class="nx">rule</span> <span class="p">{</span> <span class="nx">$name</span><span class="o">:</span><span class="nx">ident</span> <span class="p">}</span>
+</span><span class="line">    <span class="o">=&gt;</span> <span class="p">{</span> <span class="kd">var</span> <span class="nx">$name</span> <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">  <span class="nx">rule</span> <span class="p">{</span> <span class="nx">$name</span><span class="o">:</span><span class="nx">ident</span> <span class="o">=</span> <span class="nx">$value</span><span class="o">:</span><span class="nx">expr</span> <span class="p">}</span>
+</span><span class="line">    <span class="o">=&gt;</span> <span class="p">{</span> <span class="kd">var</span> <span class="nx">$name</span> <span class="o">=</span> <span class="nx">$value</span> <span class="p">}</span>
+</span><span class="line"><span class="p">}</span></span></code></pre></td>
+</tr></table></div>
+
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="nx">def</span> <span class="nx">x</span><span class="p">;</span>
+</span><span class="line"><span class="nx">def</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span><span class="line"><span class="kd">var</span> <span class="nx">def</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span></span></code></pre></td>
+</tr></table></div>
+
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="kd">var</span> <span class="nx">x</span><span class="p">;</span>
+</span><span class="line"><span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span><span class="line"><span class="kd">var</span> <span class="nx">def</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span></span></code></pre></td>
+</tr></table></div>
+</section>
+
+<section>
+  <h1>Did we just <em>extend</em> the JavaScript language?</h1>
+</section>
+
+<section>
+  <h1>Boilerplate</h1>
+</section>
+
+<section>
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="c1">// Plain JavaScript</span>
+</span><span class="line">
+</span><span class="line"><span class="kd">var</span> <span class="nx">div</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">DOM</span><span class="p">.</span><span class="nx">div</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span>
+</span><span class="line">            <span class="nx">React</span><span class="p">.</span><span class="nx">DOM</span><span class="p">.</span><span class="nx">h1</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">header</span><span class="p">));</span></span></code></pre></td>
+</tr></table></div>
+
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="c1">// JSX</span>
+</span><span class="line">
+</span><span class="line"><span class="kd">var</span> <span class="nx">div</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+</span><span class="line">  <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="p">{</span> <span class="nx">header</span> <span class="p">}</span><span class="o">&lt;</span><span class="err">/h1&gt;</span>
+</span><span class="line"><span class="o">&lt;</span><span class="err">/div&gt;;</span></span></code></pre></td>
+</tr></table></div>
+<footer>React.js boilerplate</footer>
+</section>
+
+<section>
+  <h1>Can I use it with ECMAScript 6?</h1>
+</section>
+
+<section>
+  <h1 class="higher">Yes, but the ES6 transformations come <em>bundled with JSX</em>
+</h1>
+</section>
+
+<section>
+  <h1 class="higher">Sweet.js lets you <em>mix &amp; match</em> macros from libraries.</h1>
+</section>
+
+<section>
+  <h1>There's more...</h1>
+</section>
+
+<section>
+  <h1>Macro <em>Hygiene</em>
+</h1>
+</section>
+
+<section>
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="nx">macro</span> <span class="nx">swap</span> <span class="p">{</span>
+</span><span class="line">  <span class="nx">rule</span> <span class="p">{</span>
+</span><span class="line">    <span class="p">(</span><span class="nx">$x</span><span class="o">:</span><span class="nx">ident</span><span class="p">,</span> <span class="nx">$y</span><span class="o">:</span><span class="nx">ident</span><span class="p">)</span>
+</span><span class="line">  <span class="p">}</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class="line">    <span class="kd">var</span> <span class="nx">tmp</span> <span class="o">=</span> <span class="nx">$x</span><span class="p">;</span>
+</span><span class="line">    <span class="nx">$x</span> <span class="o">=</span> <span class="nx">$y</span><span class="p">;</span>
+</span><span class="line">    <span class="nx">$y</span> <span class="o">=</span> <span class="nx">tmp</span><span class="p">;</span>
+</span><span class="line">  <span class="p">}</span>
+</span><span class="line"><span class="p">}</span></span></code></pre></td>
+</tr></table></div>
+
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span><span class="line"><span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+</span><span class="line"><span class="nx">swap</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">);</span></span></code></pre></td>
+</tr></table></div>
+
+<footer>Simple swap macro</footer>
+</section>
+
+<section>
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span><span class="line"><span class="kd">var</span> <span class="nx">tmp</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+</span><span class="line"><span class="nx">swap</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">tmp</span><span class="p">);</span></span></code></pre></td>
+</tr></table></div>
+
+<footer>What does this convert to?</footer>
+</section>
+
+<section>
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span><span class="line"><span class="kd">var</span> <span class="nx">tmp</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+</span><span class="line"><span class="nx">swap</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">tmp</span><span class="p">);</span></span></code></pre></td>
+</tr></table></div>
+
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="kd">var</span> <span class="nx">a$634</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span><span class="line"><span class="kd">var</span> <span class="nx">tmp$635</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+</span><span class="line"><span class="kd">var</span> <span class="nx">tmp$637</span> <span class="o">=</span> <span class="nx">a$634</span><span class="p">;</span>
+</span><span class="line"><span class="nx">a$634</span> <span class="o">=</span> <span class="nx">tmp$635</span><span class="p">;</span>
+</span><span class="line"><span class="nx">tmp$635</span> <span class="o">=</span> <span class="nx">tmp$637</span><span class="p">;</span></span></code></pre></td>
+</tr></table></div>
+
+<footer><em>Hygienic</em> macros at work</footer>
+</section>
+
+<section>
+  <h1>There's even more...</h1>
+</section>
+
+<section>
+<h1 class="higher">Infix macros</h1>
+
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="k">return</span> <span class="nx">z</span> <span class="nx">unless</span> <span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">y</span><span class="p">;</span></span></code></pre></td>
+</tr></table></div>
+</section>
+
+<section>
+<h1 class="higher">Operators</h1>
+
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="mi">2</span> <span class="o">^^</span> <span class="mi">3</span> <span class="o">===</span> <span class="mi">8</span><span class="p">;</span></span></code></pre></td>
+</tr></table></div>
+</section>
+
+<section>
+  <h1 class="higher">And much more:</h1>
+<ul>
+  <li>Reader macros (readtables)</li>
+  <li>Pattern classes</li>
+  <li>Pretty errors</li>
+  <li>Source maps</li>
+</ul>
+</section>
+
+<section>
+  <h1>Real example</h1>
+</section>
+
+<section>
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="nx">UsersCtrl</span><span class="p">.</span><span class="nx">$inject</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'$scope'</span><span class="p">,</span> <span class="s1">'$http'</span><span class="p">];</span>
+</span><span class="line"><span class="kd">function</span> <span class="nx">UsersCtrl</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">$http</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line">
+</span><span class="line"><span class="nx">module</span><span class="p">.</span><span class="nx">factory</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'$http'</span><span class="p">,</span>
+</span><span class="line">                        <span class="kd">function</span><span class="p">(</span><span class="nx">$http</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line"><span class="p">}]);</span></span></code></pre></td>
+</tr></table></div>
+<footer>Typical boilerplate in <em>AngularJS</em> apps</footer>
+</section>
+
+<section class="smaller">
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="c1">// Before</span>
+</span><span class="line"><span class="nx">UsersCtrl</span><span class="p">.</span><span class="nx">$inject</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'$scope'</span><span class="p">,</span> <span class="s1">'$http'</span><span class="p">];</span>
+</span><span class="line"><span class="kd">function</span> <span class="nx">UsersCtrl</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">$http</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line">
+</span><span class="line"><span class="nx">module</span><span class="p">.</span><span class="nx">factory</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'$http'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$http</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line"><span class="p">}]);</span></span></code></pre></td>
+</tr></table></div>
+
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="c1">// After</span>
+</span><span class="line"><span class="nx">$function</span> <span class="nx">UsersCtrl</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">$http</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line">
+</span><span class="line"><span class="nx">module</span><span class="p">.</span><span class="nx">factory</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">,</span> <span class="nx">$function</span><span class="p">(</span><span class="nx">$http</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line"><span class="p">});</span></span></code></pre></td>
+</tr></table></div>
+<footer>My solution</footer>
+</section>
+
+<section>
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="nx">macro</span> <span class="nx">$function</span> <span class="p">{</span>
+</span><span class="line">  <span class="nx">rule</span> <span class="p">{</span>
+</span><span class="line">    <span class="nx">$name</span><span class="o">:</span><span class="nx">ident</span><span class="p">(</span><span class="nx">$arg</span> <span class="p">(,)</span> <span class="p">...)</span> <span class="p">{</span>
+</span><span class="line">      <span class="nx">$body</span> <span class="p">...</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">  <span class="p">}</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class="line">    <span class="c1">// ...</span>
+</span><span class="line">  <span class="p">}</span>
+</span><span class="line"><span class="p">}</span></span></code></pre></td>
+</tr></table></div>
+<footer>The pattern</footer>
+</section>
+
+<section>
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="nx">macro</span> <span class="nx">$function</span> <span class="p">{</span>
+</span><span class="line">  <span class="nx">rule</span> <span class="p">{</span>
+</span><span class="line">    <span class="nx">$name</span><span class="o">:</span><span class="nx">ident</span><span class="p">(</span><span class="nx">$arg</span> <span class="p">(,)</span> <span class="p">...)</span> <span class="p">{</span>
+</span><span class="line">      <span class="nx">$body</span> <span class="p">...</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">  <span class="p">}</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class="line">    <span class="kd">function</span> <span class="nx">$name</span><span class="p">(</span><span class="nx">$arg</span> <span class="p">(,)</span> <span class="p">...)</span> <span class="p">{</span>
+</span><span class="line">      <span class="nx">$body</span> <span class="p">...</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="nx">$name</span><span class="p">.</span><span class="nx">$inject</span> <span class="o">=</span> <span class="nx">to_str</span><span class="p">(</span><span class="nx">$arg</span> <span class="p">...);</span>
+</span><span class="line">  <span class="p">}</span>
+</span><span class="line"><span class="p">}</span></span></code></pre></td>
+</tr></table></div>
+<footer>The implementation</footer>
+</section>
+
+<section class="smaller">
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="nx">macro</span> <span class="nx">to_str</span> <span class="p">{</span>
+</span><span class="line">  <span class="k">case</span> <span class="p">{</span>
+</span><span class="line">    <span class="nx">_</span> <span class="p">(</span><span class="nx">$token</span> <span class="p">...)</span>
+</span><span class="line">  <span class="p">}</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class="line">    <span class="nx">letstx</span> <span class="nx">$names</span> <span class="p">...</span> <span class="o">=</span> <span class="err">#</span><span class="p">{</span><span class="nx">$token</span> <span class="p">...}.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">      <span class="k">return</span> <span class="nx">makeValue</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span> <span class="nx">t</span><span class="p">);</span>
+</span><span class="line">    <span class="p">});</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">return</span> <span class="err">#</span><span class="p">{[</span><span class="nx">$names</span> <span class="p">(,)</span> <span class="p">...]};</span>
+</span><span class="line">  <span class="p">}</span>
+</span><span class="line"><span class="p">}</span></span></code></pre></td>
+</tr></table></div>
+<footer>The implementation contd.</footer>
+</section>
+
+<section class="smaller">
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="nx">macro</span> <span class="nx">$function</span> <span class="p">{</span>
+</span><span class="line">  <span class="c1">// ...</span>
+</span><span class="line">
+</span><span class="line">  <span class="nx">rule</span> <span class="p">{</span>
+</span><span class="line">    <span class="p">(</span><span class="nx">$arg</span> <span class="p">(,)</span> <span class="p">...)</span> <span class="p">{</span> <span class="nx">$body</span> <span class="p">...</span>  <span class="p">}</span>
+</span><span class="line">  <span class="p">}</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class="line">    <span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">$arg</span> <span class="p">(,)</span> <span class="p">...)</span> <span class="p">{</span>
+</span><span class="line">      <span class="nx">$body</span> <span class="p">...</span>
+</span><span class="line">    <span class="p">}).</span><span class="nx">add$inject</span><span class="p">(</span><span class="nx">to_str</span><span class="p">(</span><span class="nx">$arg</span><span class="p">))</span>
+</span><span class="line">  <span class="p">}</span>
+</span><span class="line"><span class="p">}</span></span></code></pre></td>
+</tr></table></div>
+
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">add$inject</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$inject</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">  <span class="k">this</span><span class="p">.</span><span class="nx">$inject</span> <span class="o">=</span> <span class="nx">$inject</span><span class="p">;</span>
+</span><span class="line">  <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+</span><span class="line"><span class="p">};</span></span></code></pre></td>
+</tr></table></div>
+<footer>The inline $function</footer>
+</section>
+
+<section>
+  <h1 class="higher">Summing up</h1>
+  <ul>
+    <li>Macros <em>compose</em> better than compilers</li>
+    <li>Macros <em>understand JS</em> syntax</li>
+    <li>Many macros <em>already written</em>
+</li>
+  </ul>
+</section>
+
+<section>
+<h1>About me</h1>
+</section>
+
+<section>
+<h1>@apohorecki<br>github.com/psyho</h1>
+</section>
+
+<section>
+<figure>
+<img src="gunpowderlabs.png">
+</figure>
+<footer>Senior Developer at <a href="http://www.gunpowderlabs.com">GunpowderLabs</a></footer>
+</section>
+
+<section>
+<figure>
+<img src="sckrk-large.png" alt="[sckrk]">
+</figure>
+</section>
+
+<section>
+<figure>
+<img src="hypnotoad.gif">
+<figcaption>you shall ask<br>questions now</figcaption>
+</figure>
+</section>
+
+<section>
+<h1>Thanks!</h1>
+</section>
+
+<style type="text/css">
+  div.highlight {
+    margin-bottom: 50px;
+    margin-top: 50px;
+  }
+
+  .higher {
+    margin-top: 120px;
+  }
+
+  h1.octocat {
+    height: 200px;
+    background: url("octocat.jpg") top left no-repeat;
+    padding-left: 100px;
+    padding-top: 25px;
+    margin-left: 40px;
+  }
+
+  em {
+    color: #08c;
+    font-style: normal;
+  }
+
+  .inverted em {
+    color: #c82829;
+  }
+
+  .smaller .highlight {
+    font-size: 60%;
+  }
+
+  .tiny .highlight {
+    font-size: 40%;
+  }
+
+  .slightly-smaller .highlight {
+    font-size: 70%;
+  }
+
+  .side-by-side td {
+    vertical-align: top;
+  }
+
+  .side-by-side .highlight {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+</style>
+<style>
+  .highlight {
+    font-size: 0.8em;
+    background-color: #FDF6E3;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #ccc;
+    border-collapse: collapse;
+    border: 1px solid #ebe4ce;
+  }
+  .highlight .line-numbers {
+    width: 30px;
+    text-align: right;
+    background-color: #FDF8E8;
+    color: #93A1A1;
+    border-right: 1px solid #EBE4CE;
+  }
+  .highlight .line-number {
+    padding-right: 7px;
+  }
+  .highlight .code {
+    padding-left: 5px;
+  }
+
+.highlight { margin: 73px; }
+.highlight .hll { background-color: #ffffcc }
+.highlight .c { color: #586E75 } /* Comment */
+.highlight .err { color: #93A1A1 } /* Error */
+.highlight .g { color: #93A1A1 } /* Generic */
+.highlight .k { color: #859900 } /* Keyword */
+.highlight .l { color: #93A1A1 } /* Literal */
+.highlight .n { color: #93A1A1 } /* Name */
+.highlight .o { color: #859900 } /* Operator */
+.highlight .x { color: #CB4B16 } /* Other */
+.highlight .p { color: #93A1A1 } /* Punctuation */
+.highlight .cm { color: #586E75 } /* Comment.Multiline */
+.highlight .cp { color: #859900 } /* Comment.Preproc */
+.highlight .c1 { color: #586E75 } /* Comment.Single */
+.highlight .cs { color: #859900 } /* Comment.Special */
+.highlight .gd { color: #2AA198 } /* Generic.Deleted */
+.highlight .ge { color: #93A1A1; font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #DC322F } /* Generic.Error */
+.highlight .gh { color: #CB4B16 } /* Generic.Heading */
+.highlight .gi { color: #859900 } /* Generic.Inserted */
+.highlight .go { color: #93A1A1 } /* Generic.Output */
+.highlight .gp { color: #93A1A1 } /* Generic.Prompt */
+.highlight .gs { color: #93A1A1; font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #CB4B16 } /* Generic.Subheading */
+.highlight .gt { color: #93A1A1 } /* Generic.Traceback */
+.highlight .kc { color: #CB4B16 } /* Keyword.Constant */
+.highlight .kd { color: #268BD2 } /* Keyword.Declaration */
+.highlight .kn { color: #859900 } /* Keyword.Namespace */
+.highlight .kp { color: #859900 } /* Keyword.Pseudo */
+.highlight .kr { color: #268BD2 } /* Keyword.Reserved */
+.highlight .kt { color: #DC322F } /* Keyword.Type */
+.highlight .ld { color: #93A1A1 } /* Literal.Date */
+.highlight .m { color: #2AA198 } /* Literal.Number */
+.highlight .s { color: #2AA198 } /* Literal.String */
+.highlight .na { color: #93A1A1 } /* Name.Attribute */
+.highlight .nb { color: #B58900 } /* Name.Builtin */
+.highlight .nc { color: #268BD2 } /* Name.Class */
+.highlight .no { color: #CB4B16 } /* Name.Constant */
+.highlight .nd { color: #268BD2 } /* Name.Decorator */
+.highlight .ni { color: #CB4B16 } /* Name.Entity */
+.highlight .ne { color: #CB4B16 } /* Name.Exception */
+.highlight .nf { color: #268BD2 } /* Name.Function */
+.highlight .nl { color: #93A1A1 } /* Name.Label */
+.highlight .nn { color: #93A1A1 } /* Name.Namespace */
+.highlight .nx { color: #93A1A1 } /* Name.Other */
+.highlight .py { color: #93A1A1 } /* Name.Property */
+.highlight .nt { color: #268BD2 } /* Name.Tag */
+.highlight .nv { color: #268BD2 } /* Name.Variable */
+.highlight .ow { color: #859900 } /* Operator.Word */
+.highlight .w { color: #93A1A1 } /* Text.Whitespace */
+.highlight .mf { color: #2AA198 } /* Literal.Number.Float */
+.highlight .mh { color: #2AA198 } /* Literal.Number.Hex */
+.highlight .mi { color: #2AA198 } /* Literal.Number.Integer */
+.highlight .mo { color: #2AA198 } /* Literal.Number.Oct */
+.highlight .sb { color: #586E75 } /* Literal.String.Backtick */
+.highlight .sc { color: #2AA198 } /* Literal.String.Char */
+.highlight .sd { color: #93A1A1 } /* Literal.String.Doc */
+.highlight .s2 { color: #2AA198 } /* Literal.String.Double */
+.highlight .se { color: #CB4B16 } /* Literal.String.Escape */
+.highlight .sh { color: #93A1A1 } /* Literal.String.Heredoc */
+.highlight .si { color: #2AA198 } /* Literal.String.Interpol */
+.highlight .sx { color: #2AA198 } /* Literal.String.Other */
+.highlight .sr { color: #DC322F } /* Literal.String.Regex */
+.highlight .s1 { color: #2AA198 } /* Literal.String.Single */
+.highlight .ss { color: #2AA198 } /* Literal.String.Symbol */
+.highlight .bp { color: #268BD2 } /* Name.Builtin.Pseudo */
+.highlight .vc { color: #268BD2 } /* Name.Variable.Class */
+.highlight .vg { color: #268BD2 } /* Name.Variable.Global */
+.highlight .vi { color: #268BD2 } /* Name.Variable.Instance */
+.highlight .il { color: #2AA198 } /* Literal.Number.Integer.Long */
+</style>
+
+
+<!-- Maybe a font from http://www.google.com/webfonts ? -->
+<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
+
+<style>
+  html, .view body { background-color: black; counter-reset: slideidx; }
+  body, .view section { background-color: white; border-radius: 12px }
+  /* A section is a slide. It's size is 800x600, and this will never change */
+  section, .view head > title {
+      /* The font from Google */
+      font-family: 'Oswald', arial, serif;
+      font-size: 30px;
+  }
+
+  .view section:after {
+    counter-increment: slideidx;
+    content: counter(slideidx, decimal-leading-zero);
+    position: absolute; bottom: -80px; right: 100px;
+    color: white;
+  }
+
+  .view head > title {
+    color: white;
+    text-align: center;
+    margin: 1em 0 1em 0;
+  }
+
+  h1, h2 {
+    margin-top: 200px;
+    text-align: center;
+    font-size: 80px;
+  }
+  h3 {
+    margin: 100px 0 50px 100px;
+  }
+
+  ul {
+      margin: 50px 200px;
+  }
+
+  p {
+    margin: 75px;
+    font-size: 50px;
+  }
+
+  blockquote {
+    height: 100%;
+    background-color: black;
+    color: white;
+    font-size: 60px;
+    padding: 50px;
+  }
+  blockquote:before {
+    content: open-quote;
+  }
+  blockquote:after {
+    content: close-quote;
+  }
+
+  /* Figures are displayed full-page, with the caption
+     on top of the image/video */
+  figure {
+    background-color: black;
+    width: 100%;
+    height: 100%;
+  }
+  figure > * {
+    position: absolute;
+  }
+  figure > img, figure > video {
+    width: 100%; height: 100%;
+  }
+  figcaption {
+    margin: 70px;
+    font-size: 50px;
+  }
+
+  footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 40px;
+    text-align: right;
+    background-color: #F3F4F8;
+    border-top: 1px solid #CCC;
+  }
+
+  /* Transition effect */
+  /* Feel free to change the transition effect for original
+     animations. See here:
+     https://developer.mozilla.org/en/CSS/CSS_transitions
+     How to use CSS3 Transitions: */
+  section {
+    -moz-transition: left 400ms linear 0s;
+    -webkit-transition: left 400ms linear 0s;
+    -ms-transition: left 400ms linear 0s;
+    transition: left 400ms linear 0s;
+  }
+  .view section {
+    -moz-transition: none;
+    -webkit-transition: none;
+    -ms-transition: none;
+    transition: none;
+  }
+
+  .view section[aria-selected] {
+    border: 5px red solid;
+  }
+
+  /* Before */
+  section { left: -150%; }
+  /* Now */
+  section[aria-selected] { left: 0; }
+  /* After */
+  section[aria-selected] ~ section { left: +150%; }
+
+  /* Incremental elements */
+
+  /* By default, visible */
+  .incremental > * { opacity: 1; }
+
+  /* The current item */
+  .incremental > *[aria-selected] { opacity: 1; }
+
+  /* The items to-be-selected */
+  .incremental > *[aria-selected] ~ * { opacity: 0; }
+
+  /* The progressbar, at the bottom of the slides, show the global
+     progress of the presentation. */
+  #progress-bar {
+    height: 2px;
+    background: #AAA;
+  }
+</style>
+
+<!-- {{{{ dzslides core
+#
+#
+#     __  __  __       .  __   ___  __
+#    |  \  / /__` |    | |  \ |__  /__`
+#    |__/ /_ .__/ |___ | |__/ |___ .__/ core :€
+#
+#
+# The following block of code is not supposed to be edited.
+# But if you want to change the behavior of these slides,
+# feel free to hack it!
+#
+-->
+
+<div id="progress-bar"></div>
+
+<!-- Default Style -->
+<style>
+  * { margin: 0; padding: 0; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+  details { display: none; }
+  body {
+    width: 800px; height: 600px;
+    margin-left: -400px; margin-top: -300px;
+    position: absolute; top: 50%; left: 50%;
+    overflow: hidden;
+    display: none;
+  }
+  .view body {
+    position: static;
+    margin: 0; padding: 0;
+    width: 100%; height: 100%;
+    display: inline-block;
+    overflow: visible; overflow-x: hidden;
+    /* undo Dz.onresize */
+    transform: none !important;
+    -moz-transform: none !important;
+    -webkit-transform: none !important;
+    -o-transform: none !important;
+    -ms-transform: none !important;
+  }
+  .view head, .view head > title { display: block }
+  section {
+    position: absolute;
+    pointer-events: none;
+    width: 100%; height: 100%;
+  }
+  .view section {
+    pointer-events: auto;
+    position: static;
+    width: 800px; height: 600px;
+    margin: -150px -200px;
+    float: left;
+
+    transform: scale(.4);
+    -moz-transform: scale(.4);
+    -webkit-transform: scale(.4);
+    -o-transform: scale(.4);
+    -ms-transform: scale(.4);
+  }
+  .view section > * { pointer-events: none; }
+  section[aria-selected] { pointer-events: auto; }
+  html { overflow: hidden; }
+  html.view { overflow: visible; }
+  body.loaded { display: block; }
+  .incremental {visibility: hidden; }
+  .incremental[active] {visibility: visible; }
+  #progress-bar{
+    bottom: 0;
+    position: absolute;
+    -moz-transition: width 400ms linear 0s;
+    -webkit-transition: width 400ms linear 0s;
+    -ms-transition: width 400ms linear 0s;
+    transition: width 400ms linear 0s;
+  }
+  .view #progress-bar {
+    display: none;
+  }
+</style>
+
+<script>
+  var Dz = {
+    remoteWindows: [],
+    idx: -1,
+    step: 0,
+    html: null,
+    slides: null,
+    progressBar : null,
+    params: {
+      autoplay: "1"
+    }
+  };
+
+  Dz.init = function() {
+    document.body.className = "loaded";
+    this.slides = Array.prototype.slice.call($$("body > section"));
+    this.progressBar = $("#progress-bar");
+    this.html = document.body.parentNode;
+    this.setupParams();
+    this.onhashchange();
+    this.setupTouchEvents();
+    this.onresize();
+    this.setupView();
+  }
+
+  Dz.setupParams = function() {
+    var p = window.location.search.substr(1).split('&');
+    p.forEach(function(e, i, a) {
+      var keyVal = e.split('=');
+      Dz.params[keyVal[0]] = decodeURIComponent(keyVal[1]);
+    });
+  // Specific params handling
+    if (!+this.params.autoplay)
+      $$.forEach($$("video"), function(v){ v.controls = true });
+  }
+
+  Dz.onkeydown = function(aEvent) {
+    // Don't intercept keyboard shortcuts
+    if (aEvent.altKey
+      || aEvent.ctrlKey
+      || aEvent.metaKey
+      || aEvent.shiftKey) {
+      return;
+    }
+    if ( aEvent.keyCode == 37 // left arrow
+      || aEvent.keyCode == 38 // up arrow
+      || aEvent.keyCode == 33 // page up
+    ) {
+      aEvent.preventDefault();
+      this.back();
+    }
+    if ( aEvent.keyCode == 39 // right arrow
+      || aEvent.keyCode == 40 // down arrow
+      || aEvent.keyCode == 34 // page down
+    ) {
+      aEvent.preventDefault();
+      this.forward();
+    }
+    if (aEvent.keyCode == 35) { // end
+      aEvent.preventDefault();
+      this.goEnd();
+    }
+    if (aEvent.keyCode == 36) { // home
+      aEvent.preventDefault();
+      this.goStart();
+    }
+    if (aEvent.keyCode == 32) { // space
+      aEvent.preventDefault();
+      this.toggleContent();
+    }
+    if (aEvent.keyCode == 70) { // f
+      aEvent.preventDefault();
+      this.goFullscreen();
+    }
+    if (aEvent.keyCode == 79) { // o
+      aEvent.preventDefault();
+      this.toggleView();
+    }
+  }
+
+  /* Touch Events */
+
+  Dz.setupTouchEvents = function() {
+    var orgX, newX;
+    var tracking = false;
+
+    var db = document.body;
+    db.addEventListener("touchstart", start.bind(this), false);
+    db.addEventListener("touchmove", move.bind(this), false);
+
+    function start(aEvent) {
+      aEvent.preventDefault();
+      tracking = true;
+      orgX = aEvent.changedTouches[0].pageX;
+    }
+
+    function move(aEvent) {
+      if (!tracking) return;
+      newX = aEvent.changedTouches[0].pageX;
+      if (orgX - newX > 100) {
+        tracking = false;
+        this.forward();
+      } else {
+        if (orgX - newX < -100) {
+          tracking = false;
+          this.back();
+        }
+      }
+    }
+  }
+
+  Dz.setupView = function() {
+    document.body.addEventListener("click", function ( e ) {
+      if (!Dz.html.classList.contains("view")) return;
+      if (!e.target || e.target.nodeName != "SECTION") return;
+
+      Dz.html.classList.remove("view");
+      Dz.setCursor(Dz.slides.indexOf(e.target) + 1);
+    }, false);
+  }
+
+  /* Adapt the size of the slides to the window */
+
+  Dz.onresize = function() {
+    var db = document.body;
+    var sx = db.clientWidth / window.innerWidth;
+    var sy = db.clientHeight / window.innerHeight;
+    var transform = "scale(" + (1/Math.max(sx, sy)) + ")";
+
+    db.style.MozTransform = transform;
+    db.style.WebkitTransform = transform;
+    db.style.OTransform = transform;
+    db.style.msTransform = transform;
+    db.style.transform = transform;
+  }
+
+
+  Dz.getDetails = function(aIdx) {
+    var s = $("section:nth-of-type(" + aIdx + ")");
+    var d = s.$("details");
+    return d ? d.innerHTML : "";
+  }
+
+  Dz.onmessage = function(aEvent) {
+    var argv = aEvent.data.split(" "), argc = argv.length;
+    argv.forEach(function(e, i, a) { a[i] = decodeURIComponent(e) });
+    var win = aEvent.source;
+    if (argv[0] === "REGISTER" && argc === 1) {
+      this.remoteWindows.push(win);
+      this.postMsg(win, "REGISTERED", document.title, this.slides.length);
+      this.postMsg(win, "CURSOR", this.idx + "." + this.step);
+      return;
+    }
+    if (argv[0] === "BACK" && argc === 1)
+      this.back();
+    if (argv[0] === "FORWARD" && argc === 1)
+      this.forward();
+    if (argv[0] === "START" && argc === 1)
+      this.goStart();
+    if (argv[0] === "END" && argc === 1)
+      this.goEnd();
+    if (argv[0] === "TOGGLE_CONTENT" && argc === 1)
+      this.toggleContent();
+    if (argv[0] === "SET_CURSOR" && argc === 2)
+      window.location.hash = "#" + argv[1];
+    if (argv[0] === "GET_CURSOR" && argc === 1)
+      this.postMsg(win, "CURSOR", this.idx + "." + this.step);
+    if (argv[0] === "GET_NOTES" && argc === 1)
+      this.postMsg(win, "NOTES", this.getDetails(this.idx));
+  }
+
+  Dz.toggleContent = function() {
+    // If a Video is present in this new slide, play it.
+    // If a Video is present in the previous slide, stop it.
+    var s = $("section[aria-selected]");
+    if (s) {
+      var video = s.$("video");
+      if (video) {
+        if (video.ended || video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      }
+    }
+  }
+
+  Dz.setCursor = function(aIdx, aStep) {
+    // If the user change the slide number in the URL bar, jump
+    // to this slide.
+    aStep = (aStep != 0 && typeof aStep !== "undefined") ? "." + aStep : ".0";
+    window.location.hash = "#" + aIdx + aStep;
+  }
+
+  Dz.onhashchange = function() {
+    var cursor = window.location.hash.split("#"),
+        newidx = 1,
+        newstep = 0;
+    if (cursor.length == 2) {
+      newidx = ~~cursor[1].split(".")[0];
+      newstep = ~~cursor[1].split(".")[1];
+      if (newstep > Dz.slides[newidx - 1].$$('.incremental > *').length) {
+        newstep = 0;
+        newidx++;
+      }
+    }
+    this.setProgress(newidx, newstep);
+    if (newidx != this.idx) {
+      this.setSlide(newidx);
+    }
+    if (newstep != this.step) {
+      this.setIncremental(newstep);
+    }
+    for (var i = 0; i < this.remoteWindows.length; i++) {
+      this.postMsg(this.remoteWindows[i], "CURSOR", this.idx + "." + this.step);
+    }
+  }
+
+  Dz.back = function() {
+    if (this.idx == 1 && this.step == 0) {
+      return;
+    }
+    if (this.step == 0) {
+      this.setCursor(this.idx - 1,
+                     this.slides[this.idx - 2].$$('.incremental > *').length);
+    } else {
+      this.setCursor(this.idx, this.step - 1);
+    }
+  }
+
+  Dz.forward = function() {
+    if (this.idx >= this.slides.length &&
+        this.step >= this.slides[this.idx - 1].$$('.incremental > *').length) {
+        return;
+    }
+    if (this.step >= this.slides[this.idx - 1].$$('.incremental > *').length) {
+      this.setCursor(this.idx + 1, 0);
+    } else {
+      this.setCursor(this.idx, this.step + 1);
+    }
+  }
+
+  Dz.goStart = function() {
+    this.setCursor(1, 0);
+  }
+
+  Dz.goEnd = function() {
+    var lastIdx = this.slides.length;
+    var lastStep = this.slides[lastIdx - 1].$$('.incremental > *').length;
+    this.setCursor(lastIdx, lastStep);
+  }
+
+  Dz.toggleView = function() {
+    this.html.classList.toggle("view");
+
+    if (this.html.classList.contains("view")) {
+      $("section[aria-selected]").scrollIntoView(true);
+    }
+  }
+
+  Dz.setSlide = function(aIdx) {
+    this.idx = aIdx;
+    var old = $("section[aria-selected]");
+    var next = $("section:nth-of-type("+ this.idx +")");
+    if (old) {
+      old.removeAttribute("aria-selected");
+      var video = old.$("video");
+      if (video) {
+        video.pause();
+      }
+    }
+    if (next) {
+      next.setAttribute("aria-selected", "true");
+      if (this.html.classList.contains("view")) {
+        next.scrollIntoView();
+      }
+      var video = next.$("video");
+      if (video && !!+this.params.autoplay) {
+        video.play();
+      }
+    } else {
+      // That should not happen
+      this.idx = -1;
+      // console.warn("Slide doesn't exist.");
+    }
+  }
+
+  Dz.setIncremental = function(aStep) {
+    this.step = aStep;
+    var old = this.slides[this.idx - 1].$('.incremental > *[aria-selected]');
+    if (old) {
+      old.removeAttribute('aria-selected');
+    }
+    var incrementals = $$('.incremental');
+    if (this.step <= 0) {
+      $$.forEach(incrementals, function(aNode) {
+        aNode.removeAttribute('active');
+      });
+      return;
+    }
+    var next = this.slides[this.idx - 1].$$('.incremental > *')[this.step - 1];
+    if (next) {
+      next.setAttribute('aria-selected', true);
+      next.parentNode.setAttribute('active', true);
+      var found = false;
+      $$.forEach(incrementals, function(aNode) {
+        if (aNode != next.parentNode)
+          if (found)
+            aNode.removeAttribute('active');
+          else
+            aNode.setAttribute('active', true);
+        else
+          found = true;
+      });
+    } else {
+      setCursor(this.idx, 0);
+    }
+    return next;
+  }
+
+  Dz.goFullscreen = function() {
+    var html = $('html'),
+        requestFullscreen = html.requestFullscreen || html.requestFullScreen || html.mozRequestFullScreen || html.webkitRequestFullScreen;
+    if (requestFullscreen) {
+      requestFullscreen.apply(html);
+    }
+  }
+
+  Dz.setProgress = function(aIdx, aStep) {
+    var slide = $("section:nth-of-type("+ aIdx +")");
+    if (!slide)
+      return;
+    var steps = slide.$$('.incremental > *').length + 1,
+        slideSize = 100 / (this.slides.length - 1),
+        stepSize = slideSize / steps;
+    this.progressBar.style.width = ((aIdx - 1) * slideSize + aStep * stepSize) + '%';
+  }
+
+  Dz.postMsg = function(aWin, aMsg) { // [arg0, [arg1...]]
+    aMsg = [aMsg];
+    for (var i = 2; i < arguments.length; i++)
+      aMsg.push(encodeURIComponent(arguments[i]));
+    aWin.postMessage(aMsg.join(" "), "*");
+  }
+
+  function init() {
+    Dz.init();
+    window.onkeydown = Dz.onkeydown.bind(Dz);
+    window.onresize = Dz.onresize.bind(Dz);
+    window.onhashchange = Dz.onhashchange.bind(Dz);
+    window.onmessage = Dz.onmessage.bind(Dz);
+  }
+
+  window.onload = init;
+</script>
+
+
+<script> // Helpers
+  if (!Function.prototype.bind) {
+    Function.prototype.bind = function (oThis) {
+
+      // closest thing possible to the ECMAScript 5 internal IsCallable
+      // function
+      if (typeof this !== "function")
+      throw new TypeError(
+        "Function.prototype.bind - what is trying to be fBound is not callable"
+      );
+
+      var aArgs = Array.prototype.slice.call(arguments, 1),
+          fToBind = this,
+          fNOP = function () {},
+          fBound = function () {
+            return fToBind.apply( this instanceof fNOP ? this : oThis || window,
+                   aArgs.concat(Array.prototype.slice.call(arguments)));
+          };
+
+      fNOP.prototype = this.prototype;
+      fBound.prototype = new fNOP();
+
+      return fBound;
+    };
+  }
+
+  var $ = (HTMLElement.prototype.$ = function(aQuery) {
+    return this.querySelector(aQuery);
+  }).bind(document);
+
+  var $$ = (HTMLElement.prototype.$$ = function(aQuery) {
+    return this.querySelectorAll(aQuery);
+  }).bind(document);
+
+  $$.forEach = function(nodeList, fun) {
+    Array.prototype.forEach.call(nodeList, fun);
+  }
+
+</script>
+<!-- vim: set fdm=marker: }}} -->
