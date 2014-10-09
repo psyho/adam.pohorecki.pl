@@ -121,6 +121,41 @@
 </section>
 
 <section>
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="c1">// define a function</span>
+</span><span class="line"><span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">  <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span></span></code></pre></td>
+</tr></table></div>
+
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="c1">// call a function</span>
+</span><span class="line"><span class="nx">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span></span></code></pre></td>
+</tr></table></div>
+
+<div class="highlight"><table><tr>
+<td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td>
+<td class="code"><pre><code class="js"><span class="line"><span class="c1">//loop over an array</span>
+</span><span class="line"><span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="o">++</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+</span><span class="line"><span class="p">}</span></span></code></pre></td>
+</tr></table></div>
+</section>
+
+
+<section>
   <h1>Macros in JavaScript use <em>pattern matching</em>
 </h1>
 </section>
@@ -140,11 +175,11 @@
 <span class="line-number">7</span>
 </pre></td>
 <td class="code"><pre><code class="js"><span class="line"><span class="nx">macro</span> <span class="nx">def</span> <span class="p">{</span>
-</span><span class="line">  <span class="nx">rule</span> <span class="p">{</span> <span class="nx">$name</span><span class="o">:</span><span class="nx">ident</span> <span class="p">}</span>
-</span><span class="line">    <span class="o">=&gt;</span> <span class="p">{</span> <span class="kd">var</span> <span class="nx">$name</span> <span class="p">}</span>
-</span><span class="line">
 </span><span class="line">  <span class="nx">rule</span> <span class="p">{</span> <span class="nx">$name</span><span class="o">:</span><span class="nx">ident</span> <span class="o">=</span> <span class="nx">$value</span><span class="o">:</span><span class="nx">expr</span> <span class="p">}</span>
 </span><span class="line">    <span class="o">=&gt;</span> <span class="p">{</span> <span class="kd">var</span> <span class="nx">$name</span> <span class="o">=</span> <span class="nx">$value</span> <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">  <span class="nx">rule</span> <span class="p">{</span> <span class="nx">$name</span><span class="o">:</span><span class="nx">ident</span> <span class="p">}</span>
+</span><span class="line">    <span class="o">=&gt;</span> <span class="p">{</span> <span class="kd">var</span> <span class="nx">$name</span> <span class="p">}</span>
 </span><span class="line"><span class="p">}</span></span></code></pre></td>
 </tr></table></div>
 
@@ -171,6 +206,11 @@
 
 <section>
   <h1>Did we just <em>extend</em> the JavaScript language?</h1>
+</section>
+
+<section>
+  <h1>But <em>why?</em>
+</h1>
 </section>
 
 <section>

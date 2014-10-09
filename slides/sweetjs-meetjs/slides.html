@@ -92,6 +92,28 @@ for ever {
 </section>
 
 <section>
+<script lang="js">
+// define a function
+function add(x, y) {
+  return x + y;
+}
+</script>
+
+<script lang="js">
+// call a function
+add(1, 2);
+</script>
+
+<script lang="js">
+//loop over an array
+for(var x = 0; x < arr.length; ++x) {
+  console.log(x);
+}
+</script>
+</section>
+
+
+<section>
   <h1>Macros in JavaScript use <em>pattern matching</em></h1>
 </section>
 
@@ -102,11 +124,11 @@ for ever {
 <section>
 <script lang="js">
 macro def {
-  rule { $name:ident }
-    => { var $name }
-
   rule { $name:ident = $value:expr }
     => { var $name = $value }
+
+  rule { $name:ident }
+    => { var $name }
 }
 </script>
 
@@ -125,6 +147,10 @@ var def = 123;
 
 <section>
   <h1>Did we just <em>extend</em> the JavaScript language?</h1>
+</section>
+
+<section>
+  <h1>But <em>why?</em></h1>
 </section>
 
 <section>
