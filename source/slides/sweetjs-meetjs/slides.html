@@ -1,0 +1,479 @@
+<title>Boilerplate-B-Gone: DIY Syntactic Sugar with Sweet.js</title>
+
+<section>
+  <h1 class="higher">Boilerplate - B - Gone:<br> DIY Syntactic Sugar with <em>Sweet.js</em></h1>
+  <footer>Adam Pohorecki - 27.09.2014 @ <a href="http://summit.meetjs.pl/2014/">Meet.js Summit</a></footer>
+</section>
+
+<section>
+<h1 class="higher">Agenda</h1>
+<ul>
+  <li>What are macros?</li>
+  <li>Why macros?</li>
+  <li>Sweet.js</li>
+  <li>Practical example</li>
+</ul>
+</section>
+
+<section>
+<h1>Macros</h1>
+</section>
+
+<section>
+<script lang="c">
+#define ever (;;)
+</script>
+
+<script lang="c">
+for ever {
+   ...
+}
+</script>
+
+<footer>C Preprocessor Macros</footer>
+</section>
+
+<section>
+  <h1>C Macros: Glorified <em>Search & Replace</em></h1>
+</section>
+
+<section>
+<script lang="clojure">
+(defmacro unless [cond & body]
+  `(if (not ~cond) ~@body))
+</script>
+
+<script lang="clojure">
+(unless (admin? user)
+  (println "Can't touch this"))
+</script>
+
+<footer>LISP (Clojure) Macros</footer>
+</section>
+
+<section>
+  <h1>In LISP <em>code is data</em></h1>
+</section>
+
+<section>
+  <h1 class="higher"><em>Macro</em></h1>
+  <ul>
+    <li>Function</li>
+    <li>Accepts code as arguments</li>
+    <li>Returns transformed code</li>
+  </ul>
+</section>
+
+<section>
+  <h1>LISPs have <em>very little</em> syntax</h1>
+</section>
+
+<section>
+<script lang="clojure">
+; define a function
+(defn add [x y] (+ x y))
+</script>
+
+<script lang="clojure">
+; call a function
+(add 1 2)
+</script>
+
+<script lang="clojure">
+; loop over an array
+(for [x arr] (println x))
+</script>
+
+<footer>Notice anything <em>similar</em>?</footer>
+</section>
+
+<section>
+  <h1>JavaScript has<br> a lot <em>more syntax</em></h1>
+</section>
+
+<section>
+<script lang="js">
+// define a function
+function add(x, y) {
+  return x + y;
+}
+</script>
+
+<script lang="js">
+// call a function
+add(1, 2);
+</script>
+
+<script lang="js">
+//loop over an array
+for(var x = 0; x < arr.length; ++x) {
+  console.log(x);
+}
+</script>
+</section>
+
+
+<section>
+  <h1>Macros in JavaScript use <em>pattern matching</em></h1>
+</section>
+
+<section>
+  <h1>Sweet.js "Hello World"</h1>
+</section>
+
+<section>
+<script lang="js">
+macro def {
+  rule { $name:ident = $value:expr }
+    => { var $name = $value }
+
+  rule { $name:ident }
+    => { var $name }
+}
+</script>
+
+<script lang="js">
+def x;
+def y = 10;
+var def = 123;
+</script>
+
+<script lang="js">
+var x;
+var y = 10;
+var def = 123;
+</script>
+</section>
+
+<section>
+  <h1>Did we just <em>extend</em> the JavaScript language?</h1>
+</section>
+
+<section>
+  <h1>But <em>why?</em></h1>
+</section>
+
+<section>
+  <h1>Boilerplate</h1>
+</section>
+
+<section>
+<script lang="js">
+// Plain JavaScript
+
+var div = React.DOM.div(null,
+            React.DOM.h1(null, header));
+</script>
+
+<script lang="js">
+// JSX
+
+var div = <div>
+  <h1>{ header }</h1>
+</div>;
+</script>
+<footer>React.js boilerplate</footer>
+</section>
+
+<section>
+  <h1>Can I use it with ECMAScript 6?</h1>
+</section>
+
+<section>
+  <h1 class="higher">Yes, but the ES6 transformations come <em>bundled with JSX</em></h1>
+</section>
+
+<section>
+  <h1 class="higher">Sweet.js lets you <em>mix&nbsp;&amp;&nbsp;match</em> macros from libraries.</h1>
+</section>
+
+<section>
+  <h1>There's more...</h1>
+</section>
+
+<section>
+  <h1>Macro <em>Hygiene</em></h1>
+</section>
+
+<section>
+<script lang="js">
+macro swap {
+  rule {
+    ($x:ident, $y:ident)
+  } => {
+    var tmp = $x;
+    $x = $y;
+    $y = tmp;
+  }
+}
+</script>
+
+<script lang="js">
+var a = 10;
+var b = 20;
+swap(a, b);
+</script>
+
+<footer>Simple swap macro</footer>
+</section>
+
+<section>
+<script lang="js">
+var a = 10;
+var tmp = 20;
+swap(a, tmp);
+</script>
+
+<footer>What does this convert to?</footer>
+</section>
+
+<section>
+<script lang="js">
+var a = 10;
+var tmp = 20;
+swap(a, tmp);
+</script>
+
+<script lang="js">
+var a$634 = 10;
+var tmp$635 = 20;
+var tmp$637 = a$634;
+a$634 = tmp$635;
+tmp$635 = tmp$637;
+</script>
+
+<footer><em>Hygienic</em> macros at work</footer>
+</section>
+
+<section>
+  <h1>There's even more...</h1>
+</section>
+
+<section>
+<h1 class="higher">Infix macros</h1>
+
+<script lang="js">
+return z unless x < y;
+</script>
+</section>
+
+<section>
+<h1 class="higher">Operators</h1>
+
+<script lang="js">
+2 ^^ 3 === 8;
+</script>
+</section>
+
+<section>
+  <h1 class="higher">And much more:</h1>
+<ul>
+  <li>Reader macros (readtables)</li>
+  <li>Pattern classes</li>
+  <li>Pretty errors</li>
+  <li>Source maps</li>
+</ul>
+</section>
+
+<section>
+  <h1>Real example</h1>
+</section>
+
+<section>
+<script lang="js">
+UsersCtrl.$inject = ['$scope', '$http'];
+function UsersCtrl($scope, $http) {
+}
+
+module.factory('foo', ['$http',
+                        function($http) {
+}]);
+</script>
+<footer>Typical boilerplate in <em>AngularJS</em> apps</footer>
+</section>
+
+<section class="smaller">
+<script lang="js">
+// Before
+UsersCtrl.$inject = ['$scope', '$http'];
+function UsersCtrl($scope, $http) {
+}
+
+module.factory('foo', ['$http', function($http) {
+}]);
+</script>
+
+<script lang="js">
+// After
+$function UsersCtrl($scope, $http) {
+}
+
+module.factory('foo', $function($http) {
+});
+</script>
+<footer>My solution</footer>
+</section>
+
+<section>
+<script lang="js">
+macro $function {
+  rule {
+    $name:ident($arg (,) ...) {
+      $body ...
+    }
+  } => {
+    // ...
+  }
+}
+</script>
+<footer>The pattern</footer>
+</section>
+
+<section>
+<script lang="js">
+macro $function {
+  rule {
+    $name:ident($arg (,) ...) {
+      $body ...
+    }
+  } => {
+    function $name($arg (,) ...) {
+      $body ...
+    }
+    $name.$inject = to_str($arg ...);
+  }
+}
+</script>
+<footer>The implementation</footer>
+</section>
+
+<section class="smaller">
+<script lang="js">
+macro to_str {
+  case {
+    _ ($token ...)
+  } => {
+    letstx $names ... = #{$token ...}.map(function(t) {
+      return makeValue(t.token.value, t);
+    });
+
+    return #{[$names (,) ...]};
+  }
+}
+</script>
+<footer>The implementation contd.</footer>
+</section>
+
+<section class="smaller">
+<script lang="js">
+macro $function {
+  // ...
+
+  rule {
+    ($arg (,) ...) { $body ...  }
+  } => {
+    (function ($arg (,) ...) {
+      $body ...
+    }).add$inject(to_str($arg))
+  }
+}
+</script>
+
+<script lang="js">
+Function.prototype.add$inject = function($inject) {
+  this.$inject = $inject;
+  return this;
+};
+</script>
+<footer>The inline $function</footer>
+</section>
+
+<section>
+  <h1 class="higher">Summing up</h1>
+  <ul>
+    <li>Macros <em>compose</em> better than compilers</li>
+    <li>Macros <em>understand JS</em> syntax</li>
+    <li>Many macros <em>already written</em></li>
+  </ul>
+</section>
+
+<section>
+<h1>About me</h1>
+</section>
+
+<section>
+<h1>@apohorecki<br>github.com/psyho</h1>
+</section>
+
+<section>
+<figure>
+<img src="gunpowderlabs.png" />
+</figure>
+<footer>Senior Developer at <a href="http://www.gunpowderlabs.com">GunpowderLabs</a></footer>
+</section>
+
+<section>
+<figure>
+<img src="sckrk-large.png" alt="[sckrk]" />
+</figure>
+</section>
+
+<section>
+<figure>
+<img src="hypnotoad.gif" />
+<figcaption>you shall ask<br>questions now</figcaption>
+</figure>
+</section>
+
+<section>
+<h1>Thanks!</h1>
+</section>
+
+<style type="text/css">
+  div.highlight {
+    margin-bottom: 50px;
+    margin-top: 50px;
+  }
+
+  .higher {
+    margin-top: 120px;
+  }
+
+  h1.octocat {
+    height: 200px;
+    background: url("octocat.jpg") top left no-repeat;
+    padding-left: 100px;
+    padding-top: 25px;
+    margin-left: 40px;
+  }
+
+  em {
+    color: #08c;
+    font-style: normal;
+  }
+
+  .inverted em {
+    color: #c82829;
+  }
+
+  .smaller .highlight {
+    font-size: 60%;
+  }
+
+  .tiny .highlight {
+    font-size: 40%;
+  }
+
+  .slightly-smaller .highlight {
+    font-size: 70%;
+  }
+
+  .side-by-side td {
+    vertical-align: top;
+  }
+
+  .side-by-side .highlight {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+</style>
