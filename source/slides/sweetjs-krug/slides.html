@@ -1,0 +1,208 @@
+<title>Sweeten Your JavaScript with Macros</title>
+
+<section>
+  <h1 class="higher">Sweeten Your JavaScript with <em>Macros</em></h1>
+  <footer>Adam Pohorecki - 14.10.2014 @ <a href="http://www.meetup.com/Krakow-Ruby-Users-Group/events/207365572/">KRUG</a></footer>
+</section>
+
+<section>
+<h1>Boilerplate</h1>
+</section>
+
+<section>
+<script lang="js">
+UsersCtrl.$inject = ['$scope', '$http'];
+function UsersCtrl($scope, $http) {
+}
+
+module.factory('foo', ['$http',
+                        function($http) {
+}]);
+</script>
+<footer>Typical boilerplate in <em>AngularJS</em> apps</footer>
+</section>
+
+<section>
+  <h1>Just use <em>ng-annotate</em></h1>
+</section>
+
+<section>
+  <h1>What if I want<br>to do <em>this</em>:</h1>
+</section>
+
+<section>
+<script lang="js">
+function UsersCtrl($scope, repository) {
+  $scope.es6 =
+    repository.find(x => x.isGreat());
+}
+</script>
+<footer>What about other <em>transpilers?</em></footer>
+</section>
+
+<section>
+<figure class="white-bg">
+<img src="before.png" />
+</figure>
+</section>
+
+<section>
+<figure class="white-bg">
+<img src="after.png" />
+</figure>
+</section>
+
+<section>
+<script lang="js">
+$function UsersCtrl($scope, repository) {
+  $scope.es6 =
+    repository.find(x => x.isGreat());
+}
+</script>
+<footer>Sweet.js lets you <em>mix&amp;match</em> macros</footer>
+</section>
+
+<section>
+  <h1>Many existing<br><em>macro libraries</em></h1>
+</section>
+
+<section>
+  <h1>Trivial macro <em>example</em></h1>
+</section>
+
+<section>
+<script lang="js">
+macro swap {
+  rule {
+    ($x:ident, $y:ident)
+  } => {
+    var tmp = $x;
+    $x = $y;
+    $y = tmp;
+  }
+}
+</script>
+
+<script lang="js">
+var a = 10;
+var b = 20;
+swap(a, b);
+</script>
+
+<footer>Simple swap macro</footer>
+</section>
+
+<section>
+<script lang="js">
+var a = 10;
+var tmp = 20;
+swap(a, tmp);
+</script>
+
+<footer>What does this convert to?</footer>
+</section>
+
+<section>
+<script lang="js">
+var a = 10;
+var tmp = 20;
+swap(a, tmp);
+</script>
+
+<script lang="js">
+var a$634 = 10;
+var tmp$635 = 20;
+var tmp$637 = a$634;
+a$634 = tmp$635;
+tmp$635 = tmp$637;
+</script>
+
+<footer><em>Hygienic</em> macros at work</footer>
+</section>
+
+<section>
+  <h1 class="higher">Summing up</h1>
+  <ul>
+    <li>Macros <em>compose</em> better than compilers</li>
+    <li>Macros <em>understand JS</em> syntax</li>
+    <li>Many macros <em>already written</em></li>
+  </ul>
+</section>
+
+<section>
+<h1>About me</h1>
+</section>
+
+<section>
+<h1>@apohorecki<br>github.com/psyho</h1>
+</section>
+
+<section>
+<figure>
+<img src="gunpowderlabs.png" />
+</figure>
+<footer>Senior Developer at <a href="http://www.gunpowderlabs.com">GunpowderLabs</a></footer>
+</section>
+
+<section>
+<figure>
+<img src="sckrk-large.png" alt="[sckrk]" />
+</figure>
+</section>
+
+<section>
+<h1>Thanks!</h1>
+</section>
+
+<style type="text/css">
+  div.highlight {
+    margin-bottom: 50px;
+    margin-top: 50px;
+  }
+
+  .higher {
+    margin-top: 120px;
+  }
+
+  h1.octocat {
+    height: 200px;
+    background: url("octocat.jpg") top left no-repeat;
+    padding-left: 100px;
+    padding-top: 25px;
+    margin-left: 40px;
+  }
+
+  em {
+    color: #08c;
+    font-style: normal;
+  }
+
+  .inverted em {
+    color: #c82829;
+  }
+
+  .smaller .highlight {
+    font-size: 60%;
+  }
+
+  .tiny .highlight {
+    font-size: 40%;
+  }
+
+  .slightly-smaller .highlight {
+    font-size: 70%;
+  }
+
+  .side-by-side td {
+    vertical-align: top;
+  }
+
+  .side-by-side .highlight {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .white-bg {
+    background-color: white;
+  }
+</style>
