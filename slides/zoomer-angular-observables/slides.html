@@ -1,0 +1,251 @@
+<title>Reactive AngularJs</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<script type="text/javascript">
+  angular.module('samples', ['ng']);
+  jQuery(function() {
+    jQuery('.sample.ng').each(function() {
+      angular.bootstrap(this, ['samples']);
+    })
+  });
+</script>
+
+<style type="text/css">
+  img.center {
+    margin: 150px auto;
+    text-align: center;
+    display: block;
+  }
+
+  emph {
+    color: #08c;
+  }
+</style>
+
+<section>
+  <h1><em>Reactive</em> AngularJS</h1>
+<footer>Adam Pohorecki</footer>
+</section>
+
+<section>
+<h1>Reactive Programming</h1>
+</section>
+
+<section>
+<div class="sample ng" ng-init="a = 1; b = 2; c = 3">
+  <div>
+    <label for="a">A =</label>
+    <input type="number" ng-model="a" id="a" />
+  </div>
+
+  <div>
+    <label for="b">B =</label>
+    <input type="number" ng-model="b" id="b" />
+  </div>
+
+  <div>
+    <label for="c">C =</label>
+    <input type="number" ng-model="c" id="c" />
+  </div>
+
+  <div>
+    <strong>A + B = {{a + b}}</strong>
+  </div>
+
+  <div>
+    <strong>B + C = {{b + c}}</strong>
+  </div>
+</div>
+<footer>Look Ma, it's already reactive!</footer>
+</section>
+
+
+<section>
+<script lang="js">
+class ExampleCtrl {
+  constructor() {
+    this.a = 1;
+    this.b = 2;
+  }
+
+  get d() {
+    return this.a + this.b;
+  }
+
+  get e() {
+    return this.d + 1;
+  }
+}
+</script>
+
+<footer>Dependent values</footer>
+</section>
+
+<section>
+  <h1>Recalculated on every <em>$digest</em></h1>
+</section>
+
+<section>
+  <h1>At least <em>twice</em></h1>
+</section>
+
+<section>
+  <h1>Caching and <em>$watch</em>ing</h1>
+</section>
+
+<section>
+<script lang="js">
+class ExampleCtrl {
+  constructor($scope) {
+    this.a = 1;
+    this.b = 2;
+    this.resetD();
+    this.resetE();
+    $scope.$watch(() => this.a, this.resetD);
+    $scope.$watch(() => this.b, this.resetD);
+    $scope.$watch(() => this.d, this.resetE);
+  }
+
+  resetD() {
+    this.d = this.a + this.b;
+  }
+
+  resetE() {
+    this.e = this.d + 1;
+  }
+}
+</script>
+</section>
+
+<section>
+  <h1><em>Sharing</em> data between controllers</h1>
+</section>
+
+<section>
+<script lang="js">
+.factory("allTodoItems", ...)
+
+.controller("CurrentTodoController", ...)
+.controller("TodoStatsController", ...)
+.controller("TodoListController", ...)
+.controller("TodoHistoryController", ...)
+</script>
+
+<footer><em>TODO</em> List</footer>
+</section>
+
+<section>
+  <h1>Mutation + $watches = <em>bugs</em></h1>
+</section>
+
+<section>
+  <h1><em>Observables</em></h1>
+</section>
+
+<section>
+  <h1>Called <em>Signals</em> in FRP</h1>
+</section>
+
+<section>
+  <h1 class="higher">Observables</h1>
+  <ul>
+    <li>Model a <em>changing value</em> over time</li>
+    <li>The value inside is <em>immutable</em></li>
+  </ul>
+</section>
+
+<section>
+<script lang="js">
+var a = new Observable(1);
+var b = new Observable(2);
+
+var d = Observable.merge(a, b, (a, b) => a + b);
+var e = d.map((d) => d + 1);
+
+a.reset(10);
+b.apply((v) => v + 3);
+</script>
+
+<footer><em>Minimal</em> Example</footer>
+</section>
+
+<section>
+<script lang="js">
+function computeStats(allObservables) {
+  // pure function
+}
+
+class TodoSatsController {
+  constructor($scope, allTodosEver) {
+    allTodosEver
+      .map(computeStats)
+      .eachValue($scope,
+        (stats) => this.stats = stats);
+  }
+}
+</script>
+
+<footer><em>Typical</em> usage example</footer>
+</section>
+
+<section>
+  <h1>Summing Up</h1>
+</section>
+
+<section>
+  <h1 class="higher">Observables</h1>
+  <ul>
+    <li>Save you from <em>$watch hell</em></li>
+    <li>Better <em>performance</em> out of the box</li>
+    <li>Easy to implement (RxJS, Bacon.js, roll-your-own)</li>
+    <li>Immutable data + pure functions</li>
+  </ul>
+</section>
+
+<section>
+  <h1 class="higher">Word of warning</h1>
+  <ul>
+    <li>No need to go overboard with this</li>
+    <li>Mutable state is OK, <em>shared mutable state</em> is the problem</li>
+    <li>In a long-lived app, a lot of state becomes mutable because of refreshes</li>
+  </ul>
+</section>
+
+<section>
+<h1>Thank you</h1>
+</section>
+
+<style type="text/css">
+em {
+  color: #08c;
+  font-style: normal;
+}
+
+div.highlight, .sample {
+  font-size: 0.7em;
+}
+
+.smaller div.highlight {
+  font-size: 0.6em;
+}
+
+.sample p {
+  font-size: 0.7em;
+  margin: 5px;
+}
+
+.sample {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px #ccc;
+  box-shadow: 5px 5px 5px #ccc;
+  margin: 73px;
+  padding: 1em;
+}
+
+.higher {
+  margin-top: 120px;
+}
+</style>
